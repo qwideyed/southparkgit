@@ -1,999 +1,1539 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Park: The Town Guide</title>
-  <!-- Tailwind CSS CDN -->
+  <title>South Park Gazette & Community Terminal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Poppins & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Lucide Icons CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700;800&family=Bungee&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            fredoka: ['Fredoka', 'sans-serif'],
-            inter: ['Inter', 'sans-serif']
+            headline: ['Bungee', 'cursive'],
+            marker: ['"Permanent Marker"', 'cursive'],
+            mono: ['"Courier Prime"', 'monospace'],
+            sans: ['"Space Grotesk"', 'sans-serif'],
           },
           colors: {
-            spRed: '#e53935',
-            spTeal: '#00bcd4',
-            spOrange: '#ff7043',
-            spGreen: '#4caf50',
-            spYellow: '#fbc02d',
-            spBlue: '#1e88e5',
-            spDark: '#0b0f17',
-            spCard: '#131b2a',
-            spBorder: '#1f2d42'
+            townDark: '#0e1117',
+            townPanel: '#161b24',
+            townPaper: '#f2ecdc',
+            paperBorder: '#273142',
+            cRed: '#d32f2f',
+            cTeal: '#00acc1',
+            kGreen: '#2e7d32',
+            kOrange: '#e65100',
+            sBlue: '#1565c0',
+            bYellow: '#f59e0b',
+            stampRed: '#b91c1c',
           },
-          animation: {
-            'bounce-gentle': 'bounce 2.5s infinite',
-            'pulse-glow': 'pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-          },
-          keyframes: {
-            pulseGlow: {
-              '0%, 100%': { opacity: '0.6', filter: 'blur(20px)' },
-              '50%': { opacity: '1', filter: 'blur(28px)' },
-            }
+          boxShadow: {
+            'cutout': '3px 4px 0px rgba(0,0,0,0.85)',
+            'cutout-lg': '6px 7px 0px rgba(0,0,0,0.9)',
+            'cutout-xl': '8px 10px 0px rgba(0,0,0,0.95)',
+            'paper-tape': '0 1px 3px rgba(0,0,0,0.3)',
           }
         }
       }
     }
   </script>
-  
   <style>
-    /* Custom Scrollbar */
+    body {
+      background-color: #0b0d13;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
+        linear-gradient(to bottom, rgba(14, 17, 23, 0.95), #0b0d13);
+      background-size: 24px 24px, 100% 100%;
+    }
+    .paper-edge {
+      border: 2px solid #232c3d;
+      box-shadow: 4px 4px 0px #05070a;
+    }
+    .tape {
+      background: rgba(238, 224, 180, 0.35);
+      border-left: 2px dashed rgba(255,255,255,0.4);
+      border-right: 2px dashed rgba(255,255,255,0.4);
+      backdrop-filter: blur(2px);
+    }
+    .paper-cut-shadow {
+      filter: drop-shadow(4px 5px 0px rgba(0, 0, 0, 0.7));
+    }
+    .scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+    .badge-stamp {
+      border: 3px dashed #b91c1c;
+      color: #ef4444;
+      transform: rotate(-3deg);
+      text-transform: uppercase;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+    }
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
     }
     ::-webkit-scrollbar-track {
-      background: #0b0f17;
+      background: #0e1117;
     }
     ::-webkit-scrollbar-thumb {
-      background: #233148;
-      border-radius: 4px;
+      background: #253144;
+      border: 2px solid #0e1117;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #3b5072;
-    }
-    .glass-card {
-      background: rgba(19, 27, 42, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .glass-card-hover:hover {
-      background: rgba(24, 34, 53, 0.9);
-      border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-4px);
-    }
-    .text-glow-yellow {
-      text-shadow: 0 0 16px rgba(251, 192, 45, 0.4);
-    }
-    .card-cutout-border {
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      background: #3b4d68;
     }
   </style>
 </head>
+<body class="text-slate-200 font-sans selection:bg-kOrange selection:text-white pb-20">
 
-<body class="bg-spDark text-slate-100 font-inter min-h-screen selection:bg-spOrange selection:text-white antialiased overflow-x-hidden">
-
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-spRed via-spOrange to-spYellow p-0.5 shadow-lg group-hover:rotate-6 transition-transform">
-          <div class="w-full h-full bg-spDark rounded-[14px] flex items-center justify-center font-fredoka font-bold text-xl text-spYellow tracking-tighter">
-            SP
-          </div>
-        </div>
-        <div>
-          <span class="font-fredoka text-xl sm:text-2xl font-bold tracking-wide bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 bg-clip-text text-transparent">
-            SOUTH PARK
-          </span>
-          <span class="block text-[11px] font-medium tracking-widest text-slate-400 uppercase -mt-1">
-            Town Guide & Archives
-          </span>
-        </div>
-      </a>
-
-      <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-1 font-medium text-sm text-slate-300">
-        <a href="#characters" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-slate-800/60 transition-all">Characters</a>
-        <a href="#episodes" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-slate-800/60 transition-all">Iconic Episodes</a>
-        <a href="#soundboard" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-slate-800/60 transition-all">Soundboard</a>
-        <a href="#locations" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-slate-800/60 transition-all">Town Map</a>
-        <a href="#quiz" class="px-3.5 py-2 rounded-xl hover:text-white hover:bg-slate-800/60 transition-all">Fan Quiz</a>
-      </nav>
-
-      <!-- Action items -->
-      <div class="flex items-center gap-2.5">
-        <!-- Search Trigger Button -->
-        <button id="searchOpenBtn" class="flex items-center gap-2 px-3 py-2 bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white rounded-xl border border-slate-700/60 text-xs sm:text-sm font-medium transition shadow-sm" title="Search characters & episodes (Press /)">
-          <i data-lucide="search" class="w-4 h-4 text-amber-400"></i>
-          <span class="hidden sm:inline">Search...</span>
-          <kbd class="hidden md:inline-block px-1.5 py-0.5 text-[10px] bg-slate-900 border border-slate-700 rounded text-slate-400 font-mono">/</kbd>
-        </button>
-
-        <!-- Bookmarks Trigger -->
-        <button id="bookmarksBtn" class="relative p-2.5 bg-slate-800/80 hover:bg-slate-700/80 text-amber-400 rounded-xl border border-slate-700/60 transition shadow-sm" title="Saved Favorites">
-          <i data-lucide="bookmark" class="w-4 h-4"></i>
-          <span id="favBadge" class="absolute -top-1 -right-1 bg-spRed text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform">0</span>
-        </button>
-
-        <!-- Mobile Menu Toggle -->
-        <button id="mobileMenuBtn" class="md:hidden p-2.5 text-slate-300 hover:text-white bg-slate-800/70 rounded-xl border border-slate-700/50">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
+  <div class="w-full bg-amber-500 text-slate-950 font-mono text-xs font-bold py-1.5 px-3 border-b-2 border-black flex items-center overflow-hidden z-50 sticky top-0">
+    <div class="bg-black text-amber-400 px-2 py-0.5 rounded text-[10px] uppercase font-headline tracking-wider mr-3 whitespace-nowrap shadow-sm">
+      SP-ALERT // 9,750 FT
+    </div>
+    <div class="relative overflow-hidden w-full whitespace-nowrap">
+      <div id="tickerContent" class="inline-block animate-[marquee_38s_linear_infinite] whitespace-nowrap">
+        🚨 POLICE BLOTTER: Randy Marsh arrested naked outside Whole Foods muttering about medicinal KFC &bull; ⚠️ MANBEARPIG sighted foraging near Stark's Pond, Al Gore issues Super Serial Warning &bull; 🌮 CASA BONITA reports 47 sopapillas consumed by unidentified boy in red jacket &bull; 🛸 Unidentified satellite dish emerging from Cartman's posterior again &bull; 🧻 TOWELIE arrested for public dampness &bull; 🏫 MR. GARRISON warns children that midterm exams will be replaced with Game of Thrones reenactments &bull; ⛷️ SKEETER'S BAR: "We don't take kindly to people who don't take kindly around here!"
       </div>
-
     </div>
+  </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-800/80 bg-spDark/95 px-5 py-4 space-y-2">
-      <a href="#characters" class="block py-2 text-sm font-medium text-slate-200 hover:text-amber-400">Characters Roster</a>
-      <a href="#episodes" class="block py-2 text-sm font-medium text-slate-200 hover:text-amber-400">Iconic Episodes</a>
-      <a href="#soundboard" class="block py-2 text-sm font-medium text-slate-200 hover:text-amber-400">Voice Soundboard</a>
-      <a href="#locations" class="block py-2 text-sm font-medium text-slate-200 hover:text-amber-400">South Park Town</a>
-      <a href="#quiz" class="block py-2 text-sm font-medium text-slate-200 hover:text-amber-400">Fan Knowledge Quiz</a>
-    </div>
-  </header>
-
-  <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
-    <!-- Ambient Glow Blobs -->
-    <div class="absolute -top-24 left-1/4 w-96 h-96 bg-spBlue/20 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute top-1/3 -right-24 w-96 h-96 bg-spOrange/20 rounded-full blur-[110px] pointer-events-none"></div>
-    <div class="absolute bottom-0 left-10 w-80 h-80 bg-spGreen/15 rounded-full blur-[90px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="text-center max-w-3xl mx-auto">
+  <header class="border-b-4 border-slate-900 bg-townPanel/90 backdrop-blur-md relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         
-        <!-- Colorado Snowy Town Pill -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/70 text-xs sm:text-sm font-medium text-slate-300 mb-6 shadow-inner">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Elevation 9,750 ft &bull; Park County, Colorado</span>
-        </div>
-
-        <h1 class="font-fredoka text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-white mb-6">
-          "Come on down and meet some 
-          <span class="bg-gradient-to-r from-spYellow via-spOrange to-spRed bg-clip-text text-transparent underline decoration-spTeal/40 decoration-wavy decoration-2">
-            friends of mine!
-          </span>"
-        </h1>
-
-        <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
-          Explore the official-unofficial archive of the most scandalous, satire-packed, quiet mountain town in animated television history.
-        </p>
-
-        <!-- Dynamic Catchphrase Machine in Hero -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 mb-10 max-w-xl mx-auto border border-slate-700/60 shadow-xl relative group">
-          <div class="flex items-center justify-between border-b border-slate-700/50 pb-3 mb-3">
-            <span class="text-xs uppercase font-semibold tracking-wider text-amber-400 flex items-center gap-1.5">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Daily Town Wisdom
-            </span>
-            <span id="heroQuoteAuthor" class="text-xs font-medium text-slate-400">Eric Cartman</span>
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <div class="w-16 h-16 bg-cRed border-4 border-black shadow-cutout flex flex-col items-center justify-center -rotate-2">
+              <span class="font-headline text-2xl text-yellow-300 leading-none">SP</span>
+              <span class="font-mono text-[9px] text-white tracking-widest uppercase">CO 80440</span>
+            </div>
+            <div class="absolute -top-2.5 -right-3 px-2 py-0.5 bg-cTeal border-2 border-black text-[9px] font-mono text-black font-bold uppercase rotate-12 shadow-sm">
+              MUNICIPAL
+            </div>
           </div>
-          <p id="heroQuoteText" class="font-fredoka text-lg sm:text-xl text-white italic tracking-wide min-h-[56px] flex items-center justify-center">
-            "Respect my authoritah!"
-          </p>
-          <div class="mt-4 flex items-center justify-center gap-3">
-            <button id="heroRandomQuoteBtn" class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-semibold rounded-xl text-xs sm:text-sm transition-all transform active:scale-95 shadow-md shadow-orange-500/20">
-              <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-              <span>Roll Another Quote</span>
-            </button>
-            <button id="heroSpeakQuoteBtn" class="flex items-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs sm:text-sm transition">
-              <i data-lucide="volume-2" class="w-4 h-4 text-spTeal"></i>
-              <span>Play Audio</span>
-            </button>
+          <div>
+            <h1 class="font-headline text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight uppercase flex items-center gap-2">
+              South Park Gazette
+            </h1>
+            <p class="font-mono text-xs sm:text-sm text-slate-400">
+              MUNICIPAL ARCHIVES &bull; ELEVATION 9,750 FT &bull; POP. UNSTABLE
+            </p>
           </div>
         </div>
 
-        <!-- Metric Badges -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-2">
-          <div class="glass-card p-4 rounded-2xl text-center">
-            <p class="font-fredoka text-2xl sm:text-3xl font-bold text-spTeal">26+</p>
-            <p class="text-xs text-slate-400 font-medium">Iconic Seasons</p>
-          </div>
-          <div class="glass-card p-4 rounded-2xl text-center">
-            <p class="font-fredoka text-2xl sm:text-3xl font-bold text-spOrange">325+</p>
-            <p class="text-xs text-slate-400 font-medium">Broadcast Episodes</p>
-          </div>
-          <div class="glass-card p-4 rounded-2xl text-center">
-            <p class="font-fredoka text-2xl sm:text-3xl font-bold text-spYellow">5x</p>
-            <p class="text-xs text-slate-400 font-medium">Primetime Emmys</p>
-          </div>
-          <div class="glass-card p-4 rounded-2xl text-center">
-            <p class="font-fredoka text-2xl sm:text-3xl font-bold text-spRed">&infin;</p>
-            <p class="text-xs text-slate-400 font-medium">Controversies Caused</p>
-          </div>
-        </div>
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+          <button id="kennyDeathQuickBtn" class="px-3 py-2 bg-kOrange/20 hover:bg-kOrange/30 text-orange-300 border-2 border-orange-500/50 rounded shadow-cutout flex items-center gap-1.5 transition">
+            <i data-lucide="skull" class="w-4 h-4 text-orange-400"></i>
+            <span>Kill Kenny (<span id="quickKennyCount">128</span>)</span>
+          </button>
+          
+          <button id="cartmanSchemeQuickBtn" class="px-3 py-2 bg-cRed/20 hover:bg-cRed/30 text-rose-300 border-2 border-rose-500/50 rounded shadow-cutout flex items-center gap-1.5 transition">
+            <i data-lucide="crosshair" class="w-4 h-4 text-red-400"></i>
+            <span>Scheme Generator</span>
+          </button>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="characters" class="py-16 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-spTeal mb-2">
-            <i data-lucide="users" class="w-4 h-4"></i> The Citizens & Misfits
-          </div>
-          <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Meet the Town Roster
-          </h2>
-          <p class="text-sm text-slate-400 mt-1 max-w-xl">
-            Click on any character card to inspect their alter egos, famous quotes, first appearance, and criminal history.
-          </p>
-        </div>
-
-        <!-- Filter category tags -->
-        <div class="flex flex-wrap gap-2" id="characterFilters">
-          <button data-cat="all" class="char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 border border-transparent transition">All Characters</button>
-          <button data-cat="boys" class="char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">The Main Four</button>
-          <button data-cat="school" class="char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Classmates</button>
-          <button data-cat="adults" class="char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Adults & Townies</button>
-          <button data-cat="alteregos" class="char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Alter Egos</button>
-        </div>
-      </div>
-
-      <!-- Characters Grid -->
-      <div id="characterGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <!-- Rendered by JavaScript dynamically -->
-      </div>
-
-    </div>
-  </section>
-
-  <section id="episodes" class="py-16 bg-slate-950/60 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-        <div>
-          <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-spOrange mb-2">
-            <i data-lucide="tv" class="w-4 h-4"></i> Hall of Fame
-          </div>
-          <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Iconic Episodes & Sagas
-          </h2>
-          <p class="text-sm text-slate-400 mt-1">
-            The critically acclaimed masterpieces, Emmy winners, and unforgettable town chaos.
-          </p>
-        </div>
-
-        <!-- Filter Tags -->
-        <div class="flex flex-wrap gap-2" id="episodeFilters">
-          <button data-tag="all" class="ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 border border-transparent transition">All Episodes</button>
-          <button data-tag="classic" class="ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Classics</button>
-          <button data-tag="emmy" class="ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Emmy Winners</button>
-          <button data-tag="trilogy" class="ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Multi-part Sagas</button>
-          <button data-tag="banned" class="ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">Censored / Banned</button>
-        </div>
-      </div>
-
-      <!-- Episode Grid -->
-      <div id="episodesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Injected via JavaScript -->
-      </div>
-
-    </div>
-  </section>
-
-  <section id="soundboard" class="py-16 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-spYellow mb-2">
-          <i data-lucide="volume-2" class="w-4 h-4"></i> Voice Archive
-        </div>
-        <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          Interactive Soundboard
-        </h2>
-        <p class="text-sm text-slate-400 mt-2">
-          Tap any button to trigger instant browser speech synthesis customized with character pitches & tempos, or copy the memorable line.
-        </p>
-      </div>
-
-      <div id="soundboardGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-        <!-- Dynamic sound cards -->
-      </div>
-
-    </div>
-  </section>
-
-  <section id="locations" class="py-16 bg-slate-950/60 border-t border-slate-800/80 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-spGreen mb-2">
-          <i data-lucide="map-pin" class="w-4 h-4"></i> Town Landmarks
-        </div>
-        <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          South Park Key Locations
-        </h2>
-        <p class="text-sm text-slate-400 mt-2">
-          The hotspots where alien abductions happen, Tegridy is grown, and chocolate salty balls are served.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <!-- Location 1 -->
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 transition hover:border-spTeal/50 group">
-          <div class="w-10 h-10 rounded-xl bg-spTeal/10 text-spTeal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-fredoka text-lg text-white font-semibold">South Park Elementary</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-3">Home of the Cows, Mr. Garrison's eccentric 4th-grade classroom, and Counselor Mackey's office.</p>
-          <div class="text-[11px] font-medium text-spTeal flex items-center gap-1">
-            <span>Primary Setting</span> &bull; <span>Cafeteria Chef</span>
-          </div>
-        </div>
-
-        <!-- Location 2 -->
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 transition hover:border-spGreen/50 group">
-          <div class="w-10 h-10 rounded-xl bg-spGreen/10 text-spGreen flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="sprout" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-fredoka text-lg text-white font-semibold">Tegridy Farms</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-3">Randy Marsh's rural passion project, featuring Towelie as the certified quality inspector and seasonal specials.</p>
-          <div class="text-[11px] font-medium text-spGreen flex items-center gap-1">
-            <span>Seasons 22+</span> &bull; <span>Marsh Family</span>
-          </div>
-        </div>
-
-        <!-- Location 3 -->
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 transition hover:border-spOrange/50 group">
-          <div class="w-10 h-10 rounded-xl bg-spOrange/10 text-spOrange flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="utensils" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-fredoka text-lg text-white font-semibold">Casa Bonita</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-3">The magical Mexican wonderland with cliff divers, Black Bart's cave, and endless sopapillas. Saved in real life by Matt & Trey.</p>
-          <div class="text-[11px] font-medium text-spOrange flex items-center gap-1">
-            <span>Lakewood, CO</span> &bull; <span>Cartman's Heaven</span>
-          </div>
-        </div>
-
-        <!-- Location 4 -->
-        <div class="glass-card rounded-2xl p-5 border border-slate-800 transition hover:border-spRed/50 group">
-          <div class="w-10 h-10 rounded-xl bg-spRed/10 text-spRed flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <i data-lucide="bus" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-fredoka text-lg text-white font-semibold">The Bus Stop</h3>
-          <p class="text-xs text-slate-400 mt-1 mb-3">The snow-covered intersection where Stan, Kyle, Cartman, and Kenny stand waiting for Ms. Crabtree while solving life's absurdities.</p>
-          <div class="text-[11px] font-medium text-spRed flex items-center gap-1">
-            <span>Pilot Episode</span> &bull; <span>The Iconic Bench</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="quiz" class="py-16 border-t border-slate-800/80 relative">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center mb-10">
-        <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-spRed mb-2">
-          <i data-lucide="brain-circuit" class="w-4 h-4"></i> Town Challenge
-        </div>
-        <h2 class="font-fredoka text-3xl sm:text-4xl font-bold text-white tracking-tight">
-          The Colorado Fanatic Quiz
-        </h2>
-        <p class="text-sm text-slate-400 mt-2">
-          Test how well you know the boys, town history, and Trey Parker & Matt Stone lore.
-        </p>
-      </div>
-
-      <!-- Quiz Box Container -->
-      <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-700/60 shadow-2xl relative overflow-hidden" id="quizContainer">
-        
-        <!-- Progress bar -->
-        <div class="w-full bg-slate-800 rounded-full h-2 mb-6 overflow-hidden">
-          <div id="quizProgressBar" class="bg-gradient-to-r from-amber-400 to-spOrange h-2 rounded-full transition-all duration-300" style="width: 20%;"></div>
-        </div>
-
-        <!-- Question Counter & Badge -->
-        <div class="flex items-center justify-between text-xs font-medium text-slate-400 mb-3">
-          <span id="quizCounter">Question 1 of 5</span>
-          <span id="quizDifficulty" class="px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-amber-400 font-semibold">Trivia</span>
-        </div>
-
-        <!-- Question Content -->
-        <h3 id="quizQuestion" class="font-fredoka text-xl sm:text-2xl text-white font-semibold mb-6">
-          Loading Question...
-        </h3>
-
-        <!-- Options Container -->
-        <div id="quizOptions" class="space-y-3 mb-6">
-          <!-- Dynamic options -->
-        </div>
-
-        <!-- Feedback alert -->
-        <div id="quizFeedback" class="hidden p-4 rounded-xl text-xs sm:text-sm font-medium mb-6"></div>
-
-        <!-- Bottom Controls -->
-        <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
-          <div class="text-xs text-slate-400">
-            Score: <span id="quizScore" class="font-bold text-white">0</span> / 5
-          </div>
-          <button id="quizNextBtn" class="hidden px-5 py-2 bg-gradient-to-r from-spOrange to-spRed hover:from-orange-500 hover:to-red-500 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-md">
-            <span>Next Question</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <button id="savedDrawerBtn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-amber-300 border-2 border-slate-700 rounded shadow-cutout flex items-center gap-1.5 transition">
+            <i data-lucide="folder-archive" class="w-4 h-4 text-yellow-400"></i>
+            <span>Case Files (<span id="savedFilesCounter">0</span>)</span>
           </button>
         </div>
 
       </div>
 
+      <nav class="mt-5 pt-3 border-t-2 border-slate-800/80 flex items-center gap-2 overflow-x-auto text-xs font-mono font-bold uppercase">
+        <a href="#roster" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Citizen Roster</a>
+        <a href="#kennySection" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Kenny Graveyard</a>
+        <a href="#schemesSection" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Cartman Revenge Calc</a>
+        <a href="#randySection" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Randy's Spirals</a>
+        <a href="#episodesVault" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Banned & Landmark Ep</a>
+        <a href="#townMap" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Blueprint Map</a>
+        <a href="#soundboard" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Town Wire Soundboard</a>
+        <a href="#triviaGauntlet" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Survival Trivia</a>
+        <a href="#bulletinBoard" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-sm whitespace-nowrap">Notice Board</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- Search Modal -->
-  <div id="searchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-start justify-center p-4 sm:p-6 pt-16">
-    <div class="glass-card w-full max-w-2xl rounded-2xl border border-slate-700 overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-      <div class="p-4 border-b border-slate-700/80 flex items-center gap-3">
-        <i data-lucide="search" class="w-5 h-5 text-amber-400"></i>
-        <input id="searchInput" type="text" placeholder="Search Stan, Kyle, 'Make Love Not Warcraft', Butters..." class="w-full bg-transparent text-white placeholder-slate-400 text-sm focus:outline-none font-medium">
-        <button id="searchCloseBtn" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-16">
+
+    <section class="relative bg-townPanel border-4 border-slate-900 shadow-cutout-lg p-6 sm:p-8 overflow-hidden">
+      <div class="absolute -right-8 -bottom-8 opacity-5 text-white font-headline text-9xl select-none pointer-events-none">
+        COLORADO
+      </div>
+      
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="lg:col-span-2 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-cRed text-white text-[11px] font-mono font-bold uppercase tracking-wider shadow-sm -rotate-1">
+            <span class="w-2 h-2 bg-yellow-300 rounded-full animate-ping"></span>
+            Town Evacuation Warning Level: DEFCON 2
+          </div>
+          
+          <h2 class="font-headline text-3xl sm:text-5xl text-white tracking-tight uppercase leading-none">
+            "Welcome to South Park. <br>
+            <span class="text-amber-400 font-marker text-2xl sm:text-4xl">Leave your moral compass at the state line."</span>
+          </h2>
+          
+          <p class="font-mono text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+            Established in 1997 by two University of Colorado dropouts with construction paper, crude scissors, and an aversion to network censors. This is the unredacted digital county register containing character records, unexplained deaths, and municipal dysfunction.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2 font-mono text-xs">
+            <div class="bg-black/60 border border-slate-700 px-4 py-2.5 rounded shadow-cutout">
+              <span class="block text-slate-400 text-[10px] uppercase">Original Run</span>
+              <span class="text-white font-bold text-sm">August 13, 1997 – Present</span>
+            </div>
+            <div class="bg-black/60 border border-slate-700 px-4 py-2.5 rounded shadow-cutout">
+              <span class="block text-slate-400 text-[10px] uppercase">Recorded Episodes</span>
+              <span class="text-amber-400 font-bold text-sm">325+ Broadcasts & Specials</span>
+            </div>
+            <div class="bg-black/60 border border-slate-700 px-4 py-2.5 rounded shadow-cutout">
+              <span class="block text-slate-400 text-[10px] uppercase">Confirmed Kenny Casualties</span>
+              <span class="text-orange-400 font-bold text-sm" id="heroDeathsCount">128 Documented Deaths</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[#12161f] border-2 border-slate-700 p-5 rounded-sm shadow-cutout relative">
+          <div class="absolute -top-3 left-6 px-3 py-0.5 bg-yellow-400 text-slate-950 font-mono text-[10px] font-bold uppercase rotate-1">
+            Daily Broadcast Wire
+          </div>
+          <div class="space-y-3 pt-2 font-mono text-xs">
+            <div class="border-b border-slate-800 pb-2">
+              <span class="text-cTeal text-[10px] block font-bold">COMMISSIONER STATEMENT:</span>
+              <p class="text-slate-200 mt-1 italic">"Drugs are bad, mmkay? If you do drugs you're bad, because they're bad, mmkay."</p>
+              <span class="text-slate-500 text-[10px] block text-right">— Mr. Mackey, M.Ed.</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+              <span>Local Temperature: 11°F (Blizzard)</span>
+              <span class="text-red-400 font-bold">Alien Activity: HIGH</span>
+            </div>
+            <button onclick="triggerRandomEmergency()" class="w-full mt-2 py-2 bg-cRed hover:bg-red-700 text-white font-mono text-xs font-bold uppercase tracking-wider rounded border border-black shadow-cutout transition active:translate-y-0.5">
+              Broadcast Town Siren
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kennySection" class="bg-[#141211] border-4 border-black p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-orange-950/80 pb-6 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-kOrange text-black font-mono font-bold text-[10px] uppercase -rotate-1 mb-2">
+            MORTUARY DIVISION &bull; CASE FILE #001
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-orange-400 tracking-tight uppercase">
+            Kenny McCormick: The Graveyard Registry
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1 max-w-xl">
+            Cursed by an arcane Lovecraftian pact sworn by his parents at a Cthulhu cult meeting. Documenting his recurrent physical cessations and subsequent breakfast table rebirths.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-black/90 border-2 border-orange-600 px-4 py-2 text-center shadow-cutout">
+            <div class="text-[10px] font-mono text-orange-400 uppercase font-bold">Confirmed Total</div>
+            <div id="kennyLiveCounter" class="font-headline text-3xl text-white">128</div>
+          </div>
+          <button id="smiteKennyBtn" class="px-4 py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-headline text-sm uppercase tracking-wider border-2 border-black shadow-cutout transition active:scale-95 flex items-center gap-2">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span>Kill Kenny Now</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="space-y-3">
+          <label class="block font-mono text-xs text-slate-400 uppercase font-bold">Filter By Incident Type:</label>
+          <div class="flex flex-wrap gap-2" id="kennyFilterGroup">
+            <button data-kfilter="all" class="k-filter-btn px-2.5 py-1 bg-orange-500 text-black font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-sm">All Casualties</button>
+            <button data-kfilter="bizarre" class="k-filter-btn px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Absurd Anatomy</button>
+            <button data-kfilter="creatures" class="k-filter-btn px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Creatures & Aliens</button>
+            <button data-kfilter="cartman" class="k-filter-btn px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Cartman Negligence</button>
+          </div>
+
+          <div id="kennyDeathAlertBox" class="mt-4 p-4 bg-orange-950/40 border-2 border-dashed border-orange-500 text-orange-200 font-mono text-xs space-y-2 hidden">
+            <div class="flex items-center gap-2 text-white font-bold uppercase font-headline">
+              <i data-lucide="skull" class="w-4 h-4 text-red-500"></i>
+              <span>Stan & Kyle Transcript:</span>
+            </div>
+            <p id="stanQuote" class="text-sky-300">"OH MY GOD! THEY KILLED KENNY!"</p>
+            <p id="kyleQuote" class="text-emerald-300">"YOU BASTARDS!"</p>
+            <p id="deathCauseDesc" class="text-[11px] text-slate-400 italic pt-1 border-t border-orange-900/60"></p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[380px] overflow-y-auto pr-1" id="kennyLogsContainer">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roster" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-sBlue text-white font-mono font-bold text-[10px] uppercase -rotate-1 mb-2">
+            MUNICIPAL RECORDS // 18 ACTIVE PROFILES
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-white tracking-tight uppercase">
+            Town Personnel & Suspect Roster
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1">
+            Official police blotters, psychiatric evaluations, alter egos, and juvenile infractions.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2" id="rosterTabs">
+          <button data-rtab="all" class="roster-tab-btn px-3 py-1.5 bg-white text-slate-950 font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-cutout">All</button>
+          <button data-rtab="boys" class="roster-tab-btn px-3 py-1.5 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">The 4 Boys</button>
+          <button data-rtab="school" class="roster-tab-btn px-3 py-1.5 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">4th Grade</button>
+          <button data-rtab="adults" class="roster-tab-btn px-3 py-1.5 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Town Adults</button>
+          <button data-rtab="alterego" class="roster-tab-btn px-3 py-1.5 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Alter Egos</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="rosterGrid">
+      </div>
+    </section>
+
+    <section id="schemesSection" class="bg-[#181014] border-4 border-cRed p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="absolute -top-3 right-6 px-3 py-1 bg-cRed text-white font-mono text-xs font-bold uppercase tracking-wider rotate-2 shadow-sm">
+        CLASSIFIED: TOP SECRET
+      </div>
+
+      <div class="max-w-3xl mb-8">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-400 text-black font-mono font-bold text-[10px] uppercase mb-2">
+          ERIC THEODORE CARTMAN LABS
+        </div>
+        <h2 class="font-headline text-3xl sm:text-4xl text-rose-400 tracking-tight uppercase">
+          The Disproportionate Revenge Calculator
+        </h2>
+        <p class="font-mono text-xs text-slate-400 mt-1">
+          Have you been slighted, ignored, or offered reduced-fat Cheesy Poofs? Select your mild grievance below to observe Cartman's wildly criminal, escalated retaliation strategy.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-5 space-y-4">
+          <label class="block font-mono text-xs text-slate-300 uppercase font-bold">1. Select Minor Offense Committed Against You:</label>
+          <select id="offenseSelect" class="w-full bg-slate-900 border-2 border-slate-700 text-white font-mono text-xs p-3 rounded-none focus:outline-none focus:border-cRed">
+            <option value="chicken">Someone ate the crispy skin off your bucket of fried chicken</option>
+            <option value="money">Someone owes you exactly $16.12</option>
+            <option value="calledfat">Someone referred to you as "fat" instead of "big-boned"</option>
+            <option value="theme_park">You are forced to stand in line at an amusement park with other people</option>
+            <option value="ginger">A boy has pale skin, red hair, and freckles</option>
+            <option value="casabonita">You were not invited to Kyle's birthday party at Casa Bonita</option>
+            <option value="authoritah">A pedestrian failed to respect your Authoritah</option>
+          </select>
+
+          <label class="block font-mono text-xs text-slate-300 uppercase font-bold pt-2">2. Desired Severity Level:</label>
+          <div class="grid grid-cols-3 gap-2 font-mono text-xs">
+            <button type="button" data-sev="1" class="sev-btn py-2 px-2 border-2 border-slate-700 bg-slate-900 text-slate-300 font-bold uppercase text-center hover:border-slate-500">Petty Criminal</button>
+            <button type="button" data-sev="2" class="sev-btn py-2 px-2 border-2 border-slate-700 bg-slate-900 text-slate-300 font-bold uppercase text-center hover:border-slate-500">Town Crisis</button>
+            <button type="button" data-sev="3" class="sev-btn py-2 px-2 border-2 border-cRed bg-cRed text-white font-bold uppercase text-center">Scott Tenorman</button>
+          </div>
+
+          <button id="calculateRevengeBtn" class="w-full py-3 bg-cRed hover:bg-red-600 text-white font-headline text-sm uppercase tracking-wider border-2 border-black shadow-cutout transition active:scale-[0.98]">
+            Calculate Master Plan
+          </button>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="bg-black/80 border-2 border-slate-800 p-6 rounded relative shadow-inner min-h-[260px] flex flex-col justify-between">
+            <div class="scanlines absolute inset-0 rounded"></div>
+            
+            <div class="relative z-10 space-y-3 font-mono">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <span class="text-[10px] text-amber-400 uppercase font-bold tracking-wider">PROJECT CODENAME: <span id="schemeCodename">OPERATION CHILI_CON_CARNE</span></span>
+                <span class="badge-stamp px-2 py-0.5 text-[10px]" id="schemeRisk">PSYCHOPATHIC</span>
+              </div>
+              
+              <h3 id="schemeTitle" class="font-headline text-xl text-rose-300 uppercase">
+                The Scott Tenorman Special
+              </h3>
+              
+              <p id="schemeBody" class="text-xs text-slate-300 leading-relaxed">
+                Stage an elaborate regional chili cook-off involving local carnival workers, Radiohead, and an absurd livestock swap that ends in utter emotional devastation.
+              </p>
+
+              <div class="bg-slate-900/90 border border-slate-800 p-3 rounded space-y-1 text-[11px] text-slate-400">
+                <div><span class="text-amber-400 font-bold">Collateral Casualties:</span> <span id="schemeCollateral">Entire 4th grade class, carnival owner, Scott's dignity</span></div>
+                <div><span class="text-amber-400 font-bold">Required Equipment:</span> <span id="schemeGear">Pubes, $16.12 cash, chef apron, megaphone</span></div>
+                <div><span class="text-amber-400 font-bold">Cartman Closing Quote:</span> <span id="schemeQuote" class="italic text-slate-200">"Yes, your tears are so yummy and sweet!"</span></div>
+              </div>
+            </div>
+
+            <div class="relative z-10 pt-4 flex items-center justify-end gap-2 text-xs font-mono">
+              <button onclick="synthesizeCartmanLaugh()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 rounded flex items-center gap-1.5">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                <span>Hear Cartman Laugh</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="randySection" class="bg-[#121922] border-4 border-slate-900 p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-slate-800 pb-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-sBlue text-white font-mono font-bold text-[10px] uppercase mb-2">
+            BEHAVIORAL CASE FILE &bull; GEOLOGIST / POP STAR
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-sky-400 tracking-tight uppercase">
+            The Randy Marsh Spiral Timeline
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1 max-w-xl">
+            A comprehensive clinical breakdown of Randy Marsh fixing upon an obscure hobby and relentlessly carrying it to catastrophic national crisis.
+          </p>
+        </div>
+
+        <div class="font-mono text-xs text-slate-400 flex items-center gap-2">
+          <span>Obsession Level:</span>
+          <span class="px-2 py-0.5 bg-red-600/30 border border-red-500 text-red-300 font-bold uppercase text-[10px]">CATASTROPHIC</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="randyTimelineGrid">
+      </div>
+    </section>
+
+    <section id="episodesVault" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-slate-800 pb-4">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-400 text-slate-950 font-mono font-bold text-[10px] uppercase mb-2">
+            MUNICIPAL BROADCAST LOG // 16 ESSENTIAL SAGAS
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-white tracking-tight uppercase">
+            The Landmark Episode Vault
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1">
+            Filtered by controversies, legendary trilogies, gaming culture, and multi-part masterpieces.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2" id="epCategoryGroup">
+          <button data-eptag="all" class="ep-cat-btn px-3 py-1 bg-white text-slate-950 font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-cutout">All</button>
+          <button data-eptag="gaming" class="ep-cat-btn px-3 py-1 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Gaming & Pop</button>
+          <button data-eptag="trilogy" class="ep-cat-btn px-3 py-1 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Epic Trilogies</button>
+          <button data-eptag="banned" class="ep-cat-btn px-3 py-1 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Censored / Banned</button>
+          <button data-eptag="holiday" class="ep-cat-btn px-3 py-1 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700">Holiday & Cult</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="episodesVaultGrid">
+      </div>
+    </section>
+
+    <section id="townMap" class="bg-[#10141a] border-4 border-slate-900 p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-slate-800 pb-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-kGreen text-white font-mono font-bold text-[10px] uppercase mb-2">
+            CARTOGRAPHIC SURVEY &bull; PARK COUNTY
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-emerald-400 tracking-tight uppercase">
+            Town Blueprint & Point of Interest Explorer
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1 max-w-xl">
+            Select any registered municipal landmark to read historical hazards, hazard ratings, and citizens' uncensored Yelp reviews.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-7 bg-[#0b0e14] border-2 border-slate-800 p-4 rounded relative">
+          <div class="text-[10px] font-mono text-slate-500 uppercase mb-3 flex items-center justify-between">
+            <span>GRID SYSTEM: SOUTH_PARK_QUAD_4</span>
+            <span class="text-emerald-500 font-bold">&bull; LIVE TRACKING</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs" id="mapButtonsContainer">
+          </div>
+
+          <div class="mt-4 p-3 bg-black/50 border border-slate-800 text-[11px] font-mono text-slate-400 flex items-center justify-between">
+            <span>Notice: Stark's Pond ice thickness not guaranteed.</span>
+            <span class="text-amber-400">Caution: Scuzzlebutt sightings</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 bg-townPanel border-2 border-slate-700 p-5 rounded relative shadow-cutout">
+          <div class="tape w-24 h-4 absolute -top-2 left-8 rotate-1"></div>
+          
+          <div class="space-y-3 font-mono" id="mapDetailPanel">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="soundboard" class="bg-[#121316] border-4 border-slate-900 p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-slate-800 pb-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-400 text-black font-mono font-bold text-[10px] uppercase mb-2">
+            WIRE AUDIO INTERCEPT &bull; 12 PITCH-TUNED LINES
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-amber-400 tracking-tight uppercase">
+            South Park Town Soundboard
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1 max-w-xl">
+            Synthesized live in your browser using character-calibrated vocal formant pitch and rate values.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="soundboardContainer">
+      </div>
+    </section>
+
+    <section id="triviaGauntlet" class="bg-[#161219] border-4 border-purple-950 p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="max-w-2xl mb-8">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-purple-600 text-white font-mono font-bold text-[10px] uppercase mb-2">
+          CITIZEN EXAMINATION &bull; HARDCORE KNOWLEDGE
+        </div>
+        <h2 class="font-headline text-3xl sm:text-4xl text-purple-300 tracking-tight uppercase">
+          The Colorado Fanatic Gauntlet
+        </h2>
+        <p class="font-mono text-xs text-slate-400 mt-1">
+          10 rigorous questions testing true knowledge of Trey Parker, Matt Stone, production lore, and municipal chaos.
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-black/80 border-2 border-slate-800 p-6 sm:p-8 rounded relative shadow-cutout" id="triviaContainer">
+      </div>
+    </section>
+
+    <section id="bulletinBoard" class="bg-[#191712] border-4 border-black p-6 sm:p-8 relative shadow-cutout-lg">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-amber-900/60 pb-4 mb-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500 text-black font-mono font-bold text-[10px] uppercase mb-2">
+            COMMUNITY CORK BOARD &bull; LOCAL POSTINGS
+          </div>
+          <h2 class="font-headline text-3xl sm:text-4xl text-amber-300 tracking-tight uppercase">
+            Town Notice Board & Classifieds
+          </h2>
+          <p class="font-mono text-xs text-slate-400 mt-1">
+            Pinned municipal memos, local grievances, and user-submitted classified ads saved in browser memory.
+          </p>
+        </div>
+
+        <button id="openNewPostModal" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono text-xs font-bold uppercase rounded border border-black shadow-cutout flex items-center gap-1.5">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span>Pin Local Notice</span>
         </button>
       </div>
 
-      <div id="searchResults" class="max-h-[60vh] overflow-y-auto p-4 space-y-2">
-        <p class="text-xs text-slate-400 text-center py-8">Type a character name, keyword, or episode title to search...</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="bulletinGrid">
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Character Detail Modal -->
-  <div id="charModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-card w-full max-w-xl rounded-3xl border border-slate-700 overflow-hidden shadow-2xl relative animate-in fade-in duration-200 max-h-[90vh] flex flex-col">
-      <div class="p-6 border-b border-slate-800/80 flex items-center justify-between">
+  </main>
+
+  <div id="characterModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-townPanel border-4 border-black w-full max-w-2xl max-h-[90vh] flex flex-col shadow-cutout-xl overflow-hidden relative">
+      <div class="p-5 border-b-2 border-slate-800 bg-slate-950 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div id="modalCharAvatar" class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-inner font-fredoka font-bold text-white">
-            <!-- Icon/Letter -->
+          <div id="modalCharAvatar" class="w-12 h-12 border-2 border-black flex items-center justify-center font-headline text-2xl text-white shadow-cutout">
           </div>
           <div>
-            <h3 id="modalCharName" class="font-fredoka text-xl text-white font-bold">Stan Marsh</h3>
-            <p id="modalCharTitle" class="text-xs text-slate-400 font-medium">The Voice of Reason</p>
+            <span id="modalCharCategory" class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 bg-slate-800 text-amber-400 border border-slate-700"></span>
+            <h3 id="modalCharName" class="font-headline text-2xl text-white uppercase mt-0.5"></h3>
           </div>
         </div>
-        <button id="charModalClose" class="p-2 text-slate-400 hover:text-white rounded-xl bg-slate-800/50 hover:bg-slate-800 transition">
+        <button id="closeCharModalBtn" class="p-2 text-slate-400 hover:text-white rounded bg-slate-800 border border-slate-700">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div class="p-6 overflow-y-auto space-y-4 text-sm">
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-1">Catchphrase</h4>
-          <p id="modalCatchphrase" class="font-fredoka text-base text-white italic">"Oh my God, they killed Kenny!"</p>
+      <div class="p-6 overflow-y-auto space-y-5 font-mono text-xs">
+        <div class="p-3 bg-slate-900 border border-slate-800 text-slate-200 italic font-sans text-sm">
+          "<span id="modalCharQuote"></span>"
         </div>
 
-        <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Biography</h4>
-          <p id="modalBio" class="text-slate-300 text-xs sm:text-sm leading-relaxed"></p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3 pt-2">
-          <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
-            <span class="text-[10px] text-slate-400 uppercase font-semibold block">First Appearance</span>
-            <span id="modalFirstApp" class="text-xs font-medium text-slate-200">Season 1, Ep 1</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div class="p-2.5 bg-black/60 border border-slate-800">
+            <span class="text-[9px] uppercase text-slate-500 block">Voice Actor</span>
+            <span id="modalVoiceActor" class="text-white font-bold"></span>
           </div>
-          <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
-            <span class="text-[10px] text-slate-400 uppercase font-semibold block">Famous Alter-Ego</span>
-            <span id="modalAlterEgo" class="text-xs font-medium text-slate-200">Toolshed</span>
+          <div class="p-2.5 bg-black/60 border border-slate-800">
+            <span class="text-[9px] uppercase text-slate-500 block">First Seen</span>
+            <span id="modalFirstSeen" class="text-amber-400 font-bold"></span>
+          </div>
+          <div class="p-2.5 bg-black/60 border border-slate-800">
+            <span class="text-[9px] uppercase text-slate-500 block">Alter Ego</span>
+            <span id="modalAlterEgo" class="text-cyan-400 font-bold"></span>
+          </div>
+          <div class="p-2.5 bg-black/60 border border-slate-800">
+            <span class="text-[9px] uppercase text-slate-500 block">Status</span>
+            <span id="modalStatus" class="text-rose-400 font-bold"></span>
           </div>
         </div>
 
         <div>
-          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Notable Town Moments</h4>
-          <ul id="modalMoments" class="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
+          <span class="text-[10px] uppercase font-bold text-amber-400 block mb-1">MUNICIPAL DOSSIER & PSYCH SUMMARY:</span>
+          <p id="modalBio" class="text-slate-300 leading-relaxed bg-black/40 p-3 border border-slate-800/80"></p>
+        </div>
+
+        <div>
+          <span class="text-[10px] uppercase font-bold text-slate-400 block mb-2">INFRACTIONS & NOTABLE RECORD:</span>
+          <ul id="modalMoments" class="space-y-1.5 list-disc list-inside text-slate-300">
           </ul>
         </div>
       </div>
 
-      <div class="p-4 bg-slate-900/60 border-t border-slate-800/80 flex items-center justify-between">
-        <button id="modalFavBtn" class="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white transition">
+      <div class="p-4 bg-slate-950 border-t-2 border-slate-800 flex items-center justify-between font-mono text-xs">
+        <button id="modalBookmarkToggleBtn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5">
           <i data-lucide="bookmark" class="w-4 h-4 text-amber-400"></i>
-          <span id="modalFavText">Bookmark Character</span>
+          <span id="modalBookmarkLabel">Save File</span>
         </button>
-        <button id="modalSpeakBtn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-spOrange text-slate-950 font-bold hover:brightness-110 transition">
+        <button id="modalSpeakCatchphraseBtn" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-cutout">
           <i data-lucide="volume-2" class="w-4 h-4"></i>
-          <span>Voice Catchphrase</span>
+          <span>Vocalize</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Favorites Drawer / Sidebar -->
-  <div id="favoritesDrawer" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex justify-end">
-    <div class="w-full max-w-md bg-spDark border-l border-slate-800 h-full p-6 flex flex-col shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
-        <div class="flex items-center gap-2">
-          <i data-lucide="bookmark-check" class="w-5 h-5 text-amber-400"></i>
-          <h3 class="font-fredoka text-lg text-white font-bold">Your Saved Collection</h3>
-        </div>
-        <button id="favCloseBtn" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+  <div id="newPostModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-townPanel border-4 border-black w-full max-w-lg p-6 shadow-cutout-xl space-y-4 font-mono text-xs relative">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-headline text-xl text-amber-400 uppercase">Pin Municipal Notice</h3>
+        <button id="closeNewPostModal" class="text-slate-400 hover:text-white">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <div id="favList" class="flex-1 overflow-y-auto space-y-3">
-        <!-- Rendered saved items -->
+      <div class="space-y-3">
+        <div>
+          <label class="block text-slate-400 uppercase font-bold mb-1">Notice Title:</label>
+          <input id="postTitleInput" type="text" placeholder="e.g. Lost Guinea Pig in Space Suit" class="w-full bg-slate-900 border border-slate-700 p-2.5 text-white focus:outline-none focus:border-amber-400">
+        </div>
+        <div>
+          <label class="block text-slate-400 uppercase font-bold mb-1">Author / Resident Name:</label>
+          <input id="postAuthorInput" type="text" placeholder="e.g. Skeeter / Jimbo Kern" class="w-full bg-slate-900 border border-slate-700 p-2.5 text-white focus:outline-none focus:border-amber-400">
+        </div>
+        <div>
+          <label class="block text-slate-400 uppercase font-bold mb-1">Category:</label>
+          <select id="postCatInput" class="w-full bg-slate-900 border border-slate-700 p-2.5 text-white focus:outline-none focus:border-amber-400">
+            <option value="Town Alert">Town Alert</option>
+            <option value="Lost & Found">Lost & Found</option>
+            <option value="Rant / Complaint">Rant / Complaint</option>
+            <option value="For Sale">For Sale</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-slate-400 uppercase font-bold mb-1">Notice Details:</label>
+          <textarea id="postContentInput" rows="3" placeholder="Provide complete municipal grievance or warning..." class="w-full bg-slate-900 border border-slate-700 p-2.5 text-white focus:outline-none focus:border-amber-400"></textarea>
+        </div>
       </div>
 
-      <div class="pt-4 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
-        <span>Stored in browser memory</span>
-        <button id="clearFavsBtn" class="text-rose-400 hover:underline">Clear All</button>
+      <div class="flex justify-end gap-2 pt-2 border-t border-slate-800">
+        <button id="submitNoticeBtn" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider border border-black shadow-cutout">
+          Pin to Corkboard
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl glass-card border border-slate-700 shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
-    <div id="toastIcon" class="text-amber-400">
-      <i data-lucide="check-circle" class="w-5 h-5"></i>
+  <div id="savedDrawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex justify-end">
+    <div class="w-full max-w-md bg-townDark border-l-4 border-slate-900 h-full p-6 flex flex-col shadow-2xl font-mono text-xs">
+      <div class="flex items-center justify-between border-b-2 border-slate-800 pb-4 mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="archive" class="w-5 h-5 text-amber-400"></i>
+          <h3 class="font-headline text-lg text-white uppercase">Saved County Case Files</h3>
+        </div>
+        <button id="closeSavedDrawerBtn" class="p-1.5 text-slate-400 hover:text-white rounded bg-slate-800">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="savedFilesList" class="flex-1 overflow-y-auto space-y-3 pr-1">
+      </div>
+
+      <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-slate-500 text-[11px]">
+        <span>Browser Local Storage</span>
+        <button id="clearAllSavedBtn" class="text-rose-400 hover:underline">Clear Files</button>
+      </div>
     </div>
-    <span id="toastMsg" class="text-xs sm:text-sm font-medium text-white">Action successful</span>
   </div>
 
-  <footer class="border-t border-slate-800/80 bg-spDark/90 py-12 text-slate-400 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-spRed to-spYellow flex items-center justify-center font-fredoka font-bold text-slate-950 text-sm">
-            SP
-          </div>
-          <div>
-            <p class="font-fredoka text-sm text-white font-semibold">South Park Town Guide</p>
-            <p class="text-[11px] text-slate-500">Created for fans with love, satire, and tegridy.</p>
-          </div>
-        </div>
+  <div id="kennySmitePopup" class="fixed inset-0 z-50 pointer-events-none flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+    <div class="bg-red-950/95 border-4 border-red-600 p-8 shadow-cutout-xl text-center max-w-md space-y-3 pointer-events-auto transform -rotate-1">
+      <div class="text-6xl animate-bounce">⚡💀⚡</div>
+      <h3 class="font-headline text-3xl text-white uppercase tracking-tight">THEY KILLED KENNY!</h3>
+      <p id="smiteCauseText" class="font-mono text-xs text-orange-200"></p>
+      <div class="font-mono text-sm font-bold text-yellow-300 uppercase">YOU BASTARDS!</div>
+      <button onclick="dismissKennySmite()" class="mt-4 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-slate-950 font-mono text-xs font-bold uppercase">
+        Resume Gazette
+      </button>
+    </div>
+  </div>
 
-        <div class="flex flex-wrap justify-center gap-6 text-slate-400 font-medium">
-          <a href="#characters" class="hover:text-amber-400 transition">Characters</a>
-          <a href="#episodes" class="hover:text-amber-400 transition">Episodes</a>
-          <a href="#soundboard" class="hover:text-amber-400 transition">Soundboard</a>
-          <a href="#quiz" class="hover:text-amber-400 transition">Trivia</a>
-        </div>
+  <div id="systemToast" class="fixed bottom-6 right-6 z-50 px-4 py-3 bg-townPanel border-2 border-slate-700 shadow-cutout text-xs font-mono text-white flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300">
+    <span id="toastIcon" class="text-amber-400"><i data-lucide="info" class="w-4 h-4"></i></span>
+    <span id="toastText">System alert message</span>
+  </div>
 
-        <p class="text-slate-500 text-center md:text-right max-w-sm text-[11px]">
-          Parody & educational fan catalog. South Park and its characters are trademarks of Comedy Partners & South Park Digital Studios LLC.
-        </p>
+  <footer class="mt-20 border-t-4 border-slate-900 bg-black/90 py-10 font-mono text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-cRed text-white font-headline text-lg flex items-center justify-center border border-black">SP</div>
+        <div>
+          <span class="text-white font-bold uppercase block">South Park Municipal Archives</span>
+          <span class="text-[10px]">Trey Parker & Matt Stone homage &bull; Est. 1997</span>
+        </div>
+      </div>
+      <div class="text-center md:text-right text-[10px] space-y-1">
+        <p>Satirical Fan Terminal. South Park is a registered trademark of Comedy Partners.</p>
+        <p>No actual towels were harmed in the synthesis of this municipal terminal.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    /* Characters Dataset */
-    const charactersData = [
+    const kennyDeaths = [
+      { id: "kd1", ep: "S1E1: Cartman Gets an Anal Probe", cause: "Shot by Officer Barbrady and trampled by cattle stampede", cat: "creatures", quote: "Oh my God, they killed Kenny!" },
+      { id: "kd2", ep: "S1E2: Volcano", cause: "Crushed by a massive chunk of molten volcanic lava after avoiding gunfire", cat: "bizarre", quote: "Volcano smite" },
+      { id: "kd3", ep: "S1E10: Damien", cause: "Turned into a duck-billed platypus by Damien and promptly shot by Jimbo", cat: "bizarre", quote: "Damien dark magic" },
+      { id: "kd4", ep: "S2E3: Chickenpox", cause: "Succumbs to chickenpox while sitting on a bowling lane", cat: "bizarre", quote: "Pox contagion" },
+      { id: "kd5", ep: "S3E2: Spontaneous Combustion", cause: "Spontaneously explodes into flames due to holding in flatulence", cat: "bizarre", quote: "Methane ignition" },
+      { id: "kd6", ep: "S4E2: The Tooth Fairy Tats 2000", cause: "Drowned in river while fitted with concrete footwear by mafia loan sharks", cat: "cartman", quote: "Tooth syndicate" },
+      { id: "kd7", ep: "S5E13: Kenny Dies", cause: "Terminal muscular illness (permanent for an entire season until returned)", cat: "bizarre", quote: "Hospital flatline" },
+      { id: "kd8", ep: "S8E6: Goobacks", cause: "Shot in the chest by time-traveler seeking blue-collar employment", cat: "bizarre", quote: "Future visitor" },
+      { id: "kd9", ep: "S9E3: Wing", cause: "Accidentally gunned down by Chinese Triad mobsters during hotel firefight", cat: "cartman", quote: "Talent agency shootout" },
+      { id: "kd10", ep: "S10E8: Make Love, Not Warcraft", cause: "Avatar slain in Elwynn Forest; later collapses from lack of sunlight and hot pockets", cat: "cartman", quote: "World of Warcraft PK" },
+      { id: "kd11", ep: "S13E14: Pee", cause: "Drowns in overwhelming tidal wave of urine inside waterpark", cat: "bizarre", quote: "Waterpark breach" },
+      { id: "kd12", ep: "S14E12: Mysterion Rises", cause: "Shoots himself in the head to wake up back in his bed and escape Cthulhu dimension", cat: "creatures", quote: "Dark rebirth" }
+    ];
+
+    const characters = [
       {
         id: "stan",
         name: "Stan Marsh",
-        title: "The Voice of Reason",
         category: "boys",
-        avatarLetter: "S",
-        badgeColor: "bg-spBlue",
-        tagColor: "text-sky-400 border-sky-500/30",
-        catchphrase: "Oh my God, they killed Kenny!",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
+        avatar: "S",
+        badgeBg: "bg-sBlue",
+        tag: "Voice of Reason",
+        voiceActor: "Trey Parker",
+        firstSeen: "Spirit of Christmas (1992)",
         alterEgo: "Toolshed",
-        voicePitch: 1.1,
-        voiceRate: 1.0,
-        bio: "Generally the most grounded and morally observant boy in South Park. Stan frequently balances childhood gullibility with uncanny philosophical common sense.",
+        status: "Active / Cynical",
+        quote: "Dude, this is pretty messed up right here.",
+        pitch: 1.1,
+        rate: 1.0,
+        bio: "The level-headed, everyday surrogate of Trey Parker. Often acts as the moral center of the four boys, though prone to crippling existential cynicism, animal rescue obsession, and rebellion against corporate absurdity.",
         moments: [
-          "Defeated Lord Xenu and Scientology with blunt skepticism.",
-          "Coached the peewee hockey team to a legendary moral crisis.",
-          "Voiced existential dread when everything literally smelled like excrement."
+          "Defeated Lord Xenu and Scientology through calm logical deduction.",
+          "Led a volunteer rescue mission for baby veal calves.",
+          "Became legendary guitar simulation virtuoso in Guitar Hero.",
+          "Battled depression where everything sounded and smelled like literal manure."
         ]
       },
       {
         id: "kyle",
         name: "Kyle Broflovski",
-        title: "The Passionate Moralist",
         category: "boys",
-        avatarLetter: "K",
-        badgeColor: "bg-spGreen",
-        tagColor: "text-emerald-400 border-emerald-500/30",
-        catchphrase: "You bastards!",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
+        avatar: "K",
+        badgeBg: "bg-kGreen",
+        tag: "Moral Conscience",
+        voiceActor: "Matt Stone",
+        firstSeen: "Spirit of Christmas (1992)",
         alterEgo: "The Human Kite",
-        voicePitch: 1.35,
-        voiceRate: 1.1,
-        bio: "Smart, passionate, and fiercely ethical. Kyle is famous for his climactic 'You know, I've learned something today...' speeches and never-ending warfare with Cartman.",
+        status: "Active / Heated",
+        quote: "You know, I've learned something today...",
+        pitch: 1.35,
+        rate: 1.05,
+        bio: "The smart, hot-tempered surrogate of Matt Stone. Known for his moral speeches at town hall meetings, bitter blood-feuds with Cartman, and fiercely protective nature over his adopted Canadian infant brother Ike.",
         moments: [
-          "Brought high-stakes morality speeches to hundreds of town meetings.",
-          "Endured the infamous Cartman kidney donor standoff.",
-          "Rescued Canada and protected his adopted baby brother Ike."
+          "Brought legal action against Cartman over a stolen kidney.",
+          "Exposed the truth about Santa Claus and the Imaginationland portal.",
+          "Gave 180+ conclusive town moral speeches that were largely ignored.",
+          "Prevented the total annihilation of Canada multiple times."
         ]
       },
       {
         id: "cartman",
-        name: "Eric Cartman",
-        title: "The Master Manipulator",
+        name: "Eric Theodore Cartman",
         category: "boys",
-        avatarLetter: "C",
-        badgeColor: "bg-spRed",
-        tagColor: "text-rose-400 border-rose-500/30",
-        catchphrase: "Respect my authoritah! Screw you guys, I'm going home!",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
+        avatar: "C",
+        badgeBg: "bg-cRed",
+        tag: "Sociopathic Mastermind",
+        voiceActor: "Trey Parker",
+        firstSeen: "Cartman Gets an Anal Probe",
         alterEgo: "The Coon / Grand Wizard",
-        voicePitch: 1.4,
-        voiceRate: 0.95,
-        bio: "Selfish, scheming, charismatic, and sociopathically brilliant. Cartman has started cults, founded pirate crews in Somalia, and purchased his own amusement park.",
+        status: "Dangerous / Scheming",
+        quote: "Respect my authoritah! Screw you guys, I'm going home.",
+        pitch: 1.45,
+        rate: 0.95,
+        bio: "Vindictive, self-aggrandizing, wildly charismatic criminal child prodigy. Capable of executing multi-tiered revenge campaigns, purchasing amusement parks, and summoning dark entities to address mild grievances.",
         moments: [
-          "Fed chili con carne to his bitter rival Scott Tenorman.",
-          "Wrote and produced the award-winning song 'Minorities in My Waterpark'.",
-          "Founded the superhero coalition Coon and Friends."
+          "Fed chili con carne made of human remains to Scott Tenorman.",
+          "Formed a pirate syndicate in the Gulf of Aden.",
+          "Started a Christian rock band named 'Faith + 1' solely for a platinum plaque.",
+          "Bought Cartmanland and refused entry to every paying human being."
         ]
       },
       {
         id: "kenny",
         name: "Kenny McCormick",
-        title: "The Immortal Martyr",
         category: "boys",
-        avatarLetter: "M",
-        badgeColor: "bg-spOrange",
-        tagColor: "text-amber-400 border-amber-500/30",
-        catchphrase: "(Muffled) Mmmph rmpph ffrrr mpphh!",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
-        alterEgo: "Mysterion / Princess Kenny",
-        voicePitch: 0.6,
-        voiceRate: 1.2,
-        bio: "A perpetually muffled parka-wearer whose frequent deaths are actually a horrifying cosmic curse linked to the cult of Cthulhu.",
+        avatar: "M",
+        badgeBg: "bg-kOrange",
+        tag: "Immortal Vigilante",
+        voiceActor: "Matt Stone",
+        firstSeen: "Spirit of Christmas (1992)",
+        alterEgo: "Mysterion",
+        status: "Reborn Daily",
+        quote: "(Muffled) Mmmph rmmph frr mpphh!",
+        pitch: 0.65,
+        rate: 1.25,
+        bio: "Parka-wearing survivor of extreme poverty who secretly bears the weight of genuine superhero vigilante justice. Possesses cosmic curse of endless rebirth that his friends instantly forget upon recurrence.",
         moments: [
-          "Sacrificed himself to save South Park from Satan's invasion.",
-          "Reigned as the dark, gravely vigilant protector Mysterion.",
-          "Earned cash as an expert cock magic entertainer."
+          "Sacrificed life to banish Satan back to the underworld.",
+          "Unmasked as the dark hero Mysterion to protect little sister Karen.",
+          "Spent hard-earned money to buy Karen a doll as the Guardian Angel.",
+          "Survived cock magic tournaments to rescue family finances."
         ]
       },
       {
         id: "butters",
-        name: "Butters Stotch",
-        title: "The Innocent Scapegoat",
+        name: "Leopold 'Butters' Stotch",
         category: "school",
-        avatarLetter: "B",
-        badgeColor: "bg-spTeal",
-        tagColor: "text-cyan-400 border-cyan-500/30",
-        catchphrase: "Oh hamburgers!",
-        firstApp: "Elephant Makes Love to a Pig (S1E5)",
+        avatar: "B",
+        badgeBg: "bg-cTeal",
+        tag: "Naive Scapegoat",
+        voiceActor: "Matt Stone",
+        firstSeen: "Elephant Makes Love to a Pig",
         alterEgo: "Professor Chaos",
-        voicePitch: 1.5,
-        voiceRate: 1.05,
-        bio: "The sweet, naive boy whose constant grounding by his harsh parents drove him to adopt a villainous tinfoil-clad alternate identity.",
+        status: "Currently Grounded",
+        quote: "Oh hamburgers! I'm gonna get grounded for sure!",
+        pitch: 1.5,
+        rate: 1.0,
+        bio: "South Park's sweet, innocent boy whose tyrannical parents punish him for existing. Under relentless manipulation by Cartman, he invented a foil-clad supervillain identity to introduce mild municipal chaos.",
         moments: [
-          "Became the feared world threat known as Professor Chaos.",
-          "Led a multimillion dollar tap dance catastrophe.",
-          "Served as Cartman's unwitting gullible sidekick."
+          "Became world-feared supervillain Professor Chaos.",
+          "Accidentally caused high-casualty tap dancing contest disaster.",
+          "Led a lucrative playground kissing company in fourth grade.",
+          "Convinced the entire internet he was an inspector named Marjorine."
         ]
       },
       {
         id: "randy",
         name: "Randy Marsh",
-        title: "The Obsessive Trendsetter",
         category: "adults",
-        avatarLetter: "R",
-        badgeColor: "bg-indigo-600",
-        tagColor: "text-indigo-400 border-indigo-500/30",
-        catchphrase: "I didn't hear no bell! Oh, I'm sorry, I thought this was America!",
-        firstApp: "Volcano (S1E2)",
+        avatar: "R",
+        badgeBg: "bg-indigo-700",
+        tag: "Manic Trend-Chaser",
+        voiceActor: "Trey Parker",
+        firstSeen: "Volcano (S1E2)",
         alterEgo: "Lorde",
-        voicePitch: 0.9,
-        voiceRate: 1.0,
-        bio: "Geologist, former pop star Lorde, and cannabis entrepreneur. Randy adopts every modern craze with manic, catastrophic zeal.",
+        status: "Manic Obsession",
+        quote: "I thought this was America! I didn't hear no bell!",
+        pitch: 0.88,
+        rate: 0.95,
+        bio: "USGS Geologist, secret international pop phenomenon Lorde, and founder of Tegridy Farms. Has never encountered a fad, controversy, or craft hobby he couldn't escalate into a federally declared disaster zone.",
         moments: [
-          "Secretly lived a double life as superstar pop singer Lorde.",
-          "Bought the town Blockbuster video and lost his sanity.",
-          "Founded and ruthlessly expanded Tegridy Farms."
+          "Lived a double-life as chart-topping pop sensation Lorde.",
+          "Challenged opposing Little League baseball fathers to bare-knuckle brawls.",
+          "Bought the town Blockbuster Video and roamed its halls as a phantom.",
+          "Burned down competitor cannabis fields with flamethrower."
         ]
       },
       {
-        id: "chef",
-        name: "Chef (Jerome McElroy)",
-        title: "The Soulful Mentor",
+        id: "mackey",
+        name: "Mr. Mackey",
         category: "adults",
-        avatarLetter: "CH",
-        badgeColor: "bg-amber-600",
-        tagColor: "text-amber-400 border-amber-500/30",
-        catchphrase: "Hello there, children! How's it going?",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
+        avatar: "MK",
+        badgeBg: "bg-green-700",
+        tag: "School Counselor",
+        voiceActor: "Trey Parker",
+        firstSeen: "Mr. Hankey, the Christmas Poo",
         alterEgo: "None",
-        voicePitch: 0.8,
-        voiceRate: 0.9,
-        bio: "The beloved school cafeteria cook who dispensed soulful musical life guidance to the boys whenever adulthood confused them.",
+        status: "Emphatically Mmkay",
+        quote: "Drugs are bad, mmkay? You shouldn't do drugs, mmkay.",
+        pitch: 1.3,
+        rate: 0.85,
+        bio: "The bobblehead-profiled guidance counselor whose advice consists solely of verbal ticks and passive-aggressive bureaucracy. Suffered intense hoarding breakdown that required Inception-style therapy.",
         moments: [
-          "Crafted the famous recipe for Chocolate Salty Balls.",
-          "Won a massive musical lawsuit with aid from famous friends.",
-          "Helped the boys dodge alien satellite probes and succubi."
+          "Accidentally passed around a bag of marijuana at assembly.",
+          "Fired from school and briefly lived as a flower child vagrant.",
+          "Defended the school from gluten panic attacks."
         ]
       },
       {
         id: "garrison",
-        name: "Mr. Garrison",
-        title: "The Unhinged Educator",
+        name: "Herbert Garrison",
         category: "adults",
-        avatarLetter: "G",
-        badgeColor: "bg-emerald-600",
-        tagColor: "text-emerald-400 border-emerald-500/30",
-        catchphrase: "Now children, let's keep quiet or Mr. Hat gets angry!",
-        firstApp: "Cartman Gets an Anal Probe (S1E1)",
+        avatar: "G",
+        badgeBg: "bg-yellow-600",
+        tag: "Volatile Educator",
+        voiceActor: "Trey Parker",
+        firstSeen: "Cartman Gets an Anal Probe",
         alterEgo: "President Garrison",
-        voicePitch: 1.2,
-        voiceRate: 1.1,
-        bio: "The boys' volatile fourth-grade teacher who channeled his inner thoughts through a puppet named Mr. Hat before accidentally becoming U.S. President.",
+        status: "Re-elected to 4th Grade",
+        quote: "Now children, let's behave or Mr. Hat will get very angry.",
+        pitch: 1.15,
+        rate: 1.05,
+        bio: "The fourth-grade teacher whose personal crises, puppet alters, and erratic political campaigns saw him accidentally ascend to the presidency of the United States of America before returning to chalkboard duty.",
         moments: [
-          "Invented the gyroscope-driven personal travel vehicle 'IT'.",
-          "Ascended to the highest political office in the world.",
-          "Battled evolution with eccentric classroom presentations."
+          "Invented the gyroscopic motorized transport device 'IT'.",
+          "Governed the nation from the Oval Office with utter unpredictability.",
+          "Wrote a bestselling romance novel featuring local townsfolk."
         ]
       },
       {
-        id: "chaos",
-        name: "Professor Chaos",
-        title: "Supervillain of the Century",
-        category: "alteregos",
-        avatarLetter: "PC",
-        badgeColor: "bg-teal-600",
-        tagColor: "text-teal-300 border-teal-500/30",
-        catchphrase: "Chaos will reign supreme throughout the universe!",
-        firstApp: "Professor Chaos (S6E6)",
-        alterEgo: "Butters Stotch",
-        voicePitch: 1.45,
-        voiceRate: 1.15,
-        bio: "Armed with tin-foil gauntlets, cardboard shoulder pads, and faithful minion General Disarray, he seeks mild municipal disruption.",
+        id: "jimbo",
+        name: "Jimbo Kern",
+        category: "adults",
+        avatar: "J",
+        badgeBg: "bg-stone-700",
+        tag: "Outdoorsman / Veteran",
+        voiceActor: "Matt Stone",
+        firstSeen: "Volcano (S1E2)",
+        alterEgo: "None",
+        status: "Hunting Law Exemption",
+        quote: "It's coming right for us! *Gunfire*",
+        pitch: 0.85,
+        rate: 1.0,
+        bio: "Stan's gun-toting uncle who owns Jimbo's Guns and hosts the cable access hunting show 'Huntin' and Killin''. Utilizes a legal loophole to harvest endangered wildlife.",
         moments: [
-          "Swapped diner soup orders and hid whiteboard erasers.",
-          "Attempted to flood the Earth via a backyard garden hose.",
-          "Became a major antagonist across the South Park RPG video games."
+          "Bypassed hunting bans by yelling 'It's coming right for us!' before shooting.",
+          "Recounted dubious Vietnam wartime experiences involving a Ferris wheel.",
+          "Led armed town militias against prehistoric man-eating turkeys."
+        ]
+      },
+      {
+        id: "wendy",
+        name: "Wendy Testaburger",
+        category: "school",
+        avatar: "W",
+        badgeBg: "bg-purple-700",
+        tag: "Intellectual Activist",
+        voiceActor: "April Stewart",
+        firstSeen: "Cartman Gets an Anal Probe",
+        alterEgo: "Call Girl",
+        status: "Elected Class President",
+        quote: "Cartman, you are completely full of crap.",
+        pitch: 1.25,
+        rate: 1.0,
+        bio: "Smart, articulate class president who refuses to tolerate Cartman's ignorance or Stan's childish neuroses. Famously beat Cartman to a bloody pulp on the playground behind the school.",
+        moments: [
+          "Publicly dismantled and pummeled Cartman in front of the student body.",
+          "Advocated against photoshopped body standards in elementary classrooms.",
+          "Masterminded superhero communications as Call Girl."
+        ]
+      },
+      {
+        id: "craig",
+        name: "Craig Tucker",
+        category: "school",
+        avatar: "CR",
+        badgeBg: "bg-blue-800",
+        tag: "Deadpan Defiant",
+        voiceActor: "Matt Stone",
+        firstSeen: "Mr. Hankey, the Christmas Poo",
+        alterEgo: "Super Craig",
+        status: "Flipping The Bird",
+        quote: "If I could say something to the council, that'd make me so happy.",
+        pitch: 0.95,
+        rate: 0.9,
+        bio: "Famous for his blue chullo hat, monotone vocal delivery, love for his guinea pig Stripe, and involuntary habit of flipping off faculty, family, and peers without remorse.",
+        moments: [
+          "Sentenced to detention across hundreds of episodes for unsolicited bird-flipping.",
+          "Formed town-saving Peruvian flute band against giant guinea pig invasion.",
+          "Maintains sweet, supportive relationship with Tweek Tweak."
+        ]
+      },
+      {
+        id: "tweek",
+        name: "Tweek Tweak",
+        category: "school",
+        avatar: "TW",
+        badgeBg: "bg-amber-700",
+        tag: "Caffeine-Fueled Panicker",
+        voiceActor: "Matt Stone",
+        firstSeen: "Gnomes (S2E17)",
+        alterEgo: "Wonder Tweek",
+        status: "Max Coffee Intake",
+        quote: "AGHHH! TOO MUCH PRESSURE! OH MAN!",
+        pitch: 1.6,
+        rate: 1.35,
+        bio: "Neurotic child whose parents run the local Tweak Bros. Coffee shop and feed him unlimited dark roast espresso to manage his nervous twitching and terror of Underpants Gnomes.",
+        moments: [
+          "Fought Craig in epic arranged schoolyard boxing match orchestrated by boys.",
+          "Exposed the economic conspiracy of Underpants Gnomes.",
+          "Calmed geopolitical North Korean nuclear threat via acoustic song."
+        ]
+      },
+      {
+        id: "timmy",
+        name: "Timmy Burch",
+        category: "school",
+        avatar: "TI",
+        badgeBg: "bg-red-800",
+        tag: "Rock Star Frontman",
+        voiceActor: "Trey Parker",
+        firstSeen: "The Tooth Fairy Tats 2000",
+        alterEgo: "Iron Maiden / Fastpass",
+        status: "Rocking Out",
+        quote: "TIMMY! And the Lords of the Underworld!",
+        pitch: 1.4,
+        rate: 1.1,
+        bio: "Energetic wheelchair-bound boy with limited vocabulary who became the sensational front-man for heavy metal outfit 'Timmy and the Lords of the Underworld'.",
+        moments: [
+          "Headlined stadium tours across Colorado as a rock icon.",
+          "Engineered a rivalry with Jimmy Valmer that culminated in a fistfight.",
+          "Operated handicap transit enterprise Handicar to disrupt taxi services."
+        ]
+      },
+      {
+        id: "jimmy",
+        name: "Jimmy Valmer",
+        category: "school",
+        avatar: "JV",
+        badgeBg: "bg-yellow-700",
+        tag: "Standup Comedian",
+        voiceActor: "Trey Parker",
+        firstSeen: "Cripple Fight (S5E2)",
+        alterEgo: "Fastpass",
+        status: "Telling Jokes",
+        quote: "What a g-g-great audience!",
+        pitch: 1.05,
+        rate: 0.95,
+        bio: "Crutch-assisted stand-up comedian with an unyielding positive attitude, severe stutter, and zero tolerance for stolen comedy material or sponsored corporate advertisements.",
+        moments: [
+          "Co-invented the legendary Fishsticks joke that broke Kanye West.",
+          "Reformed the bloody rivalry between the Bloods and Crips gang in Denver.",
+          "Exposed undercover sentient corporate ads taking over student body."
+        ]
+      },
+      {
+        id: "towelie",
+        name: "Towelie",
+        category: "alterego",
+        avatar: "TO",
+        badgeBg: "bg-sky-600",
+        tag: "Genetically Engineered Terrycloth",
+        voiceActor: "Vernon Chatman",
+        firstSeen: "Towelie (S5E8)",
+        alterEgo: "Smart Towel RG-400",
+        status: "Slightly High",
+        quote: "Don't forget to bring a towel! Wanna get high?",
+        pitch: 1.35,
+        rate: 0.9,
+        bio: "Manufactured by Tynacorp as high-tech military espionage fabric. Easily distracted by illicit substances and now serves as certified quality inspector at Tegridy Farms.",
+        moments: [
+          "Wrote a tell-all autobiography titled 'A Million Little Fibers'.",
+          "Assisted the military in destroying the evil Smart Towel prototype.",
+          "Certified organic harvest strains at Tegridy Farms."
+        ]
+      },
+      {
+        id: "coon",
+        name: "The Coon",
+        category: "alterego",
+        avatar: "CN",
+        badgeBg: "bg-red-950",
+        tag: "Vigilante Narcissist",
+        voiceActor: "Trey Parker",
+        firstSeen: "The Coon (S13E2)",
+        alterEgo: "Eric Cartman",
+        status: "Self-Appointed Leader",
+        quote: "The Coon will save this city... for commercial sponsors.",
+        pitch: 1.4,
+        rate: 0.95,
+        bio: "Cartman's raccoon-themed vigilante alter-ego whose pursuit of hero stardom involves framing innocent rivals, allying with cosmic horrors, and demanding franchised cinematic universes.",
+        moments: [
+          "Summoned Cthulhu from the sunken city to crush rival daycare chains.",
+          "Banished his superhero allies into the dark abyss of dark space.",
+          "Drafted a 20-year multi-phase cinematic universe roadmap."
         ]
       },
       {
         id: "mysterion",
         name: "Mysterion",
-        title: "The Immortal Dark Knight",
-        category: "alteregos",
-        avatarLetter: "MY",
-        badgeColor: "bg-purple-600",
-        tagColor: "text-purple-400 border-purple-500/30",
-        catchphrase: "I cannot die. I feel everything, and yet I always return.",
-        firstApp: "The Coon (S13E2)",
+        category: "alterego",
+        avatar: "MY",
+        badgeBg: "bg-purple-900",
+        tag: "The Dark Protector",
+        voiceActor: "Matt Stone",
+        firstSeen: "The Coon (S13E2)",
         alterEgo: "Kenny McCormick",
-        voicePitch: 0.7,
-        voiceRate: 0.85,
-        bio: "The true brooding vigilante of South Park who protects his little sister Karen and seeks the esoteric truth behind his repeated reincarnations.",
+        status: "Curse Vigilant",
+        quote: "I cannot die. I feel everything, but tomorrow I wake up in bed.",
+        pitch: 0.7,
+        rate: 0.85,
+        bio: "The only child in South Park with actual paranormal gifts. Mysterion watches over the vulnerable and combats the cosmic wickedness born of Necronomicon lore.",
         moments: [
-          "Exposed Cartman's selfish superhero schemes to the community.",
-          "Confronted the dark lord Cthulhu directly in R'lyeh.",
-          "Gave his sister hope as the superhero Guardian Angel."
+          "Directly faced Cthulhu to release his captured friends.",
+          "Defeated Professor Chaos's schemes in local basements.",
+          "Protected his little sister from bullies as an anonymous guardian angel."
+        ]
+      },
+      {
+        id: "chaos",
+        name: "Professor Chaos",
+        category: "alterego",
+        avatar: "PC",
+        badgeBg: "bg-teal-700",
+        tag: "Supervillain Mastermind",
+        voiceActor: "Matt Stone",
+        firstSeen: "Professor Chaos (S6E6)",
+        alterEgo: "Butters Stotch",
+        status: "Plotting Minor Inconvenience",
+        quote: "Chaos shall reign supreme across the whole entire Earth!",
+        pitch: 1.45,
+        rate: 1.1,
+        bio: "Clad in aluminum foil and corrugated cardboard, Professor Chaos and minion General Disarray scheme to bring the world to its knees through minor societal nuisances.",
+        moments: [
+          "Swapped diner soup bowls so customers received minestrone instead of clam chowder.",
+          "Stole all the dry-erase markers from Mr. Garrison's whiteboard.",
+          "Attempted to flood the global continents by leaving a garden hose running."
         ]
       }
     ];
 
-    const episodesData = [
+    const randySpirals = [
       {
-        id: "tenorman",
-        title: "Scott Tenorman Must Die",
-        season: "Season 5",
-        episode: "Episode 4",
-        airDate: "July 11, 2001",
-        tag: "classic",
-        tagLabel: "Classic Masterpiece",
-        badgeClass: "text-rose-400 bg-rose-500/10 border-rose-500/30",
-        synopsis: "After an older boy cons Cartman out of $16.12, Eric crafts an infamous, chilling revenge plot involving Radiohead and a bowl of town chili.",
-        whyLegendary: "Widely regarded as the turning point defining Cartman's transition from spoiled brat to calculating Machiavellian genius."
+        era: "Season 9",
+        obsession: "Little League Fistfights",
+        alias: "Batdad Challenger",
+        disaster: "Got kicked out of every Colorado youth baseball game for getting belligerently drunk and shirtless behind home plate.",
+        quote: "I thought this was America! Isn't this America?!"
       },
       {
-        id: "warcraft",
-        title: "Make Love, Not Warcraft",
-        season: "Season 10",
-        episode: "Episode 8",
-        airDate: "October 4, 2006",
-        tag: "emmy",
-        tagLabel: "Emmy Winner",
-        badgeClass: "text-amber-400 bg-amber-500/10 border-amber-500/30",
-        synopsis: "The boys dedicate their waking lives to grind boars in World of Warcraft to defeat a rogue player killing innocent low-level characters.",
-        whyLegendary: "Won the Primetime Emmy Award; created in direct partnership with Blizzard Entertainment utilizing official game machinima."
+        era: "Season 10",
+        obsession: "World of Warcraft",
+        alias: "Sword of a Thousand Truths Bearer",
+        disaster: "Drove to Blizzard HQ with a high-capacity flash drive to save the world from an overpowered no-life rogue killer.",
+        quote: "Stan! Give the sword to your friend's character! You can't trust the Sword to a noob!"
       },
       {
-        id: "weapons",
-        title: "Good Times with Weapons",
-        season: "Season 8",
-        episode: "Episode 1",
-        airDate: "March 17, 2004",
-        tag: "classic",
-        tagLabel: "Anime Parody",
-        badgeClass: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
-        synopsis: "The boys buy authentic Japanese ninja weapons at the local fair and transform into stylized anime superheroes until Butters takes an errant shuriken.",
-        whyLegendary: "Features the legendary spoof song 'Let's Fighting Love' and unmatched juxtaposed animation styles."
+        era: "Season 14",
+        obsession: "Creme Fraiche & Food Network",
+        alias: "Celebrity Chef Randy",
+        disaster: "Took over the school cafeteria, demanded truffle oil and shallots, and drove the family into utter madness with cooking TV.",
+        quote: "Oh yeah, deglaze that pan. Give me some of that Creme Fraiche."
       },
       {
-        id: "imaginationland",
-        title: "Imaginationland Trilogy",
-        season: "Season 11",
-        episode: "Episodes 10-12",
-        airDate: "October 2007",
-        tag: "trilogy",
-        tagLabel: "3-Part Saga",
-        badgeClass: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
-        synopsis: "When terrorists attack the collective barrier of human imagination, the boys must unite fictional pop-culture heroes before all fantasy is lost.",
-        whyLegendary: "Won the 2008 Emmy for Outstanding Animated Program (Over One Hour) and showcased the immense scale of South Park lore."
+        era: "Season 18",
+        obsession: "International Pop Music",
+        alias: "Lorde (Ella Yelich-O'Connor)",
+        disaster: "Disguised himself as a 17-year-old New Zealand pop idol to use the clean executive restroom at USGS, topping the charts.",
+        quote: "Ya ya ya, I am Lorde. I am Lorde, ya ya ya."
       },
       {
-        id: "twenty",
-        title: "200 & 201",
-        season: "Season 14",
-        episode: "Episodes 5-6",
-        airDate: "April 2010",
-        tag: "banned",
-        tagLabel: "Banned / Censored",
-        badgeClass: "text-purple-400 bg-purple-500/10 border-purple-500/30",
-        synopsis: "Celebrities launch a class-action lawsuit against South Park demanding the secret to immunity from ridicule, leading to high-stakes confrontations.",
-        whyLegendary: "Heavily bleeped and ultimately removed from streaming networks and syndication due to controversial media representations."
+        era: "Season 19",
+        obsession: "PC Principal / Social Acceptance",
+        alias: "PC Randy",
+        disaster: "Pledged a frat house, threw frat parties, and checked everyone's microaggressions at the door.",
+        quote: "You PC bro? Yeah! Ohio State!"
       },
       {
-        id: "casabonita",
-        title: "Casa Bonita",
-        season: "Season 7",
-        episode: "Episode 11",
-        airDate: "November 12, 2003",
-        tag: "classic",
-        tagLabel: "Iconic Adventure",
-        badgeClass: "text-orange-400 bg-orange-500/10 border-orange-500/30",
-        synopsis: "Kyle invites Butters to his birthday party at Casa Bonita instead of Cartman. In response, Cartman tricks Butters into living in a bomb shelter.",
-        whyLegendary: "Led to real-life show creators Matt Stone and Trey Parker later purchasing and restoring the actual Casa Bonita restaurant in Colorado."
+        era: "Season 22-Present",
+        obsession: "Tegridy Farms Cannabis Empire",
+        alias: "The Tegridy Farmer",
+        disaster: "Moved family to a rural dirt farm, blew up backyard growers with explosives, partnered with Towelie, and supplied China.",
+        quote: "Folks just don't have no tegridy these days."
+      },
+      {
+        era: "Season 24",
+        obsession: "Pandemic Specials & Origin Story",
+        alias: "COVID Pioneer",
+        disaster: "Traveled to Wuhan with Mickey Mouse on a business venture and inadvertently caused the entire global pandemic lockdown.",
+        quote: "It wasn't me, Stan! I was just hanging out with a pangolin!"
+      },
+      {
+        era: "Season 25",
+        obsession: "Blockbuster Video Revitalization",
+        alias: "Ghost of Redbox",
+        disaster: "Bought the South Park strip mall Blockbuster franchise during the streaming era and lost his grip on reality like The Shining.",
+        quote: "We're having a movie night! Who wants to rent Turner and Hooch on VHS?!"
       }
     ];
 
-    const soundboardQuotes = [
-      { speaker: "Eric Cartman", quote: "Respect my authoritah!", pitch: 1.4, rate: 0.9, color: "border-spRed text-rose-400" },
-      { speaker: "Eric Cartman", quote: "Screw you guys, I'm going home!", pitch: 1.45, rate: 1.05, color: "border-spRed text-rose-400" },
-      { speaker: "Kyle Broflovski", quote: "You bastards!", pitch: 1.4, rate: 1.1, color: "border-spGreen text-emerald-400" },
-      { speaker: "Randy Marsh", quote: "I thought this was America!", pitch: 0.9, rate: 1.0, color: "border-spBlue text-sky-400" },
-      { speaker: "Randy Marsh", quote: "I didn't hear no bell!", pitch: 0.85, rate: 0.95, color: "border-spBlue text-sky-400" },
-      { speaker: "Butters Stotch", quote: "Oh hamburgers!", pitch: 1.5, rate: 1.0, color: "border-spTeal text-teal-300" },
-      { speaker: "Mr. Mackey", quote: "Drugs are bad, m'kay?", pitch: 1.3, rate: 0.8, color: "border-spGreen text-green-300" },
-      { speaker: "Chef", quote: "Hello there, children!", pitch: 0.8, rate: 0.9, color: "border-amber-500 text-amber-300" },
-      { speaker: "Kenny McCormick", quote: "Mmmph rrr mmmph ffff!", pitch: 0.6, rate: 1.3, color: "border-spOrange text-amber-400" },
-      { speaker: "Towelie", quote: "Don't forget to bring a towel!", pitch: 1.3, rate: 0.95, color: "border-purple-400 text-purple-300" },
-      { speaker: "Stan Marsh", quote: "Oh my God, they killed Kenny!", pitch: 1.1, rate: 1.0, color: "border-spBlue text-sky-400" },
-      { speaker: "Professor Chaos", quote: "Chaos will reign supreme!", pitch: 1.4, rate: 1.1, color: "border-cyan-500 text-cyan-300" }
+    const episodesVault = [
+      {
+        id: "ep1",
+        title: "Scott Tenorman Must Die",
+        season: "Season 5, Episode 4",
+        airDate: "July 11, 2001",
+        tag: "classic",
+        imdb: "9.6 / 10",
+        runtime: "22 mins",
+        summary: "Cartman gets conned out of $16.12 by an older eighth-grader and engineers a revenge scheme involving Radiohead, a chili contest, and utter moral ruin.",
+        trivia: "Regarded by Trey Parker & Matt Stone as the definitive turning point in Cartman's psyche from whiny brat to calculating evil genius."
+      },
+      {
+        id: "ep2",
+        title: "Make Love, Not Warcraft",
+        season: "Season 10, Episode 8",
+        airDate: "October 4, 2006",
+        tag: "gaming",
+        imdb: "9.5 / 10",
+        runtime: "22 mins",
+        summary: "The boys retreat into complete gaming isolation in Stan's basement to grind boars and obtain the legendary Sword of a Thousand Truths.",
+        trivia: "Won the Primetime Emmy Award. Blizzard Entertainment collaborated directly, capturing live Machinima assets on private test servers."
+      },
+      {
+        id: "ep3",
+        title: "Good Times with Weapons",
+        season: "Season 8, Episode 1",
+        airDate: "March 17, 2004",
+        tag: "gaming",
+        imdb: "9.2 / 10",
+        runtime: "22 mins",
+        summary: "The boys acquire authentic ninja martial arts weaponry at the county fair, transforming into an anime series until Butters gets struck in the eye.",
+        trivia: "Features the viral song 'Let's Fighting Love', sung phonetically in broken Japanese and English by creator Trey Parker."
+      },
+      {
+        id: "ep4",
+        title: "Imaginationland Trilogy",
+        season: "Season 11, Episodes 10-12",
+        airDate: "October 17, 2007",
+        tag: "trilogy",
+        imdb: "9.2 / 10",
+        runtime: "68 mins (Combined)",
+        summary: "When the barrier between reality and human imagination is breached by terrorists, fictional icons must wage war to preserve human creativity.",
+        trivia: "Won the 2008 Emmy for Outstanding Animated Program over one hour and featured over 200 iconic pop-culture character parodies."
+      },
+      {
+        id: "ep5",
+        title: "Black Friday Trilogy",
+        season: "Season 17, Episodes 7-9",
+        airDate: "Nov - Dec 2013",
+        tag: "trilogy",
+        imdb: "9.1 / 10",
+        runtime: "66 mins",
+        summary: "The kids divide into Game of Thrones-themed factions battling over Xbox One vs. PlayStation 4 console discounts at the South Park Mall.",
+        trivia: "Directly inspired and promoted the Obsidian Entertainment video game 'South Park: The Stick of Truth'."
+      },
+      {
+        id: "ep6",
+        title: "Episodes 200 & 201",
+        season: "Season 14, Episodes 5-6",
+        airDate: "April 14, 2010",
+        tag: "banned",
+        imdb: "8.9 / 10",
+        runtime: "44 mins",
+        summary: "Every celebrity ever ridiculed by the town launches a lawsuit to extract the secret of Mohammed's immunity to criticism.",
+        trivia: "Heavily bleeped and permanently removed from physical distribution, syndication, and digital streaming platforms worldwide."
+      },
+      {
+        id: "ep7",
+        title: "Trapped in the Closet",
+        season: "Season 9, Episode 12",
+        airDate: "November 16, 2005",
+        tag: "banned",
+        imdb: "9.1 / 10",
+        runtime: "22 mins",
+        summary: "Stan takes a free personality test and is declared the reincarnation of L. Ron Hubbard by church leadership, prompting Tom Cruise to lock himself in Stan's closet.",
+        trivia: "Led to the departure of voice actor Isaac Hayes (Chef) from the series and featured the recurring closing credits disclaimer: 'John Smith / Jane Smith'."
+      },
+      {
+        id: "ep8",
+        title: "Casa Bonita",
+        season: "Season 7, Episode 11",
+        airDate: "November 12, 2003",
+        tag: "classic",
+        imdb: "9.2 / 10",
+        runtime: "22 mins",
+        summary: "Kyle invites Butters to his birthday dinner at Mexican fun-restaurant Casa Bonita. Cartman locks Butters in a fallout shelter to take his seat.",
+        trivia: "In 2021, Trey Parker and Matt Stone actually purchased the real-life bankrupt Casa Bonita in Lakewood, Colorado for $3.1M and renovated it for $40M."
+      },
+      {
+        id: "ep9",
+        title: "Woodland Critter Christmas",
+        season: "Season 8, Episode 14",
+        airDate: "December 15, 2004",
+        tag: "holiday",
+        imdb: "9.1 / 10",
+        runtime: "22 mins",
+        summary: "Stan helps cute, talking forest animals prepare for the birth of their lord, only to discover they are bloodthirsty disciples of the Antichrist.",
+        trivia: "Written in a state of sheer exhaustion over 4 continuous sleepless days before air date. It turns out to be a sick story Cartman wrote in class."
+      }
+    ];
+
+    const soundboard = [
+      { quote: "Respect my authoritah!", speaker: "Eric Cartman", pitch: 1.45, rate: 0.95, color: "text-rose-400" },
+      { quote: "Screw you guys, I'm going home!", speaker: "Eric Cartman", pitch: 1.5, rate: 1.05, color: "text-rose-400" },
+      { quote: "Oh my God, they killed Kenny!", speaker: "Stan Marsh", pitch: 1.1, rate: 1.0, color: "text-sky-400" },
+      { quote: "YOU BASTARDS!", speaker: "Kyle Broflovski", pitch: 1.4, rate: 1.1, color: "text-emerald-400" },
+      { quote: "I thought this was America!", speaker: "Randy Marsh", pitch: 0.88, rate: 1.0, color: "text-indigo-400" },
+      { quote: "I didn't hear no bell!", speaker: "Randy Marsh", pitch: 0.82, rate: 0.95, color: "text-indigo-400" },
+      { quote: "Oh hamburgers!", speaker: "Butters Stotch", pitch: 1.55, rate: 1.0, color: "text-teal-300" },
+      { quote: "Drugs are bad, mmkay?", speaker: "Mr. Mackey", pitch: 1.3, rate: 0.85, color: "text-green-400" },
+      { quote: "Don't forget to bring a towel!", speaker: "Towelie", pitch: 1.35, rate: 0.95, color: "text-cyan-400" },
+      { quote: "It's coming right for us!", speaker: "Jimbo Kern", pitch: 0.8, rate: 1.05, color: "text-stone-300" },
+      { quote: "TIMMY!", speaker: "Timmy Burch", pitch: 1.45, rate: 1.1, color: "text-yellow-400" },
+      { quote: "Chaos shall reign supreme!", speaker: "Professor Chaos", pitch: 1.45, rate: 1.1, color: "text-teal-400" }
+    ];
+
+    const mapLocations = [
+      {
+        id: "elementary",
+        name: "South Park Elementary",
+        grid: "B-2",
+        type: "Civic Institution",
+        hazard: "Hazardous: Regular gunfights, alien abductions & uncertified counseling.",
+        history: "Home of the fighting South Park Cows. The fourth-grade classroom has survived 26 years of instructional breakdown under Herbert Garrison.",
+        yelpReview: "⭐⭐☆☆☆ 'Chef's Salisbury steak was great, but the substitute teachers frequently summon ancient deities on the chalkboard.' — Kyle B."
+      },
+      {
+        id: "tegridy",
+        name: "Tegridy Farms",
+        grid: "D-4",
+        type: "Agricultural Disaster",
+        hazard: "High: Industrial flamethrowers and rogue laboratory strains.",
+        history: "Acquired by Randy Marsh after renouncing municipal suburban life. Supplies hemp, seasonal specials, and international diplomatic leverage.",
+        yelpReview: "⭐⭐⭐⭐⭐ 'Towelie gave me a 3-hour dissertation on towel dampness. Best product in the mountain state.' — Big Al"
+      },
+      {
+        id: "casabonita",
+        name: "Casa Bonita",
+        grid: "A-1",
+        type: "Entertainment Sanctuary",
+        hazard: "Moderate: Black Bart's cave traps & runaway cliff-divers.",
+        history: "The mystical Mexican palace of cliff diving, bottomless sopapillas, and arcade treasures. Cartman's spiritual center of the universe.",
+        yelpReview: "⭐⭐⭐⭐⭐ 'I locked a classmate in a nuclear shelter for eight days just to eat sopapillas here. Totally worth it.' — Eric C."
+      },
+      {
+        id: "busstop",
+        name: "The Bus Stop",
+        grid: "C-3",
+        type: "Municipal Transit",
+        hazard: "Extreme: Ms. Crabtree screaming & drive-by alien probes.",
+        history: "The snowy intersection where Stan, Kyle, Cartman, and Kenny wait for the morning bus while resolving theological and philosophical paradoxes.",
+        yelpReview: "⭐☆☆☆☆ 'The bus driver yelled at me to SIT DOWN AND SHUT UP because a bird landed on my head.' — Craig T."
+      },
+      {
+        id: "pond",
+        name: "Stark's Pond",
+        grid: "B-4",
+        type: "Wilderness Reserve",
+        hazard: "Critical: Thin ice, ManBearPig territory & underwater vessels.",
+        history: "The wooded reservoir where boys test raft experiments, battle scuzzlebutts, and meet secretly at midnight to discuss supernatural occurrences.",
+        yelpReview: "⭐⭐☆☆☆ 'Saw an old man in hiking boots warning me about a half-man, half-bear, half-pig creature. Ruined my picnic.' — Wendy T."
+      },
+      {
+        id: "citywok",
+        name: "City Wok",
+        grid: "C-1",
+        type: "Culinary Landmark",
+        hazard: "Low: Occasional Mongol invasions along the City Wall.",
+        history: "Run by proprietor Tuong Lu Kim (who is secretly psychologist Dr. William Janus). Known for sweet & sour chicken and defending the City Wall.",
+        yelpReview: "⭐⭐⭐☆☆ 'Welcome to City Wok, take your order please! Stop tearing down my City Wall!' — Tuong Lu Kim"
+      },
+      {
+        id: "skeeters",
+        name: "Skeeter's Bar",
+        grid: "A-3",
+        type: "Tavern",
+        hazard: "Severe: Locals who don't take kindly to outsiders.",
+        history: "The dive establishment where town locals gather to complain about illegal immigrants, pandas, and any newcomer from outside county limits.",
+        yelpReview: "⭐☆☆☆☆ 'Walked in wearing a Denver Broncos jersey. Bartender immediately told me: We don't take kindly to your types in here.' — Visitor"
+      },
+      {
+        id: "church",
+        name: "South Park Church",
+        grid: "D-2",
+        type: "Theological Outpost",
+        hazard: "Moderate: Father Maxi theological combat & confession box traps.",
+        history: "Presided over by Father Maxi. Has encountered real-life encounters with Jesus Christ, Satan, and extraterrestrial visitors.",
+        yelpReview: "⭐⭐⭐☆☆ 'Jesus Christ hosts a public-access call-in show on channel 10 that provides better life advice.' — Stuart M."
+      }
     ];
 
     const triviaQuestions = [
       {
-        question: "What is the name of Kyle's adopted younger Canadian brother?",
-        options: ["Pip", "Ike", "Terrance", "Clyde"],
-        answer: 1,
-        explanation: "Ike Broflovski is Kyle's beloved adopted little brother who loves watching Terrance and Phillip!"
+        q: "What is the full canon name of Kenny's superhero alter ego who cannot die?",
+        opts: ["Captain Chaos", "Mysterion", "Toolshed", "Mint-Berry Crunch"],
+        correct: 1,
+        exp: "Kenny is Mysterion, whose immortality is revealed to be a Lovecraftian curse stemming from his parents' Cthulhu cult meetings."
       },
       {
-        question: "What real-life establishment did Matt Stone and Trey Parker buy and renovate in Colorado?",
-        options: ["Whistlin' Willy's", "City Wok", "Casa Bonita", "Skeeter's Bar"],
-        answer: 2,
-        explanation: "They purchased the iconic Mexican restaurant Casa Bonita in Lakewood, Colorado to preserve its magic."
+        q: "In 'Scott Tenorman Must Die', how much money did Scott swindle from Cartman initially?",
+        opts: ["$10.00", "$16.12", "$25.50", "$3.50"],
+        correct: 1,
+        exp: "Scott sold Cartman pubic hair for exactly $16.12, initiating the darkest revenge plot in animated television history."
       },
       {
-        question: "Which of the following is Kenny's secret superhero alter ego?",
-        options: ["Toolshed", "The Coon", "Mysterion", "Mint-Berry Crunch"],
-        answer: 2,
-        explanation: "Kenny is the dark, gravelly-voiced superhero Mysterion who genuinely cannot die permanently."
+        q: "What was Randy Marsh's secret international pop-star identity?",
+        opts: ["Sia", "Lorde", "Bjork", "Lady Gaga"],
+        correct: 1,
+        exp: "Randy discovered he could auto-tune his voice in the USGS bathroom stall to record chart-topping pop singles as Lorde."
       },
       {
-        question: "What is the name of Randy Marsh's marijuana farm in Colorado?",
-        options: ["Rocky Mountain High", "Tegridy Farms", "South Park Organics", "Boulder Botanicals"],
-        answer: 1,
-        explanation: "Randy moves his family out to the country to start Tegridy Farms in Season 22."
+        q: "What is the name of Kyle's adopted baby brother from Canada?",
+        opts: ["Pip", "Terrance", "Ike", "Phillip"],
+        correct: 2,
+        exp: "Sir Ike Moisha Broflovski is Kyle's beloved adopted Canadian brother who excels in child prodigy politics."
       },
       {
-        question: "What animated animal serves as the beloved mascot of South Park Elementary?",
-        options: ["The South Park Cows", "The Red Mountain Beavers", "The Colorado Elks", "The Pufferfish"],
-        answer: 0,
-        explanation: "The official school mascot is the South Park Cows (and briefly Giant Douche / Turd Sandwich)!"
+        q: "Which real Colorado restaurant did creators Matt Stone and Trey Parker purchase and restore in 2021?",
+        opts: ["City Wok", "Casa Bonita", "The Fort", "Beau Jo's Pizza"],
+        correct: 1,
+        exp: "They acquired the historic Casa Bonita restaurant in Lakewood, Colorado and invested over $40 million to restore its cliff divers and caves."
+      },
+      {
+        q: "What fictitious video game weapon does Randy Marsh deliver in 'Make Love, Not Warcraft'?",
+        opts: ["The Doomhammer", "The Frostmourne", "The Sword of a Thousand Truths", "The Blade of Elwynn"],
+        correct: 2,
+        exp: "The Sword of a Thousand Truths was stored on a 1-gigabyte flash drive by Blizzard developers who foresaw the end of the world."
+      },
+      {
+        q: "What does the towel mascot 'Towelie' constantly remind residents not to forget?",
+        opts: ["Their wallet", "A towel", "Their sunscreen", "Their car keys"],
+        correct: 1,
+        exp: "Towelie's prime directive as Smart Towel model RG-400 is reminding civilians to always bring a towel."
+      },
+      {
+        q: "What is Butters Stotch's supervillain name when wearing tin foil and corrugated cardboard?",
+        opts: ["Doctor Malice", "Professor Chaos", "General Disarray", "The Anarchist"],
+        correct: 1,
+        exp: "After the boys reject Butters as Kenny's replacement in Season 6, he assumes the identity of Professor Chaos."
+      },
+      {
+        q: "What line did Jimbo Kern and Ned use to circumvent Colorado hunting regulations in Season 1?",
+        opts: ["'Shoot to kill!'", "'It's coming right for us!'", "'Defend the border!'", "'Hunting season open!'"],
+        correct: 1,
+        exp: "Jimbo yelled 'It's coming right for us!' to legally justify shooting any creature in self-defense."
+      },
+      {
+        q: "What creature did Al Gore warn the world about that is half man, half bear, and half pig?",
+        opts: ["The Scuzzlebutt", "ManBearPig", "The Jackalope", "Cthulhu"],
+        correct: 1,
+        exp: "Al Gore was 'Super Serial' about ManBearPig, who later turned out to be completely real and extremely destructive."
       }
     ];
 
-    let currentQuizIndex = 0;
-    let quizScoreCount = 0;
-    let selectedQuizAnswer = null;
-    let savedBookmarks = JSON.parse(localStorage.getItem('sp_bookmarks') || '[]');
+    let defaultNotices = [
+      {
+        id: "b1",
+        title: "Lost: One (1) Towel in Vicinity of Bowling Alley",
+        author: "Towelie",
+        cat: "Lost & Found",
+        date: "Today",
+        text: "I am a high-tech synthetic towel and I seem to have forgotten where I live. If found, please do not use me to clean motor oil."
+      },
+      {
+        id: "b2",
+        title: "ATTENTION CITIZENS: ManBearPig is REAL",
+        author: "Former VP Al Gore",
+        cat: "Town Alert",
+        date: "Yesterday",
+        text: "I am super serial. He is roaming the caves near Stark's Pond. He has the body of a man, head of a bear, and paws of a pig. Excelsior!"
+      },
+      {
+        id: "b3",
+        title: "Fresh Tegridy Strain: Snow Day Special",
+        author: "Randy Marsh",
+        cat: "For Sale",
+        date: "2 days ago",
+        text: "Our new winter reserve is cured with genuine Colorado mountain snow. Zero chemicals, 100% farm-grown tegridy."
+      }
+    ];
 
-    /* Toast Helper */
-    function showToast(message, isSuccess = true) {
-      const toast = document.getElementById('toast');
-      const toastMsg = document.getElementById('toastMsg');
-      const toastIcon = document.getElementById('toastIcon');
-      
-      toastMsg.textContent = message;
-      toastIcon.innerHTML = isSuccess ? `<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>` : `<i data-lucide="info" class="w-5 h-5 text-amber-400"></i>`;
+    let savedCaseFiles = JSON.parse(localStorage.getItem('sp_gazette_files') || '[]');
+    let currentTriviaIdx = 0;
+    let triviaScore = 0;
+    let triviaAnswered = false;
+    let kennyKillTally = 128;
+
+    function initTerminal() {
+      renderKennyGraveyard('all');
+      renderRoster('all');
+      renderRandySpirals();
+      renderEpisodesVault('all');
+      renderSoundboard();
+      renderMapButtons();
+      selectMapLocation('elementary');
+      initTrivia();
+      renderBulletinBoard();
+      updateSavedCounter();
       lucide.createIcons();
-      
+    }
+
+    function showToast(msg, isAlert = false) {
+      const toast = document.getElementById('systemToast');
+      const text = document.getElementById('toastText');
+      const icon = document.getElementById('toastIcon');
+      text.textContent = msg;
+      icon.innerHTML = isAlert ? '<i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i>' : '<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>';
+      lucide.createIcons();
       toast.classList.remove('translate-y-24', 'opacity-0');
       toast.classList.add('translate-y-0', 'opacity-100');
-      
       setTimeout(() => {
-        toast.classList.add('translate-y-24', 'opacity-0');
         toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
       }, 2500);
     }
 
-    /* Speech Synthesis helper */
-    function speakText(text, pitch = 1.0, rate = 1.0) {
+    function speakLine(text, pitch = 1.0, rate = 1.0) {
       if (!('speechSynthesis' in window)) {
-        showToast("Speech synthesis not supported on this browser.", false);
+        showToast("Audio synthesizer not supported in this environment", true);
         return;
       }
       window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.pitch = pitch;
-      utterance.rate = rate;
-      window.speechSynthesis.speak(utterance);
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.pitch = pitch;
+      utt.rate = rate;
+      window.speechSynthesis.speak(utt);
     }
 
-    function updateBookmarkBadge() {
-      const badge = document.getElementById('favBadge');
-      badge.textContent = savedBookmarks.length;
-      if (savedBookmarks.length > 0) {
-        badge.classList.remove('scale-0');
-        badge.classList.add('scale-100');
+    function updateSavedCounter() {
+      const badge = document.getElementById('savedFilesCounter');
+      badge.textContent = savedCaseFiles.length;
+      renderSavedDrawer();
+    }
+
+    function toggleSaveFile(file) {
+      const existsIdx = savedCaseFiles.findIndex(f => f.id === file.id);
+      if (existsIdx > -1) {
+        savedCaseFiles.splice(existsIdx, 1);
+        showToast(`Dossier "${file.name || file.title}" removed from county files`);
       } else {
-        badge.classList.remove('scale-100');
-        badge.classList.add('scale-0');
+        savedCaseFiles.push(file);
+        showToast(`Dossier "${file.name || file.title}" filed into municipal archive`);
       }
-      renderFavoritesDrawer();
+      localStorage.setItem('sp_gazette_files', JSON.stringify(savedCaseFiles));
+      updateSavedCounter();
+      renderRoster(activeRosterTab);
     }
 
-    function toggleBookmark(item) {
-      const index = savedBookmarks.findIndex(b => b.id === item.id);
-      if (index > -1) {
-        savedBookmarks.splice(index, 1);
-        showToast(`Removed "${item.name || item.title}" from saved favorites`, false);
-      } else {
-        savedBookmarks.push(item);
-        showToast(`Added "${item.name || item.title}" to saved favorites!`);
-      }
-      localStorage.setItem('sp_bookmarks', JSON.stringify(savedBookmarks));
-      updateBookmarkBadge();
-      renderCharacters();
+    function isFileSaved(id) {
+      return savedCaseFiles.some(f => f.id === id);
     }
 
-    function isBookmarked(id) {
-      return savedBookmarks.some(b => b.id === id);
-    }
-
-    function renderFavoritesDrawer() {
-      const list = document.getElementById('favList');
-      if (savedBookmarks.length === 0) {
-        list.innerHTML = `
-          <div class="text-center py-16 text-slate-500 text-xs">
-            <i data-lucide="bookmark" class="w-8 h-8 mx-auto mb-2 opacity-40"></i>
-            <p>No favorites saved yet.</p>
-            <p class="mt-1 text-slate-600">Click the bookmark icon on any character or episode!</p>
+    function renderSavedDrawer() {
+      const container = document.getElementById('savedFilesList');
+      if (savedCaseFiles.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-slate-500 font-mono text-xs">
+            <i data-lucide="folder" class="w-8 h-8 mx-auto mb-2 opacity-30"></i>
+            <p>Archive terminal empty.</p>
+            <p class="text-[10px] text-slate-600 mt-1">Bookmark characters or landmark episodes to pin records.</p>
           </div>
         `;
         lucide.createIcons();
         return;
       }
 
-      list.innerHTML = savedBookmarks.map(item => `
-        <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 flex items-center justify-between gap-3">
+      container.innerHTML = savedCaseFiles.map(f => `
+        <div class="p-3 bg-slate-900 border-2 border-slate-800 flex items-center justify-between gap-3 shadow-cutout">
           <div class="overflow-hidden">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 block">${item.type || 'Item'}</span>
-            <h4 class="text-sm font-semibold text-white truncate">${item.name || item.title}</h4>
-            <p class="text-xs text-slate-400 truncate">${item.catchphrase || item.synopsis || ''}</p>
+            <span class="text-[9px] uppercase font-bold text-amber-400 block">${f.type}</span>
+            <h4 class="text-xs font-bold text-white truncate uppercase">${f.name || f.title}</h4>
+            <p class="text-[10px] text-slate-400 truncate">${f.sub || f.quote || ''}</p>
           </div>
-          <button onclick="removeFavorite('${item.id}')" class="p-2 text-slate-400 hover:text-rose-400 rounded-lg transition" title="Remove">
+          <button onclick="removeSavedItem('${f.id}')" class="p-1.5 text-slate-400 hover:text-rose-400">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
           </button>
         </div>
@@ -1001,118 +1541,100 @@
       lucide.createIcons();
     }
 
-    window.removeFavorite = function(id) {
-      savedBookmarks = savedBookmarks.filter(b => b.id !== id);
-      localStorage.setItem('sp_bookmarks', JSON.stringify(savedBookmarks));
-      updateBookmarkBadge();
-      renderCharacters();
-      showToast("Item removed", false);
+    window.removeSavedItem = function(id) {
+      savedCaseFiles = savedCaseFiles.filter(f => f.id !== id);
+      localStorage.setItem('sp_gazette_files', JSON.stringify(savedCaseFiles));
+      updateSavedCounter();
+      renderRoster(activeRosterTab);
+      showToast("Case file deleted");
     };
 
-    function renderCharacters(filter = 'all') {
-      const grid = document.getElementById('characterGrid');
-      const filtered = filter === 'all' 
-        ? charactersData 
-        : charactersData.filter(c => c.category === filter);
-
-      grid.innerHTML = filtered.map(char => {
-        const bookmarked = isBookmarked(char.id);
-        return `
-          <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group glass-card-hover relative cursor-pointer" onclick="openCharModal('${char.id}')">
-            <!-- Header bar with avatar and bookmark -->
-            <div class="flex items-start justify-between gap-3 mb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl ${char.badgeColor} flex items-center justify-center font-fredoka font-bold text-white text-xl shadow-lg shadow-black/40">
-                  ${char.avatarLetter}
-                </div>
-                <div>
-                  <h3 class="font-fredoka text-lg text-white font-bold group-hover:text-amber-300 transition-colors">${char.name}</h3>
-                  <span class="text-xs text-slate-400 font-medium">${char.title}</span>
-                </div>
-              </div>
-              <button onclick="event.stopPropagation(); toggleBookmark({ id: '${char.id}', name: '${char.name}', type: 'Character', catchphrase: '${char.catchphrase.replace(/'/g, "\\'")}' })" class="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-amber-400 transition" title="Save Favorite">
-                <i data-lucide="bookmark" class="w-4 h-4 ${bookmarked ? 'fill-amber-400 text-amber-400' : ''}"></i>
-              </button>
-            </div>
-
-            <!-- Catchphrase bubble -->
-            <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-3 mb-4">
-              <p class="text-xs italic text-slate-300 font-fredoka">"${char.catchphrase}"</p>
-            </div>
-
-            <!-- Footer stats -->
-            <div class="flex items-center justify-between pt-3 border-t border-slate-800/80 text-xs text-slate-400">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold border ${char.tagColor}">
-                ${char.alterEgo}
-              </span>
-              <span class="text-[11px] font-medium text-slate-500 group-hover:text-slate-300 transition">View Profile &rarr;</span>
-            </div>
+    function renderKennyGraveyard(filter = 'all') {
+      const container = document.getElementById('kennyLogsContainer');
+      const filtered = filter === 'all' ? kennyDeaths : kennyDeaths.filter(d => d.cat === filter);
+      
+      container.innerHTML = filtered.map(d => `
+        <div class="p-3 bg-black/60 border border-orange-900/60 hover:border-orange-500 transition font-mono text-xs space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-orange-400 font-bold text-[10px] uppercase">${d.ep}</span>
+            <button onclick="inspectKennyDeath('${d.id}')" class="text-[10px] text-slate-400 hover:text-white underline">Inspect</button>
           </div>
-        `;
-      }).join('');
-      lucide.createIcons();
+          <p class="text-slate-300 text-[11px] leading-snug">${d.cause}</p>
+        </div>
+      `).join('');
     }
 
-    let activeChar = null;
-    window.openCharModal = function(charId) {
-      activeChar = charactersData.find(c => c.id === charId);
-      if (!activeChar) return;
-
-      document.getElementById('modalCharAvatar').textContent = activeChar.avatarLetter;
-      document.getElementById('modalCharAvatar').className = `w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-inner font-fredoka font-bold text-white ${activeChar.badgeColor}`;
-      document.getElementById('modalCharName').textContent = activeChar.name;
-      document.getElementById('modalCharTitle').textContent = activeChar.title;
-      document.getElementById('modalCatchphrase').textContent = `"${activeChar.catchphrase}"`;
-      document.getElementById('modalBio').textContent = activeChar.bio;
-      document.getElementById('modalFirstApp').textContent = activeChar.firstApp;
-      document.getElementById('modalAlterEgo').textContent = activeChar.alterEgo;
-      
-      const momentsList = document.getElementById('modalMoments');
-      momentsList.innerHTML = activeChar.moments.map(m => `<li>${m}</li>`).join('');
-
-      const isSaved = isBookmarked(activeChar.id);
-      document.getElementById('modalFavText').textContent = isSaved ? "Saved in Collection" : "Bookmark Character";
-
-      document.getElementById('charModal').classList.remove('hidden');
+    window.inspectKennyDeath = function(deathId) {
+      const death = kennyDeaths.find(d => d.id === deathId);
+      if (!death) return;
+      const alertBox = document.getElementById('kennyDeathAlertBox');
+      document.getElementById('deathCauseDesc').textContent = `Incident Log: ${death.cause} (${death.ep})`;
+      alertBox.classList.remove('hidden');
+      speakLine("Oh my God! They killed Kenny! You bastards!", 1.2, 1.05);
     };
 
-    function renderEpisodes(tag = 'all') {
-      const container = document.getElementById('episodesGrid');
-      const filtered = tag === 'all' 
-        ? episodesData 
-        : episodesData.filter(ep => ep.tag === tag);
+    function triggerSmiteKenny() {
+      kennyKillTally++;
+      document.getElementById('kennyLiveCounter').textContent = kennyKillTally;
+      document.getElementById('quickKennyCount').textContent = kennyKillTally;
+      document.getElementById('heroDeathsCount').textContent = `${kennyKillTally} Documented Deaths`;
 
-      container.innerHTML = filtered.map(ep => {
-        const bookmarked = isBookmarked(ep.id);
+      const randomDeath = kennyDeaths[Math.floor(Math.random() * kennyDeaths.length)];
+      const popup = document.getElementById('kennySmitePopup');
+      document.getElementById('smiteCauseText').textContent = `Cause of Death: ${randomDeath.cause} (${randomDeath.ep})`;
+      popup.classList.remove('opacity-0', 'pointer-events-none');
+      popup.classList.add('opacity-100');
+
+      speakLine("Oh my God! They killed Kenny! You bastards!", 1.3, 1.1);
+    }
+
+    window.dismissKennySmite = function() {
+      const popup = document.getElementById('kennySmitePopup');
+      popup.classList.add('opacity-0', 'pointer-events-none');
+      popup.classList.remove('opacity-100');
+    };
+
+    let activeRosterTab = 'all';
+    function renderRoster(cat = 'all') {
+      activeRosterTab = cat;
+      const grid = document.getElementById('rosterGrid');
+      const filtered = cat === 'all' ? characters : characters.filter(c => c.category === cat);
+
+      grid.innerHTML = filtered.map(c => {
+        const saved = isFileSaved(c.id);
         return `
-          <div class="glass-card rounded-2xl p-6 border border-slate-800 hover:border-slate-700 transition flex flex-col justify-between group glass-card-hover">
+          <div class="bg-townPanel border-2 border-slate-800 p-5 shadow-cutout hover:border-slate-600 transition flex flex-col justify-between group relative cursor-pointer" onclick="openCharacterDossier('${c.id}')">
+            <div class="tape w-16 h-3 absolute -top-1.5 right-6 rotate-2"></div>
+            
             <div>
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${ep.badgeClass}">
-                  ${ep.tagLabel}
-                </span>
-                <button onclick="toggleBookmark({ id: '${ep.id}', name: '${ep.title}', type: 'Episode', synopsis: '${ep.synopsis.replace(/'/g, "\\'")}' })" class="p-1.5 text-slate-400 hover:text-amber-400 transition" title="Save Favorite">
-                  <i data-lucide="bookmark" class="w-4 h-4 ${bookmarked ? 'fill-amber-400 text-amber-400' : ''}"></i>
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 ${c.badgeBg} text-white font-headline text-xl flex items-center justify-center border-2 border-black shadow-cutout">
+                    ${c.avatar}
+                  </div>
+                  <div>
+                    <h3 class="font-headline text-lg text-white group-hover:text-amber-400 transition uppercase">${c.name}</h3>
+                    <span class="text-[10px] font-mono text-slate-400 block">${c.tag}</span>
+                  </div>
+                </div>
+                <button onclick="event.stopPropagation(); toggleSaveFile({ id: '${c.id}', name: '${c.name.replace(/'/g, "\\'")}', type: 'Citizen', quote: '${c.quote.replace(/'/g, "\\'")}' })" class="p-1.5 bg-slate-900 border border-slate-700 text-slate-400 hover:text-amber-400 transition" title="Save file">
+                  <i data-lucide="bookmark" class="w-4 h-4 ${saved ? 'fill-amber-400 text-amber-400' : ''}"></i>
                 </button>
               </div>
 
-              <h3 class="font-fredoka text-xl text-white font-bold group-hover:text-amber-400 transition-colors">
-                ${ep.title}
-              </h3>
-              
-              <div class="text-xs text-slate-400 font-medium mb-3 flex items-center gap-2">
-                <span>${ep.season}, ${ep.episode}</span> &bull; 
-                <span>${ep.airDate}</span>
+              <div class="bg-black/60 border border-slate-800 p-2.5 mb-3 font-mono text-[11px] text-slate-300 italic">
+                "${c.quote}"
               </div>
 
-              <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                ${ep.synopsis}
-              </p>
+              <div class="space-y-1 font-mono text-[11px] text-slate-400">
+                <div><span class="text-slate-500 uppercase text-[9px]">Alter Ego:</span> <span class="text-cyan-400 font-bold">${c.alterEgo}</span></div>
+                <div><span class="text-slate-500 uppercase text-[9px]">Status:</span> <span class="text-rose-300 font-bold">${c.status}</span></div>
+              </div>
             </div>
 
-            <div class="pt-3 border-t border-slate-800/80">
-              <span class="text-[10px] text-amber-400 uppercase font-semibold block mb-0.5">Why It's Legendary:</span>
-              <p class="text-[11px] text-slate-400 italic">${ep.whyLegendary}</p>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between font-mono text-[10px]">
+              <span class="text-amber-400 uppercase font-bold">CASE #${c.id.toUpperCase()}</span>
+              <span class="text-slate-400 group-hover:text-white transition flex items-center gap-1">Open File &rarr;</span>
             </div>
           </div>
         `;
@@ -1120,361 +1642,496 @@
       lucide.createIcons();
     }
 
-    function renderSoundboard() {
-      const grid = document.getElementById('soundboardGrid');
-      grid.innerHTML = soundboardQuotes.map((sq, i) => `
-        <div class="glass-card rounded-2xl p-4 border border-slate-800 hover:border-slate-700 transition flex flex-col justify-between">
+    let currentOpenChar = null;
+    window.openCharacterDossier = function(charId) {
+      currentOpenChar = characters.find(c => c.id === charId);
+      if (!currentOpenChar) return;
+
+      const c = currentOpenChar;
+      const avatar = document.getElementById('modalCharAvatar');
+      avatar.textContent = c.avatar;
+      avatar.className = `w-12 h-12 border-2 border-black flex items-center justify-center font-headline text-2xl text-white shadow-cutout ${c.badgeBg}`;
+
+      document.getElementById('modalCharName').textContent = c.name;
+      document.getElementById('modalCharCategory').textContent = `Division: ${c.category.toUpperCase()}`;
+      document.getElementById('modalCharQuote').textContent = c.quote;
+      document.getElementById('modalVoiceActor').textContent = c.voiceActor;
+      document.getElementById('modalFirstSeen').textContent = c.firstSeen;
+      document.getElementById('modalAlterEgo').textContent = c.alterEgo;
+      document.getElementById('modalStatus').textContent = c.status;
+      document.getElementById('modalBio').textContent = c.bio;
+
+      const list = document.getElementById('modalMoments');
+      list.innerHTML = c.moments.map(m => `<li>${m}</li>`).join('');
+
+      const saved = isFileSaved(c.id);
+      document.getElementById('modalBookmarkLabel').textContent = saved ? "In Municipal Case Files" : "Save to Case Files";
+
+      document.getElementById('characterModal').classList.remove('hidden');
+    };
+
+    document.getElementById('modalSpeakCatchphraseBtn').addEventListener('click', () => {
+      if (currentOpenChar) {
+        speakLine(currentOpenChar.quote, currentOpenChar.pitch, currentOpenChar.rate);
+      }
+    });
+
+    document.getElementById('modalBookmarkToggleBtn').addEventListener('click', () => {
+      if (currentOpenChar) {
+        toggleSaveFile({
+          id: currentOpenChar.id,
+          name: currentOpenChar.name,
+          type: "Citizen",
+          quote: currentOpenChar.quote
+        });
+        const saved = isFileSaved(currentOpenChar.id);
+        document.getElementById('modalBookmarkLabel').textContent = saved ? "In Municipal Case Files" : "Save to Case Files";
+      }
+    });
+
+    document.getElementById('closeCharModalBtn').addEventListener('click', () => {
+      document.getElementById('characterModal').classList.add('hidden');
+    });
+
+    const revengeSchemes = {
+      chicken: {
+        title: "The Kentucky Fried Retaliation",
+        risk: "MILITARY-GRADE TERROR",
+        body: "Form a monopolistic fried poultry cartel in Park County, corner the town's fast food supply, and hire medicinal cannabis doctors to make fried chicken skin a Class 1 controlled substance solely available through you.",
+        collateral: "Kenny McCormick (malnutrition), Colonel Sanders estate, Kyle's sanity",
+        gear: "14 KFC buckets, counterfeit FDA licenses, megaphone, bullwhip",
+        quote: "You touched the skin, Kyle. You took the only part that mattered!"
+      },
+      money: {
+        title: "The Scott Tenorman Special",
+        risk: "COLD-BLOODED PSYCHOPATHY",
+        body: "Stage an elaborate multi-phase county chili cook-off involving the local carnival proprietor, a stolen pony, and direct intervention from Radiohead to achieve total emotional breakdown.",
+        collateral: "Scott Tenorman, Mr. and Mrs. Tenorman, Radiohead band members",
+        gear: "Pubes, $16.12 cash, chef apron, chili pot, carnival pony",
+        quote: "Oh, the tears of unfathomable sadness! Yummy, yummy, you guys!"
+      },
+      calledfat: {
+        title: "Weight Gain 4000 Overdrive",
+        risk: "MUNICIPAL BIOHAZARD",
+        body: "Consume 500 cans of anabolic bodybuilding powder while claiming you are merely beefing up, until you require an industrial forklift to attend school assemblies.",
+        collateral: "South Park gym floor, Wendy Testaburger's speech, school stage integrity",
+        gear: "Weight Gain 4000 powdered canisters, 'BEEFCAKE' tank top, industrial forklift",
+        quote: "BEEFCAKE! Follow your dreams! Beefcake!"
+      },
+      theme_park: {
+        title: "Cartmanland Exclusivity Protocol",
+        risk: "COMMERCIAL ABSURDITY",
+        body: "Inherit one million dollars from your grandmother, purchase an amusement park outright, and produce high-budget television commercials declaring that NOBODY is permitted through the gates.",
+        collateral: "Park maintenance team, Kyle's ruptured hemorrhoid, IRS tax agents",
+        gear: "1 million dollars, amusement park deed, broadcast cameras, brass gates",
+        quote: "So much to do at Cartmanland, but you can't come! Especially not you, Kyle!"
+      },
+      ginger: {
+        title: "The Separatist Ginger Inquisition",
+        risk: "GLOBAL UPRISING",
+        body: "Deliver a presentation claiming fair-skinned redheads have no souls, then get sneakily dyed with red henna by your friends, whereupon you promptly lead an armed underground ginger liberation army.",
+        collateral: "Town assembly hall, fourth-grade lockers, Stan's faith in humanity",
+        gear: "Overhead projector, red robes, bullhorn, warehouse lair",
+        quote: "Gingers have no souls! Unless I am one, in which case we rule supreme!"
+      },
+      casabonita: {
+        title: "Operation Sopapilla Blackout",
+        risk: "KIDNAPPING & FEDERAL CRIME",
+        body: "Convince Butters that a comet hit Earth and the radioactive fallout requires him to reside inside a forgotten nuclear bunker, so you can take his dinner reservation at Casa Bonita.",
+        collateral: "Leopold 'Butters' Stotch, Park County SWAT division, cliff divers",
+        gear: "Fallout shelter rations, geiger counter tape, fake radio transmitter",
+        quote: "Well, was it worth it, Cartman? ...Totally."
+      },
+      authoritah: {
+        title: "Enforcer of Authoritah",
+        risk: "POLICE IMPERSONATION",
+        body: "Patrol neighborhood streets on an undersized tricycle equipped with a plastic baton, sunglasses, and high-velocity pepper spray, demanding unquestioned fealty from elder citizens.",
+        collateral: "Neighborhood pedestrians, mail carrier, town speed limits",
+        gear: "Tricycle, mirror aviators, nightstick, megaphone",
+        quote: "Respect my authoritah! I said pull over your Big Wheel!"
+      }
+    };
+
+    function calculateRevenge() {
+      const selected = document.getElementById('offenseSelect').value;
+      const data = revengeSchemes[selected] || revengeSchemes.money;
+
+      document.getElementById('schemeCodename').textContent = `OPERATION ${selected.toUpperCase()}_PURGE`;
+      document.getElementById('schemeRisk').textContent = data.risk;
+      document.getElementById('schemeTitle').textContent = data.title;
+      document.getElementById('schemeBody').textContent = data.body;
+      document.getElementById('schemeCollateral').textContent = data.collateral;
+      document.getElementById('schemeGear').textContent = data.gear;
+      document.getElementById('schemeQuote').textContent = `"${data.quote}"`;
+
+      speakLine(data.quote, 1.45, 0.95);
+    }
+
+    document.getElementById('calculateRevengeBtn').addEventListener('click', calculateRevenge);
+
+    window.synthesizeCartmanLaugh = function() {
+      speakLine("Ha ha ha ha ha! Suckers! Respect my authoritah!", 1.5, 1.0);
+    };
+
+    function renderRandySpirals() {
+      const container = document.getElementById('randyTimelineGrid');
+      container.innerHTML = randySpirals.map(r => `
+        <div class="bg-black/60 border-2 border-slate-800 p-4 font-mono text-xs flex flex-col justify-between shadow-cutout">
           <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[11px] font-semibold text-slate-400">${sq.speaker}</span>
-              <button onclick="copyQuote('${sq.quote.replace(/'/g, "\\'")}')" class="p-1 text-slate-500 hover:text-slate-300 rounded" title="Copy text">
-                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              </button>
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-2">
+              <span class="text-amber-400 font-bold text-[10px] uppercase">${r.era}</span>
+              <span class="text-[9px] px-1.5 py-0.5 bg-slate-800 text-slate-300 font-bold uppercase">${r.alias}</span>
             </div>
-            <p class="font-fredoka text-sm text-white font-medium mb-4 min-h-[40px] flex items-center">
-              "${sq.quote}"
-            </p>
+            <h4 class="font-headline text-sm text-sky-300 uppercase mb-2">${r.obsession}</h4>
+            <p class="text-slate-400 text-[11px] leading-relaxed mb-3">${r.disaster}</p>
           </div>
-          <button onclick="speakText('${sq.quote.replace(/'/g, "\\'")}', ${sq.pitch}, ${sq.rate})" class="w-full py-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition active:scale-95 border border-slate-700">
-            <i data-lucide="volume-2" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>Play Line</span>
-          </button>
+          <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-300 italic">
+            "${r.quote}"
+          </div>
         </div>
       `).join('');
+    }
+
+    function renderEpisodesVault(filter = 'all') {
+      const grid = document.getElementById('episodesVaultGrid');
+      const filtered = filter === 'all' ? episodesVault : episodesVault.filter(e => e.tag === filter);
+
+      grid.innerHTML = filtered.map(e => {
+        const saved = isFileSaved(e.id);
+        return `
+          <div class="bg-townPanel border-2 border-slate-800 p-5 shadow-cutout flex flex-col justify-between hover:border-slate-600 transition">
+            <div>
+              <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+                <span class="text-[10px] font-mono font-bold uppercase text-amber-400">${e.season}</span>
+                <button onclick="toggleSaveFile({ id: '${e.id}', title: '${e.title.replace(/'/g, "\\'")}', type: 'Episode', sub: '${e.season}' })" class="p-1 text-slate-400 hover:text-amber-400">
+                  <i data-lucide="bookmark" class="w-4 h-4 ${saved ? 'fill-amber-400 text-amber-400' : ''}"></i>
+                </button>
+              </div>
+
+              <h3 class="font-headline text-lg text-white uppercase mb-1">${e.title}</h3>
+              <div class="text-[10px] font-mono text-slate-400 mb-3 flex items-center gap-2">
+                <span>IMDb: ${e.imdb}</span> &bull; <span>${e.runtime}</span>
+              </div>
+
+              <p class="font-mono text-xs text-slate-300 leading-relaxed mb-4">
+                ${e.summary}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-slate-800 font-mono text-[10px] text-slate-400 bg-black/40 p-2.5">
+              <span class="text-amber-400 uppercase font-bold block mb-0.5">County Historical Trivia:</span>
+              <p class="italic text-slate-300">${e.trivia}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
       lucide.createIcons();
     }
 
-    window.copyQuote = function(text) {
-      const el = document.createElement('textarea');
-      el.value = text;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      showToast("Quote copied to clipboard!");
-    };
-
-    function loadQuizQuestion() {
-      const q = triviaQuestions[currentQuizIndex];
-      document.getElementById('quizCounter').textContent = `Question ${currentQuizIndex + 1} of ${triviaQuestions.length}`;
-      document.getElementById('quizProgressBar').style.width = `${((currentQuizIndex + 1) / triviaQuestions.length) * 100}%`;
-      document.getElementById('quizQuestion').textContent = q.question;
-      
-      const optionsContainer = document.getElementById('quizOptions');
-      const feedback = document.getElementById('quizFeedback');
-      const nextBtn = document.getElementById('quizNextBtn');
-
-      feedback.className = "hidden p-4 rounded-xl text-xs sm:text-sm font-medium mb-6";
-      feedback.textContent = "";
-      nextBtn.classList.add('hidden');
-      selectedQuizAnswer = null;
-
-      optionsContainer.innerHTML = q.options.map((opt, idx) => `
-        <button onclick="handleQuizAnswer(${idx})" class="quiz-opt-btn w-full p-3.5 rounded-xl bg-slate-800/60 hover:bg-slate-700/60 border border-slate-700/60 text-left text-xs sm:text-sm font-medium text-slate-200 transition flex items-center justify-between">
-          <span>${opt}</span>
-          <span class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center text-[10px] text-slate-400 font-mono">${String.fromCharCode(65 + idx)}</span>
+    function renderMapButtons() {
+      const container = document.getElementById('mapButtonsContainer');
+      container.innerHTML = mapLocations.map(loc => `
+        <button onclick="selectMapLocation('${loc.id}')" class="p-2.5 bg-slate-900 border border-slate-700 hover:border-emerald-400 text-left transition flex flex-col justify-between h-20 shadow-sm">
+          <span class="text-[9px] text-emerald-400 font-bold uppercase">${loc.grid}</span>
+          <span class="font-mono text-xs text-white font-bold truncate">${loc.name}</span>
         </button>
       `).join('');
     }
 
-    window.handleQuizAnswer = function(chosenIdx) {
-      if (selectedQuizAnswer !== null) return; // prevent multi clicks
-      selectedQuizAnswer = chosenIdx;
-      const q = triviaQuestions[currentQuizIndex];
-      const buttons = document.querySelectorAll('.quiz-opt-btn');
-      const feedback = document.getElementById('quizFeedback');
-      const nextBtn = document.getElementById('quizNextBtn');
+    window.selectMapLocation = function(locId) {
+      const loc = mapLocations.find(l => l.id === locId) || mapLocations[0];
+      const panel = document.getElementById('mapDetailPanel');
 
-      buttons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === q.answer) {
-          btn.classList.add('bg-emerald-950/80', 'border-emerald-500', 'text-emerald-200');
-        } else if (idx === chosenIdx) {
-          btn.classList.add('bg-rose-950/80', 'border-rose-500', 'text-rose-200');
-        }
-      });
+      panel.innerHTML = `
+        <div class="border-b border-slate-800 pb-3">
+          <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">GRID COORD: ${loc.grid} &bull; ${loc.type}</span>
+          <h3 class="font-headline text-xl text-white uppercase mt-1">${loc.name}</h3>
+        </div>
 
-      if (chosenIdx === q.answer) {
-        quizScoreCount++;
-        document.getElementById('quizScore').textContent = quizScoreCount;
-        feedback.className = "p-4 rounded-xl text-xs sm:text-sm font-medium mb-6 bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 block";
-        feedback.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
-      } else {
-        feedback.className = "p-4 rounded-xl text-xs sm:text-sm font-medium mb-6 bg-rose-950/50 border border-rose-500/40 text-rose-300 block";
-        feedback.innerHTML = `<strong>Wrong!</strong> ${q.explanation}`;
-      }
+        <div class="p-3 bg-red-950/40 border border-red-500/40 text-rose-300 text-xs font-mono">
+          <span class="font-bold uppercase text-[10px] block text-red-400">HAZARD ADVISORY:</span>
+          ${loc.hazard}
+        </div>
 
-      if (currentQuizIndex < triviaQuestions.length - 1) {
-        nextBtn.innerHTML = `<span>Next Question</span><i data-lucide="arrow-right" class="w-4 h-4"></i>`;
-      } else {
-        nextBtn.innerHTML = `<span>View Results</span><i data-lucide="award" class="w-4 h-4"></i>`;
-      }
-      nextBtn.classList.remove('hidden');
-      lucide.createIcons();
+        <div>
+          <span class="text-[10px] uppercase text-slate-400 font-bold block mb-1">MUNICIPAL OVERVIEW:</span>
+          <p class="text-xs text-slate-300 leading-relaxed">${loc.history}</p>
+        </div>
+
+        <div class="pt-3 border-t border-slate-800">
+          <span class="text-[10px] uppercase text-amber-400 font-bold block mb-1">LOCAL RESIDENT FEEDBACK:</span>
+          <p class="text-xs text-slate-400 italic bg-black/50 p-2.5 border border-slate-800">${loc.yelpReview}</p>
+        </div>
+      `;
     };
 
-    document.getElementById('quizNextBtn').addEventListener('click', () => {
-      if (currentQuizIndex < triviaQuestions.length - 1) {
-        currentQuizIndex++;
-        loadQuizQuestion();
-      } else {
-        showQuizResults();
-      }
-    });
+    function renderSoundboard() {
+      const container = document.getElementById('soundboardContainer');
+      container.innerHTML = soundboard.map(s => `
+        <div class="bg-black/70 border-2 border-slate-800 p-4 font-mono text-xs flex flex-col justify-between shadow-cutout">
+          <div>
+            <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">${s.speaker}</span>
+            <p class="font-headline text-sm ${s.color} uppercase tracking-wide min-h-[44px]">
+              "${s.quote}"
+            </p>
+          </div>
+          <button onclick="speakLine('${s.quote.replace(/'/g, "\\'")}', ${s.pitch}, ${s.rate})" class="mt-3 w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 border border-slate-700 active:scale-95 transition">
+            <i data-lucide="volume-2" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Vocalize</span>
+          </button>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
 
-    function showQuizResults() {
-      const container = document.getElementById('quizContainer');
-      let ratingTitle = "";
-      let ratingBadge = "";
+    function initTrivia() {
+      currentTriviaIdx = 0;
+      triviaScore = 0;
+      renderTriviaQuestion();
+    }
 
-      if (quizScoreCount === 5) {
-        ratingTitle = "Town Legend (Cartman-Level Schemer)";
-        ratingBadge = "bg-amber-500/20 text-amber-300 border-amber-500/40";
-      } else if (quizScoreCount >= 3) {
-        ratingTitle = "South Park Local Citizen";
-        ratingBadge = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
-      } else {
-        ratingTitle = "Grounded like Butters";
-        ratingBadge = "bg-rose-500/20 text-rose-300 border-rose-500/40";
-      }
+    function renderTriviaQuestion() {
+      const container = document.getElementById('triviaContainer');
+      triviaAnswered = false;
+      const q = triviaQuestions[currentTriviaIdx];
 
       container.innerHTML = `
-        <div class="text-center py-8">
-          <div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center mb-4 border border-amber-500/30">
-            <i data-lucide="trophy" class="w-8 h-8"></i>
+        <div class="space-y-4 font-mono text-xs">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2 text-slate-400 text-[10px] uppercase font-bold">
+            <span>QUESTION ${currentTriviaIdx + 1} OF ${triviaQuestions.length}</span>
+            <span class="text-amber-400">SCORE: ${triviaScore}</span>
           </div>
-          <h3 class="font-fredoka text-2xl sm:text-3xl text-white font-bold mb-2">Quiz Completed!</h3>
-          <p class="text-slate-400 text-sm mb-4">You scored <strong class="text-white text-lg">${quizScoreCount}</strong> out of ${triviaQuestions.length} correct.</p>
-          <div class="inline-block px-4 py-1.5 rounded-full border text-xs font-semibold ${ratingBadge} mb-6">
-            Rank: ${ratingTitle}
+
+          <h3 class="font-headline text-xl text-white uppercase leading-snug">
+            ${q.q}
+          </h3>
+
+          <div class="space-y-2 pt-2" id="triviaOptionsContainer">
+            ${q.opts.map((opt, i) => `
+              <button onclick="answerTrivia(${i})" class="t-opt-btn w-full p-3 bg-slate-900 border border-slate-700 hover:border-slate-500 text-left text-slate-200 font-mono text-xs flex items-center justify-between transition">
+                <span>${opt}</span>
+                <span class="text-[10px] text-slate-500 font-bold">${String.fromCharCode(65 + i)}</span>
+              </button>
+            `).join('')}
           </div>
-          <div>
-            <button onclick="resetQuiz()" class="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-spOrange hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl text-sm transition">
-              Play Again
+
+          <div id="triviaExplanation" class="hidden p-3 rounded font-mono text-xs leading-relaxed"></div>
+
+          <div class="pt-4 border-t border-slate-800 flex justify-end">
+            <button id="nextTriviaBtn" onclick="nextTriviaQuestion()" class="hidden px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold uppercase tracking-wider shadow-cutout">
+              Next Question &rarr;
             </button>
           </div>
         </div>
       `;
-      lucide.createIcons();
     }
 
-    window.resetQuiz = function() {
-      currentQuizIndex = 0;
-      quizScoreCount = 0;
-      document.getElementById('quizScore').textContent = "0";
-      // Restore initial quiz HTML
-      const container = document.getElementById('quizContainer');
-      container.innerHTML = `
-        <div class="w-full bg-slate-800 rounded-full h-2 mb-6 overflow-hidden">
-          <div id="quizProgressBar" class="bg-gradient-to-r from-amber-400 to-spOrange h-2 rounded-full transition-all duration-300" style="width: 20%;"></div>
-        </div>
-        <div class="flex items-center justify-between text-xs font-medium text-slate-400 mb-3">
-          <span id="quizCounter">Question 1 of 5</span>
-          <span id="quizDifficulty" class="px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-700 text-amber-400 font-semibold">Trivia</span>
-        </div>
-        <h3 id="quizQuestion" class="font-fredoka text-xl sm:text-2xl text-white font-semibold mb-6"></h3>
-        <div id="quizOptions" class="space-y-3 mb-6"></div>
-        <div id="quizFeedback" class="hidden p-4 rounded-xl text-xs sm:text-sm font-medium mb-6"></div>
-        <div class="flex items-center justify-between pt-2 border-t border-slate-800/80">
-          <div class="text-xs text-slate-400">Score: <span id="quizScore" class="font-bold text-white">0</span> / 5</div>
-          <button id="quizNextBtn" class="hidden px-5 py-2 bg-gradient-to-r from-spOrange to-spRed hover:from-orange-500 hover:to-red-500 text-white rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-md">
-            <span>Next Question</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      `;
-      document.getElementById('quizNextBtn').addEventListener('click', () => {
-        if (currentQuizIndex < triviaQuestions.length - 1) {
-          currentQuizIndex++;
-          loadQuizQuestion();
-        } else {
-          showQuizResults();
+    window.answerTrivia = function(chosenIdx) {
+      if (triviaAnswered) return;
+      triviaAnswered = true;
+
+      const q = triviaQuestions[currentTriviaIdx];
+      const buttons = document.querySelectorAll('.t-opt-btn');
+      const expBox = document.getElementById('triviaExplanation');
+      const nextBtn = document.getElementById('nextTriviaBtn');
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.correct) {
+          btn.className = "w-full p-3 bg-emerald-950 border-2 border-emerald-500 text-emerald-200 text-left text-xs font-bold flex items-center justify-between";
+        } else if (idx === chosenIdx) {
+          btn.className = "w-full p-3 bg-rose-950 border-2 border-rose-500 text-rose-200 text-left text-xs font-bold flex items-center justify-between";
         }
       });
-      loadQuizQuestion();
+
+      if (chosenIdx === q.correct) {
+        triviaScore++;
+        expBox.className = "p-3 bg-emerald-950/70 border border-emerald-500 text-emerald-200 font-mono text-xs";
+        expBox.innerHTML = `<strong>CORRECT CITIZEN:</strong> ${q.exp}`;
+      } else {
+        expBox.className = "p-3 bg-rose-950/70 border border-rose-500 text-rose-200 font-mono text-xs";
+        expBox.innerHTML = `<strong>INCORRECT:</strong> ${q.exp}`;
+      }
+
+      expBox.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
     };
 
-    const searchModal = document.getElementById('searchModal');
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-
-    function openSearch() {
-      searchModal.classList.remove('hidden');
-      setTimeout(() => searchInput.focus(), 50);
-    }
-    function closeSearch() {
-      searchModal.classList.add('hidden');
-      searchInput.value = '';
-    }
-
-    document.getElementById('searchOpenBtn').addEventListener('click', openSearch);
-    document.getElementById('searchCloseBtn').addEventListener('click', closeSearch);
-
-    // Keyboard shortcut '/' to trigger search
-    window.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement !== searchInput) {
-        e.preventDefault();
-        openSearch();
-      } else if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
-        closeSearch();
+    window.nextTriviaQuestion = function() {
+      if (currentTriviaIdx < triviaQuestions.length - 1) {
+        currentTriviaIdx++;
+        renderTriviaQuestion();
+      } else {
+        renderTriviaSummary();
       }
+    };
+
+    function renderTriviaSummary() {
+      const container = document.getElementById('triviaContainer');
+      let reportCard = "";
+      if (triviaScore >= 9) {
+        reportCard = "MUNICIPAL HISTORIAN: You are eligible to teach 4th grade under Herbert Garrison.";
+      } else if (triviaScore >= 6) {
+        reportCard = "LOCAL RESIDENT: You survive the winters, but you probably fell for ManBearPig.";
+      } else {
+        reportCard = "GROUNDED LIKE BUTTERS: You are confined to your room for two weeks with no TV.";
+      }
+
+      container.innerHTML = `
+        <div class="text-center py-6 space-y-4 font-mono">
+          <div class="font-headline text-3xl text-purple-300 uppercase">EXAMINATION CONCLUDED</div>
+          <div class="text-2xl text-white font-bold">${triviaScore} / ${triviaQuestions.length} QUESTIONS ACCURATE</div>
+          <p class="text-xs text-slate-300 max-w-md mx-auto bg-black/60 p-4 border border-slate-800">${reportCard}</p>
+          <div>
+            <button onclick="initTrivia()" class="px-6 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold uppercase tracking-wider border border-black shadow-cutout">
+              Retake Examination
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBulletinBoard() {
+      const stored = JSON.parse(localStorage.getItem('sp_gazette_notices') || 'null');
+      const notices = stored || defaultNotices;
+      const grid = document.getElementById('bulletinGrid');
+
+      grid.innerHTML = notices.map(n => `
+        <div class="bg-[#1e1c17] border-2 border-amber-900/60 p-5 font-mono text-xs flex flex-col justify-between shadow-cutout relative">
+          <div class="tape w-20 h-4 absolute -top-2 left-6 rotate-1"></div>
+          
+          <div>
+            <div class="flex items-center justify-between border-b border-amber-950 pb-2 mb-2">
+              <span class="text-[9px] uppercase font-bold text-amber-500">${n.cat}</span>
+              <span class="text-[9px] text-slate-500">${n.date}</span>
+            </div>
+            <h4 class="font-headline text-sm text-amber-200 uppercase mb-2 leading-snug">${n.title}</h4>
+            <p class="text-slate-300 text-[11px] leading-relaxed mb-3">${n.text}</p>
+          </div>
+
+          <div class="pt-2 border-t border-amber-950 text-[10px] text-slate-400 flex items-center justify-between">
+            <span>Posted by: <strong class="text-white">${n.author}</strong></span>
+            ${stored ? `<button onclick="deleteNotice('${n.id}')" class="text-rose-400 hover:underline">Remove</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.deleteNotice = function(id) {
+      let stored = JSON.parse(localStorage.getItem('sp_gazette_notices') || '[]');
+      stored = stored.filter(n => n.id !== id);
+      localStorage.setItem('sp_gazette_notices', JSON.stringify(stored));
+      renderBulletinBoard();
+      showToast("Notice removed from corkboard");
+    };
+
+    window.triggerRandomEmergency = function() {
+      const emergencies = [
+        "ALARM: Al Gore has surrounded South Park Elementary with thermal detectors!",
+        "DEFCON 1: Cartmanland has closed its gates to all citizens!",
+        "SIREN: Randy Marsh is shirtless behind home plate yelling at umpires!",
+        "ALERT: Underpants Gnomes detected in boys' dormitory lockers!"
+      ];
+      const randomMsg = emergencies[Math.floor(Math.random() * emergencies.length)];
+      showToast(randomMsg, true);
+      speakLine(randomMsg, 1.1, 1.0);
+    };
+
+    document.getElementById('openNewPostModal').addEventListener('click', () => {
+      document.getElementById('newPostModal').classList.remove('hidden');
     });
 
-    searchInput.addEventListener('input', (e) => {
-      const q = e.target.value.trim().toLowerCase();
-      if (!q) {
-        searchResults.innerHTML = '<p class="text-xs text-slate-400 text-center py-8">Type a character name, keyword, or episode title to search...</p>';
+    document.getElementById('closeNewPostModal').addEventListener('click', () => {
+      document.getElementById('newPostModal').classList.add('hidden');
+    });
+
+    document.getElementById('submitNoticeBtn').addEventListener('click', () => {
+      const title = document.getElementById('postTitleInput').value.trim();
+      const author = document.getElementById('postAuthorInput').value.trim();
+      const cat = document.getElementById('postCatInput').value;
+      const text = document.getElementById('postContentInput').value.trim();
+
+      if (!title || !author || !text) {
+        showToast("Please populate all municipal notice fields", true);
         return;
       }
 
-      const matchChars = charactersData.filter(c => 
-        c.name.toLowerCase().includes(q) || 
-        c.alterEgo.toLowerCase().includes(q) || 
-        c.catchphrase.toLowerCase().includes(q)
-      );
-
-      const matchEps = episodesData.filter(ep => 
-        ep.title.toLowerCase().includes(q) || 
-        ep.synopsis.toLowerCase().includes(q)
-      );
-
-      if (matchChars.length === 0 && matchEps.length === 0) {
-        searchResults.innerHTML = `<p class="text-xs text-slate-500 text-center py-6">No South Park citizen or episode matched "${q}".</p>`;
-        return;
-      }
-
-      let html = '';
-      if (matchChars.length > 0) {
-        html += `<div class="text-[11px] font-bold uppercase text-amber-400 mb-1 px-1">Characters (${matchChars.length})</div>`;
-        html += matchChars.map(c => `
-          <div onclick="closeSearch(); openCharModal('${c.id}')" class="p-2.5 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between transition">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-lg ${c.badgeColor} text-white text-xs font-fredoka font-bold flex items-center justify-center">${c.avatarLetter}</span>
-              <div>
-                <p class="text-xs font-semibold text-white">${c.name} <span class="text-slate-400 font-normal">(${c.alterEgo})</span></p>
-                <p class="text-[11px] text-slate-400 truncate">"${c.catchphrase}"</p>
-              </div>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
-          </div>
-        `).join('');
-      }
-
-      if (matchEps.length > 0) {
-        html += `<div class="text-[11px] font-bold uppercase text-spOrange mt-3 mb-1 px-1">Episodes (${matchEps.length})</div>`;
-        html += matchEps.map(ep => `
-          <div onclick="closeSearch(); location.href='#episodes'" class="p-2.5 rounded-xl hover:bg-slate-800/80 cursor-pointer flex items-center justify-between transition">
-            <div>
-              <p class="text-xs font-semibold text-white">${ep.title} <span class="text-slate-400 font-normal">(${ep.season})</span></p>
-              <p class="text-[11px] text-slate-400 truncate">${ep.synopsis}</p>
-            </div>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
-          </div>
-        `).join('');
-      }
-
-      searchResults.innerHTML = html;
-      lucide.createIcons();
-    });
-
-    const heroQuotes = [
-      { speaker: "Eric Cartman", text: "Respect my authoritah!", pitch: 1.4, rate: 0.9 },
-      { speaker: "Kyle Broflovski", text: "You know, I've learned something today...", pitch: 1.3, rate: 1.0 },
-      { speaker: "Randy Marsh", text: "I didn't hear no bell!", pitch: 0.85, rate: 0.95 },
-      { speaker: "Butters Stotch", text: "Oh hamburgers! I'm grounded again!", pitch: 1.5, rate: 1.1 },
-      { speaker: "Stan Marsh", text: "Oh my God, they killed Kenny!", pitch: 1.1, rate: 1.0 },
-      { speaker: "Chef", text: "Hello there, children!", pitch: 0.8, rate: 0.9 }
-    ];
-    let currentHeroQuote = heroQuotes[0];
-
-    document.getElementById('heroRandomQuoteBtn').addEventListener('click', () => {
-      const nextQuotes = heroQuotes.filter(q => q.text !== currentHeroQuote.text);
-      currentHeroQuote = nextQuotes[Math.floor(Math.random() * nextQuotes.length)];
-      document.getElementById('heroQuoteAuthor').textContent = currentHeroQuote.speaker;
-      document.getElementById('heroQuoteText').textContent = `"${currentHeroQuote.text}"`;
-    });
-
-    document.getElementById('heroSpeakQuoteBtn').addEventListener('click', () => {
-      speakText(currentHeroQuote.text, currentHeroQuote.pitch, currentHeroQuote.rate);
-    });
-
-    document.getElementById('charModalClose').addEventListener('click', () => {
-      document.getElementById('charModal').classList.add('hidden');
-    });
-
-    document.getElementById('modalSpeakBtn').addEventListener('click', () => {
-      if (activeChar) {
-        speakText(activeChar.catchphrase, activeChar.voicePitch, activeChar.voiceRate);
-      }
-    });
-
-    document.getElementById('modalFavBtn').addEventListener('click', () => {
-      if (activeChar) {
-        toggleBookmark({
-          id: activeChar.id,
-          name: activeChar.name,
-          type: "Character",
-          catchphrase: activeChar.catchphrase
-        });
-        const isSaved = isBookmarked(activeChar.id);
-        document.getElementById('modalFavText').textContent = isSaved ? "Saved in Collection" : "Bookmark Character";
-      }
-    });
-
-    // Favorites Drawer toggling
-    const favDrawer = document.getElementById('favoritesDrawer');
-    document.getElementById('bookmarksBtn').addEventListener('click', () => {
-      favDrawer.classList.remove('hidden');
-    });
-    document.getElementById('favCloseBtn').addEventListener('click', () => {
-      favDrawer.classList.add('hidden');
-    });
-    document.getElementById('clearFavsBtn').addEventListener('click', () => {
-      savedBookmarks = [];
-      localStorage.removeItem('sp_bookmarks');
-      updateBookmarkBadge();
-      showToast("Cleared saved favorites", false);
-    });
-
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-    // Close mobile menu on click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-
-    /* Filter Tag Button Events */
-    document.getElementById('characterFilters').addEventListener('click', (e) => {
-      const btn = e.target.closest('.char-filter-btn');
-      if (!btn) return;
-      document.querySelectorAll('.char-filter-btn').forEach(b => {
-        b.className = 'char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+      let stored = JSON.parse(localStorage.getItem('sp_gazette_notices') || JSON.stringify(defaultNotices));
+      stored.unshift({
+        id: 'post_' + Date.now(),
+        title,
+        author,
+        cat,
+        date: "Just now",
+        text
       });
-      btn.className = 'char-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 border border-transparent transition';
-      renderCharacters(btn.dataset.cat);
+
+      localStorage.setItem('sp_gazette_notices', JSON.stringify(stored));
+      renderBulletinBoard();
+      document.getElementById('newPostModal').classList.add('hidden');
+
+      document.getElementById('postTitleInput').value = '';
+      document.getElementById('postAuthorInput').value = '';
+      document.getElementById('postContentInput').value = '';
+      showToast("Notice pinned to town bulletin board");
     });
 
-    document.getElementById('episodeFilters').addEventListener('click', (e) => {
-      const btn = e.target.closest('.ep-filter-btn');
+    document.getElementById('savedDrawerBtn').addEventListener('click', () => {
+      document.getElementById('savedDrawer').classList.remove('hidden');
+    });
+
+    document.getElementById('closeSavedDrawerBtn').addEventListener('click', () => {
+      document.getElementById('savedDrawer').classList.add('hidden');
+    });
+
+    document.getElementById('clearAllSavedBtn').addEventListener('click', () => {
+      savedCaseFiles = [];
+      localStorage.removeItem('sp_gazette_files');
+      updateSavedCounter();
+      renderRoster(activeRosterTab);
+      showToast("All county case files erased");
+    });
+
+    document.getElementById('smiteKennyBtn').addEventListener('click', triggerSmiteKenny);
+    document.getElementById('kennyDeathQuickBtn').addEventListener('click', triggerSmiteKenny);
+
+    document.getElementById('cartmanSchemeQuickBtn').addEventListener('click', () => {
+      document.getElementById('schemesSection').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('kennyFilterGroup').addEventListener('click', (e) => {
+      const btn = e.target.closest('.k-filter-btn');
       if (!btn) return;
-      document.querySelectorAll('.ep-filter-btn').forEach(b => {
-        b.className = 'ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+      document.querySelectorAll('.k-filter-btn').forEach(b => {
+        b.className = "k-filter-btn px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700";
       });
-      btn.className = 'ep-filter-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white text-slate-900 border border-transparent transition';
-      renderEpisodes(btn.dataset.tag);
+      btn.className = "k-filter-btn px-2.5 py-1 bg-orange-500 text-black font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-sm";
+      renderKennyGraveyard(btn.dataset.kfilter);
+    });
+
+    document.getElementById('rosterTabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.roster-tab-btn');
+      if (!btn) return;
+      document.querySelectorAll('.roster-tab-btn').forEach(b => {
+        b.className = "roster-tab-btn px-3 py-1.5 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700";
+      });
+      btn.className = "roster-tab-btn px-3 py-1.5 bg-white text-slate-950 font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-cutout";
+      renderRoster(btn.dataset.rtab);
+    });
+
+    document.getElementById('epCategoryGroup').addEventListener('click', (e) => {
+      const btn = e.target.closest('.ep-cat-btn');
+      if (!btn) return;
+      document.querySelectorAll('.ep-cat-btn').forEach(b => {
+        b.className = "ep-cat-btn px-3 py-1 bg-townPanel hover:bg-slate-800 text-slate-300 font-mono text-xs font-bold uppercase rounded-sm border border-slate-700";
+      });
+      btn.className = "ep-cat-btn px-3 py-1 bg-white text-slate-950 font-mono text-xs font-bold uppercase rounded-sm border border-black shadow-cutout";
+      renderEpisodesVault(btn.dataset.eptag);
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      renderCharacters();
-      renderEpisodes();
-      renderSoundboard();
-      loadQuizQuestion();
-      updateBookmarkBadge();
-      lucide.createIcons();
+      initTerminal();
+      calculateRevenge();
     });
   </script>
 </body>
