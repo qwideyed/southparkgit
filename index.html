@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Park Gazette & Municipal Super-Terminal</title>
+  <title>South Park Archives &amp; Show Guide</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&family=Space+Grotesk:wght@400;600;700;800&family=Bungee&family=Creepster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700;800&family=Bungee&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     tailwind.config = {
@@ -16,29 +16,21 @@
         extend: {
           fontFamily: {
             headline: ['Bungee', 'cursive'],
-            marker: ['"Permanent Marker"', 'cursive'],
             mono: ['"Courier Prime"', 'monospace'],
             sans: ['"Space Grotesk"', 'sans-serif'],
-            creepy: ['Creepster', 'cursive']
+            body: ['Inter', 'sans-serif']
           },
           colors: {
-            townDark: '#0a0d13',
-            townPanel: '#121722',
-            paperBorder: '#222c3d',
-            cRed: '#d32f2f',
-            cTeal: '#00acc1',
-            kGreen: '#2e7d32',
-            kOrange: '#e65100',
-            sBlue: '#1565c0',
-            bYellow: '#f59e0b',
-            stampRed: '#b91c1c',
-            gothPurple: '#4a154b',
-            fartBrown: '#6d4c41'
-          },
-          boxShadow: {
-            'cutout': '3px 4px 0px rgba(0,0,0,0.88)',
-            'cutout-lg': '6px 7px 0px rgba(0,0,0,0.92)',
-            'cutout-xl': '8px 10px 0px rgba(0,0,0,0.96)'
+            spNavy: '#070a10',
+            spPanel: '#0e1420',
+            spCard: '#131b2b',
+            spBorder: '#233047',
+            cRed: '#c53030',
+            kGreen: '#2f855a',
+            sBlue: '#2b6cb0',
+            kOrange: '#dd6b20',
+            cTeal: '#00a3c4',
+            bYellow: '#d69e2e'
           }
         }
       }
@@ -46,2114 +38,877 @@
   </script>
   <style>
     body {
-      background-color: #080a0f;
+      background-color: #070a10;
       background-image: 
-        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
-        linear-gradient(to bottom, #0e121a, #07090d);
-      background-size: 24px 24px, 100% 100%;
+        radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0),
+        linear-gradient(to bottom, #090e17 0%, #06080d 100%);
+      background-size: 28px 28px, 100% 100%;
     }
-    .tape {
-      background: rgba(242, 230, 190, 0.4);
-      border-left: 2px dashed rgba(255,255,255,0.4);
-      border-right: 2px dashed rgba(255,255,255,0.4);
-      backdrop-filter: blur(2px);
+    .custom-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #070a10; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #233047; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3b5072; }
+    .paper-stamp {
+      box-shadow: 3px 3px 0px rgba(0,0,0,0.85);
     }
-    .cynicism-active {
-      filter: grayscale(100%) contrast(120%) brightness(80%) !important;
+    .paper-stamp-lg {
+      box-shadow: 5px 6px 0px rgba(0,0,0,0.9);
     }
-    .scanlines {
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
-      background-size: 100% 4px, 6px 100%;
-      pointer-events: none;
-    }
-    .radar-sweep {
-      background: conic-gradient(from 0deg, rgba(34, 197, 94, 0.4) 0deg, rgba(34, 197, 94, 0) 60deg, transparent 60deg);
-      animation: radarRotate 4s linear infinite;
-    }
-    @keyframes radarRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .critter-glow {
-      box-shadow: 0 0 25px rgba(220, 38, 38, 0.8), inset 0 0 25px rgba(185, 28, 28, 0.8);
-    }
-    ::-webkit-scrollbar { width: 9px; height: 9px; }
-    ::-webkit-scrollbar-track { background: #080a0f; }
-    ::-webkit-scrollbar-thumb { background: #1f293d; border: 2px solid #080a0f; }
-    ::-webkit-scrollbar-thumb:hover { background: #334466; }
   </style>
 </head>
-<body id="pageBody" class="text-slate-200 font-sans selection:bg-kOrange selection:text-white pb-24 transition-all duration-300">
+<body class="text-slate-200 font-body selection:bg-kOrange selection:text-white custom-scrollbar">
 
-  <div class="w-full bg-amber-500 text-slate-950 font-mono text-xs font-bold py-1.5 px-3 border-b-2 border-black flex items-center overflow-hidden z-50 sticky top-0">
-    <div class="bg-black text-amber-400 px-2.5 py-0.5 rounded text-[10px] uppercase font-headline tracking-wider mr-3 whitespace-nowrap shadow-sm">
-      SP-SUPER-WIRE // ELEV. 9,750 FT
-    </div>
-    <div class="relative overflow-hidden w-full whitespace-nowrap">
-      <div id="tickerContent" class="inline-block animate-[marquee_45s_linear_infinite] whitespace-nowrap">
-        🚨 POLICE ALERT: ManBearPig spotted near Stark's Pond, Al Gore requests 3,000 lbs of cereal &bull; 🍁 TEGRIDY FARMS releases 99.8% THC 'Snow Storm Special' &bull; 🥋 COON AND FRIENDS investigate missing dry-erase markers &bull; 🌮 CASA BONITA: Black Bart's cave evacuated after excessive sopapilla gorging &bull; 🇨🇦 CANADA WARNING: Terrence and Phillip report flapping head shortages &bull; 🧻 TOWELIE arrested at municipal bowling alley for excessive dryness &bull; ☕ GOTH KIDS spray-paint conformist slogans onto City Hall &bull; 🏫 PC PRINCIPAL issues 34 microaggression citations to 4th grade
+  <div class="w-full bg-[#111927] border-b border-spBorder/80 sticky top-0 z-40 backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-cRed text-white font-headline text-lg flex items-center justify-center border-2 border-black paper-stamp">
+            SP
+          </div>
+          <div>
+            <a href="#" class="font-headline text-lg text-white tracking-wide block leading-none">South Park Archives</a>
+            <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Historical &amp; Production Database</span>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center space-x-1 font-mono text-xs uppercase tracking-wider">
+          <a href="#history" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Production History</a>
+          <a href="#pipeline" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">6-Day Pipeline</a>
+          <a href="#voicecast" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Voice Cast</a>
+          <a href="#characters" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Characters</a>
+          <a href="#episodes" class="px-3 py-2 bg-sBlue text-white rounded font-bold paper-stamp hover:bg-blue-600 transition flex items-center gap-1.5">
+            <i data-lucide="film" class="w-3.5 h-3.5"></i> Episode Catalog
+          </a>
+        </nav>
       </div>
-    </div>
-    <div class="flex items-center gap-2 pl-3">
-      <button id="toggleCynicismBtn" class="px-2.5 py-1 bg-black text-rose-400 hover:text-white border border-rose-500 rounded text-[10px] font-mono uppercase whitespace-nowrap flex items-center gap-1 shadow-sm">
-        <i data-lucide="eye-off" class="w-3.5 h-3.5"></i>
-        <span id="cynicismLabel">Cynicism: OFF</span>
-      </button>
     </div>
   </div>
 
-  <header class="border-b-4 border-slate-900 bg-townPanel/95 backdrop-blur-md relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        
-        <div class="flex items-center gap-4">
-          <div class="relative">
-            <div class="w-16 h-16 bg-cRed border-4 border-black shadow-cutout flex flex-col items-center justify-center -rotate-2">
-              <span class="font-headline text-2xl text-yellow-300 leading-none">SP</span>
-              <span class="font-mono text-[9px] text-white tracking-widest uppercase">MUNICIPAL</span>
-            </div>
-            <div class="absolute -top-2.5 -right-3 px-2 py-0.5 bg-cTeal border-2 border-black text-[9px] font-mono text-black font-bold uppercase rotate-12 shadow-sm">
-              DEFCON 1
-            </div>
-          </div>
-          <div>
-            <h1 class="font-headline text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight uppercase flex items-center gap-2">
-              South Park Gazette & Municipal Terminal
-            </h1>
-            <p class="font-mono text-xs sm:text-sm text-slate-400">
-              UNREDACTED COUNTY REGISTRY &bull; 20+ DISPATCH TERMINALS &bull; ARCHIVE SEC: 80440
-            </p>
-          </div>
+  <section class="border-b border-spBorder bg-gradient-to-b from-[#0c1320] to-[#070a10] py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-spCard border border-spBorder rounded text-xs font-mono text-cyan-400 mb-4 uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Independent Reference Document &bull; 1997 – Present
         </div>
-
-        <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
-          <button onclick="triggerFartSound()" class="px-3 py-2 bg-fartBrown/40 hover:bg-fartBrown/70 text-amber-200 border-2 border-amber-700/60 rounded shadow-cutout flex items-center gap-1.5 transition">
-            <i data-lucide="wind" class="w-4 h-4 text-amber-400"></i>
-            <span>Instant Fart Synth</span>
-          </button>
-          
-          <button onclick="playMemberWhisper()" class="px-3 py-2 bg-purple-950/60 hover:bg-purple-900 text-purple-300 border-2 border-purple-700 rounded shadow-cutout flex items-center gap-1.5 transition">
-            <i data-lucide="grape" class="w-4 h-4 text-purple-400"></i>
-            <span>'Member Berries</span>
-          </button>
-
-          <button id="quickCartmanCalcBtn" class="px-3 py-2 bg-cRed/30 hover:bg-cRed/50 text-rose-300 border-2 border-rose-600 rounded shadow-cutout flex items-center gap-1.5 transition">
-            <i data-lucide="crosshair" class="w-4 h-4 text-rose-400"></i>
-            <span>Revenge Calc</span>
-          </button>
-        </div>
-
+        <h1 class="font-headline text-3xl sm:text-5xl text-white tracking-tight leading-tight uppercase">
+          South Park Chronicles &amp; Media Archive
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-slate-300 font-sans leading-relaxed">
+          An encyclopedia detailing the history, production methodology, cast records, and an archive of episodes, theatrical releases, and streaming specials created by Trey Parker and Matt Stone.
+        </p>
       </div>
 
-      <nav class="mt-5 pt-3 border-t-2 border-slate-800 flex items-center gap-2 overflow-x-auto text-[11px] font-mono font-bold uppercase">
-        <a href="#coonHQ" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-rose-400 border border-slate-700 whitespace-nowrap">1. Coon & Friends</a>
-        <a href="#tegridyDispensary" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-emerald-400 border border-slate-700 whitespace-nowrap">2. Tegridy Farms</a>
-        <a href="#canadianFart" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-amber-400 border border-slate-700 whitespace-nowrap">3. Terrence & Phillip</a>
-        <a href="#pcPrincipal" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-sky-400 border border-slate-700 whitespace-nowrap">4. PC Principal</a>
-        <a href="#chefsCafeteria" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-yellow-300 border border-slate-700 whitespace-nowrap">5. Chef's Advice</a>
-        <a href="#imaginationland" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-pink-400 border border-slate-700 whitespace-nowrap">6. Imaginationland</a>
-        <a href="#manbearpig" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-red-500 border border-slate-700 whitespace-nowrap">7. ManBearPig Radar</a>
-        <a href="#towelieLab" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 whitespace-nowrap">8. Towelie Lab</a>
-        <a href="#gothCoffee" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-purple-400 border border-slate-700 whitespace-nowrap">9. Goth Kids</a>
-        <a href="#cityWokTakeout" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-orange-400 border border-slate-700 whitespace-nowrap">10. City Wok</a>
-        <a href="#buttersPunish" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-teal-300 border border-slate-700 whitespace-nowrap">11. Ground Butters</a>
-        <a href="#lemmiwinks" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-yellow-500 border border-slate-700 whitespace-nowrap">12. Lemmiwinks</a>
-        <a href="#gameVault" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-indigo-400 border border-slate-700 whitespace-nowrap">13. Video Games</a>
-        <a href="#casaBonitaTour" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-rose-300 border border-slate-700 whitespace-nowrap">14. Casa Bonita</a>
-        <a href="#critterChamber" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-red-600 border border-slate-700 whitespace-nowrap">15. Critter Christmas</a>
-        <a href="#scottMalkinson" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-amber-200 border border-slate-700 whitespace-nowrap">16. Scott Malkinson</a>
-        <a href="#memberBerriesSec" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-purple-300 border border-slate-700 whitespace-nowrap">17. Member Berries</a>
-        <a href="#hankeySewer" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-slate-700 whitespace-nowrap">18. Mr. Hankey</a>
-        <a href="#garrisonChalkboard" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 whitespace-nowrap">19. Garrison Board</a>
-        <a href="#kennySection" class="px-2.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-orange-500 border border-slate-700 whitespace-nowrap">20. Kenny Mortuary</a>
-      </nav>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-10 font-mono">
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">Original Run</span>
+          <span class="text-xl font-bold text-white font-sans">Aug 13, 1997</span>
+          <span class="text-[10px] text-emerald-400 block mt-0.5">26+ Seasons</span>
+        </div>
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">Television Episodes</span>
+          <span class="text-xl font-bold text-white font-sans">325+</span>
+          <span class="text-[10px] text-cyan-400 block mt-0.5">Broadcasting on Comedy Central</span>
+        </div>
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">Paramount+ Specials</span>
+          <span class="text-xl font-bold text-white font-sans">7 Event Films</span>
+          <span class="text-[10px] text-amber-400 block mt-0.5">Extended Multi-Acts</span>
+        </div>
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">Theatrical Feature</span>
+          <span class="text-xl font-bold text-white font-sans">1 Film</span>
+          <span class="text-[10px] text-rose-400 block mt-0.5">Bigger, Longer &amp; Uncut (1999)</span>
+        </div>
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">Major Honors</span>
+          <span class="text-xl font-bold text-white font-sans">5 Emmys</span>
+          <span class="text-[10px] text-yellow-400 block mt-0.5">1 Peabody Award (2005)</span>
+        </div>
+        <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
+          <span class="text-slate-400 text-[11px] block uppercase">ViacomCBS Deal</span>
+          <span class="text-xl font-bold text-white font-sans">$900M+</span>
+          <span class="text-[10px] text-purple-400 block mt-0.5">Extended Through Season 30</span>
+        </div>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-16">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
 
-    <section id="coonHQ" class="bg-[#140e12] border-4 border-cRed p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-28 h-4 absolute -top-2 left-10 rotate-1"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-red-950 pb-5 mb-6">
+    <section id="history" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-cRed text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 01 // CRIME BUSTER DATABASE
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-rose-400 uppercase tracking-tight">
-            Coon and Friends Crime Buster Terminal
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            Surveillance archive tracking local licensed superheroes and rogue supervillains operating in the Park County sector.
-          </p>
+          <span class="text-xs font-mono uppercase text-cRed font-bold tracking-wider">Historical Context</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Origin &amp; The Colorado Inception</h2>
         </div>
-        <div class="text-right font-mono text-xs text-rose-300">
-          FRANCHISE PHASE: <span class="font-bold text-white uppercase">Phase 3 (Dark Universe)</span>
-        </div>
+        <span class="font-mono text-xs text-slate-400">University of Colorado Boulder (1992 – 1997)</span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div class="lg:col-span-4 space-y-2" id="heroSelectorContainer">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="w-10 h-10 rounded bg-red-950/80 border border-red-700/80 flex items-center justify-center text-red-400 font-mono font-bold text-sm">
+            01
+          </div>
+          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Spirit of Christmas (1992 &amp; 1995)</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Trey Parker and Matt Stone met in a film class at the University of Colorado Boulder in 1992. Using construction paper cutouts, an old 8mm camera, and stop-motion capture, they assembled a student short titled <em class="text-white">Jesus vs. Frosty</em>. The short established crude prototypes of Stan, Kyle, Kenny, and a character visually identical to Cartman (initially named "Kenny").
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            In 1995, Fox television executive Brian Graden saw the short and paid the duo $2,000 to produce an animated holiday video card to send to friends. This short, <em class="text-white">Jesus vs. Santa</em>, featured a martial arts brawl between Jesus and Santa Claus over the meaning of Christmas, arbitrated by the four boys and figure skater Brian Boitano.
+          </p>
         </div>
 
-        <div class="lg:col-span-8 bg-black/80 border-2 border-slate-800 p-6 rounded relative shadow-inner">
-          <div class="scanlines absolute inset-0 rounded"></div>
-          <div class="relative z-10 space-y-4 font-mono text-xs" id="heroDetailPanel">
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="w-10 h-10 rounded bg-cyan-950/80 border border-cyan-700/80 flex items-center justify-center text-cyan-400 font-mono font-bold text-sm">
+            02
           </div>
+          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Hollywood VHS Bootleg Network</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Graden's tape became an early viral hit before internet video streaming existed. Copies were duplicated from VHS to VHS across entertainment agencies, studios, and celebrity circles in Los Angeles, including George Clooney, who reportedly made dozens of copies for his peers.
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            The bootlegged cassette generated meetings with major networks. While broadcast networks balked at the coarse language and subject matter, Doug Herzog, then-president of the fledgling basic cable channel Comedy Central, committed to funding a full 22-minute pilot episode to bolster the network's original programming roster.
+          </p>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="w-10 h-10 rounded bg-emerald-950/80 border border-emerald-700/80 flex items-center justify-center text-emerald-400 font-mono font-bold text-sm">
+            03
+          </div>
+          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Pilot: 'Cartman Gets an Anal Probe'</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Produced across approximately three and a half months in early 1997, the official pilot was animated by hand using real construction paper, scissors, Elmer's glue, and an overhead lighting rig. Stop-motion frame capture made changes labor-intensive and costly.
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            When test audiences gave polarized responses, Parker and Stone trimmed several minutes (including an excised plotline involving Cartman's father and sister) and re-edited the episode. It premiered on August 13, 1997, drawing nearly 1 million viewers—a monumental rating for Comedy Central at the time—and instantly launched the series into the cultural mainstream.
+          </p>
         </div>
       </div>
     </section>
 
-    <section id="tegridyDispensary" class="bg-[#0e1713] border-4 border-kGreen p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-24 h-4 absolute -top-2 right-12 -rotate-2"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-emerald-950 pb-5 mb-6">
+    <section id="pipeline" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-kGreen text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 02 // ORGANIC BOTANICAL REGISTER
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-emerald-400 uppercase tracking-tight">
-            Tegridy Farms Dispensary & Joint Roller
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Folks don't have no tegridy no more. But our 100% farm-cured Colorado strains will cure your lack of respect." — Randy Marsh
-          </p>
+          <span class="text-xs font-mono uppercase text-kGreen font-bold tracking-wider">Animation Architecture</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">The 6-Day Production Pipeline</h2>
         </div>
-        <button onclick="rollTegridyJoint()" class="px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-green-700 hover:from-emerald-500 hover:to-green-600 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout active:scale-95 transition flex items-center gap-2">
-          <i data-lucide="sparkles" class="w-4 h-4"></i>
-          <span>Roll a Fat Tegridy Joint</span>
-        </button>
+        <span class="font-mono text-xs text-slate-400">Documented in '6 Days to Air: The Making of South Park' (2011)</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="tegridyStrainsGrid">
-      </div>
+      <div class="bg-spPanel border border-spBorder p-6 sm:p-8 rounded-lg paper-stamp-lg space-y-6">
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-body">
+          Unlike conventional animated television series that require 6 to 9 months of overseas production per episode, South Park is produced almost entirely in-house at South Park Studios in Marina del Rey, California, inside a strict 6-day cycle (Thursday to Wednesday airdate). This setup enables Parker and Stone to satirize breaking political news, legal decisions, and cultural trends within hours of their occurrence.
+        </p>
 
-      <div id="jointRollingResult" class="mt-6 p-4 bg-emerald-950/40 border-2 border-dashed border-emerald-600 font-mono text-xs text-emerald-200 hidden">
-      </div>
-    </section>
-
-    <section id="canadianFart" class="bg-[#19150e] border-4 border-amber-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-amber-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500 text-black font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 03 // CANADIAN BROADCAST CORP.
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-amber-400 uppercase tracking-tight">
-            Terrence & Phillip Fart-O-Matic Synthesizer
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            High-fidelity Canadian acoustics generated via real Web Audio oscillator harmonic synthesizers. Flapping heads guaranteed.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2 font-mono text-xs">
-          <span class="text-slate-400">Canadian Honorific:</span>
-          <button id="canadianHonorificBtn" onclick="cycleCanadianHonorific()" class="px-3 py-1.5 bg-black border border-amber-600 text-amber-300 font-bold uppercase">
-            Guy
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-black/60 border-2 border-amber-900/60 p-6 text-center space-y-4 shadow-inner">
-          <div class="w-32 h-32 mx-auto bg-red-700 border-4 border-black relative rounded-t-full overflow-hidden flex flex-col justify-end p-2 cursor-pointer" onclick="triggerFartSound(180)">
-            <div id="terrenceJaw" class="w-full h-8 bg-amber-200 border-2 border-black transition-transform duration-100 flex items-center justify-center font-bold text-[10px] text-black">
-              TERRENCE
-            </div>
-          </div>
-          <p class="font-mono text-xs text-slate-400">Click the head or use the frequency knobs below to flap and sound.</p>
-          <div class="flex justify-center gap-3">
-            <button onclick="playCanadianLine('I\'m not your buddy, guy!')" class="px-3 py-2 bg-amber-600 hover:bg-amber-500 text-black font-mono text-xs font-bold uppercase shadow-cutout">
-              "Not your buddy!"
-            </button>
-            <button onclick="playCanadianLine('I\'m not your guy, friend!')" class="px-3 py-2 bg-amber-600 hover:bg-amber-500 text-black font-mono text-xs font-bold uppercase shadow-cutout">
-              "Not your guy!"
-            </button>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 space-y-4 font-mono text-xs">
-          <div class="space-y-2">
-            <div class="flex justify-between text-amber-300 font-bold">
-              <span>FART RESONANCE FREQUENCY:</span>
-              <span id="fartFreqDisplay">115 Hz</span>
-            </div>
-            <input type="range" min="60" max="360" value="115" id="fartFreqSlider" oninput="updateFartFreq(this.value)" class="w-full accent-amber-500">
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
-            <button onclick="triggerFartType('squeak')" class="p-3 bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-amber-200 font-bold uppercase shadow-sm">
-              The Squeaker (280Hz)
-            </button>
-            <button onclick="triggerFartType('classic')" class="p-3 bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-amber-200 font-bold uppercase shadow-sm">
-              Maple Thunder (110Hz)
-            </button>
-            <button onclick="triggerFartType('rumble')" class="p-3 bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-amber-200 font-bold uppercase shadow-sm">
-              Ottawa Sub-Bass (70Hz)
-            </button>
-            <button onclick="triggerFartType('rip')" class="p-3 bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-amber-200 font-bold uppercase shadow-sm">
-              Quebec Ripper (190Hz)
-            </button>
-          </div>
-
-          <div id="canadianDialogueBox" class="p-4 bg-amber-950/30 border border-amber-600/50 text-amber-200 text-xs italic">
-            "Say Terrence, what did the Spanish priest say to the Iranian gynecologist?" &bull; "*PFFFFFFT!*" &bull; "HAHAHAHAHA!"
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pcPrincipal" class="bg-[#0f151f] border-4 border-sky-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-24 h-4 absolute -top-2 left-8 rotate-2"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-sky-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-sky-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 04 // DISCIPLINARY TRIBUNAL
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-sky-400 uppercase tracking-tight">
-            PC Principal Microaggression Scanner
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            Type anything you plan to say in South Park Elementary. PC Principal will scan for insensitive terminology and issue immediate detention.
-          </p>
-        </div>
-        <div class="font-mono text-xs text-sky-300">
-          CAMPUS STATUS: <span class="font-bold text-white uppercase">Aggressive Inclusion Mode</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div class="lg:col-span-6 space-y-3 font-mono text-xs">
-          <label class="block text-slate-300 uppercase font-bold">Draft Your Statement for Review:</label>
-          <textarea id="pcInputText" rows="4" placeholder="e.g. You guys are being crazy, this dumb rule makes no sense..." class="w-full bg-slate-900 border-2 border-slate-700 p-3 text-white focus:outline-none focus:border-sky-500"></textarea>
-          <div class="flex gap-2">
-            <button onclick="scanForMicroaggressions()" class="flex-1 py-3 bg-sky-600 hover:bg-sky-500 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout">
-              Scan For Violations
-            </button>
-            <button onclick="loadSampleOffense()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs uppercase border border-slate-700">
-              Sample Offense
-            </button>
-          </div>
-        </div>
-
-        <div class="lg:col-span-6">
-          <div class="bg-black/80 border-2 border-slate-800 p-5 rounded font-mono text-xs min-h-[200px] flex flex-col justify-between" id="pcResultPanel">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-                <span class="text-[10px] text-sky-400 uppercase font-bold">DISCIPLINARY STATUS:</span>
-                <span class="px-2 py-0.5 bg-sky-950 border border-sky-600 text-sky-300 text-[10px] font-bold uppercase" id="pcSeverityBadge">AWAITING INPUT</span>
-              </div>
-              <p id="pcVerdict" class="text-slate-300 leading-relaxed italic">
-                "DID SOMEONE JUST USE AN UNCHECKED GENERALIZATION?! SIT DOWN AND PREPARE TO CHECK YOUR PRIVILEGE, BRO!"
-              </p>
-              <div id="pcViolationsList" class="space-y-1 text-rose-400 font-bold">
-              </div>
-            </div>
-            <div class="pt-4 border-t border-slate-800 flex justify-end">
-              <button onclick="speakPCPrincipal()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 rounded flex items-center gap-1.5">
-                <i data-lucide="volume-2" class="w-4 h-4"></i>
-                <span>Hear PC Principal Scream</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="chefsCafeteria" class="bg-[#1a120c] border-4 border-yellow-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-yellow-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-500 text-slate-950 font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 05 // NUTRITIONAL & ROMANTIC GUIDANCE
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-amber-300 uppercase tracking-tight">
-            Chef's Cafeteria & Inappropriate Soul Advice
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Hello there, children! Today in the cafeteria we got Salisbury Steak, and for your life problems, Chef has got some smooth 70s soul advice."
-          </p>
-        </div>
-        <div class="font-mono text-xs text-yellow-400">
-          DAILY SPECIAL: <span class="font-bold text-white uppercase">Chef's Chocolate Salty Balls</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-black/60 border-2 border-yellow-900/60 p-5 rounded space-y-4 font-mono text-xs">
-          <h4 class="font-headline text-sm text-yellow-400 uppercase border-b border-yellow-900 pb-2">Today's Cafeteria Menu</h4>
-          <div class="space-y-3" id="chefMenuContainer">
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 bg-black/80 border-2 border-yellow-700/60 p-6 rounded space-y-4 font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-[10px] text-yellow-400 font-bold uppercase">HOTLINE // ASK CHEF FOR ADVICE</span>
-            <span class="text-slate-500 text-[10px]">DIAL EXT: 555-CHEF</span>
-          </div>
-
-          <label class="block text-slate-300 uppercase font-bold">What is troubling your elementary school soul?</label>
-          <select id="chefDilemmaSelect" class="w-full bg-slate-900 border-2 border-slate-700 text-white p-2.5 focus:outline-none focus:border-yellow-500">
-            <option value="girls">Chef, how do you talk to a girl without barfing on her shoes?</option>
-            <option value="parents">Chef, my parents joined a weird sex cult in the woods!</option>
-            <option value="aliens">Chef, Cartman has an 80-foot satellite dish stuck in his butt!</option>
-            <option value="fats">Chef, is it okay to feed someone chili made from their relatives?</option>
-            <option value="meaning">Chef, why is everyone in this town so completely insane?</option>
-          </select>
-
-          <button onclick="consultChefAdvice()" class="w-full py-3 bg-gradient-to-r from-yellow-600 to-amber-700 hover:from-yellow-500 hover:to-amber-600 text-slate-950 font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout transition">
-            Ask Chef For Song Advice
-          </button>
-
-          <div id="chefAdviceOutput" class="p-4 bg-yellow-950/40 border border-yellow-600/60 text-yellow-200 leading-relaxed italic">
-            "Hello there, children! You just gotta treat a lady real smooth, dim the lights down low, and put on some Marvin Gaye..."
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="imaginationland" class="bg-[#1a0f19] border-4 border-pink-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-pink-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-pink-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 06 // METAPHYSICAL BOUNDARY
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-pink-400 uppercase tracking-tight">
-            Imaginationland Stargate & Creature Codex
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            Dial the ancient Pentagon portal glyphs to access human imagination. Beware the Terrorist breach along the evil creature side of the wall.
-          </p>
-        </div>
-        <div class="font-mono text-xs text-pink-300">
-          SONG REQUIREMENT: <span class="font-bold text-white uppercase">Imagination Song (Trey Parker)</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-pink-900/60 p-5 rounded space-y-4 font-mono text-xs">
-          <div class="text-[10px] text-pink-400 font-bold uppercase">DIAL SEQUENCE COMBINATION:</div>
-          <div class="grid grid-cols-4 gap-2 text-center" id="stargateGlyphsGrid">
-          </div>
-          <div class="p-3 bg-pink-950/40 border border-pink-700/60 flex items-center justify-between">
-            <span>DIALED CODE: <strong id="stargateDialed" class="text-white">None</strong></span>
-            <button onclick="resetStargate()" class="text-rose-400 text-[10px] hover:underline uppercase">Reset</button>
-          </div>
-          <button onclick="activateStargate()" class="w-full py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-headline text-xs uppercase tracking-wider border border-black shadow-cutout">
-            Open Imagination Portal
-          </button>
-        </div>
-
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <div class="flex gap-2">
-            <button onclick="filterCodex('all')" class="codex-tab px-3 py-1 bg-pink-600 text-white font-bold uppercase rounded-sm border border-black text-[10px]">All Inhabitants</button>
-            <button onclick="filterCodex('good')" class="codex-tab px-3 py-1 bg-slate-900 text-slate-300 font-bold uppercase rounded-sm border border-slate-700 text-[10px]">Good Side</button>
-            <button onclick="filterCodex('evil')" class="codex-tab px-3 py-1 bg-slate-900 text-slate-300 font-bold uppercase rounded-sm border border-slate-700 text-[10px]">Evil Side of Wall</button>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-1" id="imaginationCodexGrid">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="manbearpig" class="bg-[#180d0d] border-4 border-red-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-red-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 07 // CRISIS DEFCON MONITOR
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-rose-500 uppercase tracking-tight">
-            ManBearPig Radar & Al Gore 'Super Cereal' Alert
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "I'm super cereal, you guys! Nobody believed me, and now he is eating half the town!" — Former Vice President Al Gore
-          </p>
-        </div>
-        <div class="bg-black/90 border-2 border-red-600 px-4 py-2 text-center font-mono">
-          <div class="text-[10px] text-red-400 uppercase font-bold">THREAT LEVEL</div>
-          <div id="mbpThreatBadge" class="font-headline text-2xl text-white">DEFCON 1</div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="w-64 h-64 rounded-full border-4 border-green-500/80 bg-black relative overflow-hidden shadow-cutout flex items-center justify-center">
-            <div class="absolute inset-0 radar-sweep"></div>
-            <div class="absolute w-48 h-48 rounded-full border border-green-500/30"></div>
-            <div class="absolute w-32 h-32 rounded-full border border-green-500/30"></div>
-            <div class="absolute w-16 h-16 rounded-full border border-green-500/30"></div>
-            <div class="absolute w-full h-[1px] bg-green-500/40"></div>
-            <div class="absolute h-full w-[1px] bg-green-500/40"></div>
-            
-            <div id="mbpBlip" class="absolute w-4 h-4 bg-red-600 rounded-full animate-ping top-16 right-20"></div>
-            <span class="absolute bottom-4 font-mono text-[9px] text-green-400 font-bold uppercase tracking-widest">SECTOR: STARK'S POND</span>
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 space-y-4 font-mono text-xs">
-          <div class="p-4 bg-red-950/40 border border-red-600 text-rose-200 space-y-2">
-            <div class="flex items-center gap-2 text-white font-bold uppercase font-headline">
-              <i data-lucide="alert-octagon" class="w-4 h-4 text-red-500"></i>
-              <span>Al Gore Super Cereal Broadcast:</span>
-            </div>
-            <p id="alGoreSpeech" class="italic leading-relaxed">
-              "Excelsior! The creature has descended upon the Red Cross! I warned everyone, but you all laughed! Now who's laughing?!"
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
+            <span class="text-xs font-mono uppercase text-amber-400 font-bold block">Phase 1 &bull; Thursday – Friday</span>
+            <h4 class="font-headline text-sm text-white uppercase">Writers' Room &amp; Breakouts</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Trey Parker, Matt Stone, and executive producers convene in the conference room. Rather than working from formal scripts or outlines, Parker writes scenes in bursts while storyboard artists immediately start layout drafts.
             </p>
           </div>
 
-          <div class="grid grid-cols-3 gap-2">
-            <button onclick="setMBPThreat(1)" class="p-2.5 bg-stone-900 border border-slate-700 hover:border-yellow-400 font-bold uppercase text-[10px] text-slate-300">
-              Level 1: Unverified Pig Tracks
-            </button>
-            <button onclick="setMBPThreat(3)" class="p-2.5 bg-stone-900 border border-slate-700 hover:border-orange-500 font-bold uppercase text-[10px] text-slate-300">
-              Level 3: Cereal Shortage
-            </button>
-            <button onclick="setMBPThreat(5)" class="p-2.5 bg-red-900/60 border-2 border-red-600 font-bold uppercase text-[10px] text-rose-200">
-              Level 5: Full Apocalyptic Gore
-            </button>
+          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
+            <span class="text-xs font-mono uppercase text-cyan-400 font-bold block">Phase 2 &bull; Saturday – Sunday</span>
+            <h4 class="font-headline text-sm text-white uppercase">Voice Capture &amp; Maya Rigging</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Parker and Stone record primary dialogue scratch in their private vocal booth. Character models and new asset rigs are generated in Autodesk Maya and Adobe Illustrator, intentionally replicating the imperfect, rough-hewn cut-paper look.
+            </p>
           </div>
 
-          <button onclick="broadcastSuperCerealAlarm()" class="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout transition active:scale-95">
-            Sound Super Cereal County Alarm
-          </button>
+          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
+            <span class="text-xs font-mono uppercase text-purple-400 font-bold block">Phase 3 &bull; Monday – Tuesday</span>
+            <h4 class="font-headline text-sm text-white uppercase">Full Animation &amp; Sound</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Dozens of animators construct camera motions, lip sync, and backgrounds. Composer Jamie Dunlap creates original scores and parodies, while sound designers map Foley effects and audio beds in Pro Tools.
+            </p>
+          </div>
+
+          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
+            <span class="text-xs font-mono uppercase text-rose-400 font-bold block">Phase 4 &bull; Wednesday (Air Day)</span>
+            <h4 class="font-headline text-sm text-white uppercase">Final Mix &amp; Satellite Uplink</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Final audio mix, color timing, and Standards &amp; Practices legal clearances conclude just hours before broadcast. The finished tape is digitally uploaded directly to Comedy Central's master control facility in New York.
+            </p>
+          </div>
+        </div>
+
+        <div class="border-t border-spBorder pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-slate-400 font-mono gap-2">
+          <span>Technology Evolution: Stop-Motion (1997) &rarr; SGI PowerAnimator &rarr; Autodesk Maya &amp; CorelDRAW/Illustrator</span>
+          <span class="text-slate-300">Missed Air Date: Only once (S17E4 "Goth Kids 3" due to a studio power outage)</span>
         </div>
       </div>
     </section>
 
-    <section id="towelieLab" class="bg-[#0b171c] border-4 border-cyan-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-24 h-4 absolute -top-2 left-10 rotate-1"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-cyan-950 pb-5 mb-6">
+    <section id="voicecast" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-cyan-600 text-black font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 08 // TYNACORP ESPIONAGE LAB
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-cyan-300 uppercase tracking-tight">
-            Towelie Diagnostic & Moisture Meter
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Don't forget to bring a towel! You wanna get high? ...Wait, what was I doing again?" — Towelie (Model RG-400)
-          </p>
+          <span class="text-xs font-mono uppercase text-sBlue font-bold tracking-wider">Cast Archive</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Voice Actors &amp; Creative Cast</h2>
         </div>
-        <div class="font-mono text-xs text-cyan-300">
-          BATTERY: <span class="font-bold text-white uppercase">4.20% Charge Remaining</span>
-        </div>
+        <span class="font-mono text-xs text-slate-400">Vocal Roster &bull; 1997 – Present</span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-black/60 border-2 border-cyan-800/60 p-5 rounded text-center space-y-3">
-          <div class="w-28 h-40 mx-auto bg-sky-500 border-4 border-black relative shadow-cutout flex flex-col justify-between p-2">
-            <div class="flex justify-between px-2 pt-1">
-              <div class="w-3 h-3 bg-white rounded-full border border-black flex items-center justify-center"><div class="w-1 h-1 bg-red-500 rounded-full"></div></div>
-              <div class="w-3 h-3 bg-white rounded-full border border-black flex items-center justify-center"><div class="w-1 h-1 bg-red-500 rounded-full"></div></div>
-            </div>
-            <div class="text-[9px] font-mono font-bold text-black uppercase">TYNACORP RG-400</div>
-            <div class="w-12 h-1 bg-black mx-auto mb-2"></div>
-          </div>
-          <div class="font-mono text-xs text-cyan-300 font-bold" id="towelieStateText">
-            STATUS: Mildly Stoned & Thinking of Tunes
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 space-y-4 font-mono text-xs">
-          <div class="space-y-1">
-            <div class="flex justify-between text-cyan-300 font-bold">
-              <span>TOWEL MOISTURE SATURATION LEVEL:</span>
-              <span id="towelMoistureValue">68%</span>
-            </div>
-            <input type="range" min="0" max="100" value="68" id="towelMoistureSlider" oninput="updateTowelState(this.value)" class="w-full accent-cyan-400">
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button onclick="askTowelieAdvice()" class="p-3 bg-slate-900 border border-cyan-600 hover:bg-slate-800 text-cyan-200 font-bold uppercase shadow-sm">
-              Ask Towel Advice
-            </button>
-            <button onclick="playFunkyTownBeep()" class="p-3 bg-slate-900 border border-cyan-600 hover:bg-slate-800 text-cyan-200 font-bold uppercase shadow-sm">
-              Play Funky Town Melody
-            </button>
-          </div>
-
-          <div id="towelieAdviceBox" class="p-4 bg-cyan-950/40 border border-cyan-600/60 text-cyan-200 leading-relaxed italic">
-            "If you go to a waterpark, you should always bring a towel! Also, that's the melody to Funkytown."
-          </div>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="voiceCastGrid">
       </div>
     </section>
 
-    <section id="gothCoffee" class="bg-[#120a16] border-4 border-purple-800 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-purple-950 pb-5 mb-6">
+    <section id="characters" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-purple-900 text-purple-200 font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 09 // CONFORMIST DETECTOR
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-purple-400 uppercase tracking-tight">
-            Goth Kids Coffee Corner & Misery Engine
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "If you want to be one of the non-conformists, all you have to do is dress just like us and listen to the exact same music." — Henrietta Biggle
-          </p>
+          <span class="text-xs font-mono uppercase text-kOrange font-bold tracking-wider">Personnel Records</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Character Dossiers</h2>
         </div>
-        <div class="font-mono text-xs text-purple-300">
-          ROAST: <span class="font-bold text-white uppercase">Pure Pitch Black Espresso</span>
+        <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs" id="characterTabs">
+          <button onclick="filterCharacters('all')" class="char-tab px-3 py-1.5 rounded bg-sBlue text-white font-bold paper-stamp" data-filter="all">All Profiles</button>
+          <button onclick="filterCharacters('core')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="core">The Core Four</button>
+          <button onclick="filterCharacters('school')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="school">Schoolmates</button>
+          <button onclick="filterCharacters('adults')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="adults">Parents &amp; Adults</button>
+          <button onclick="filterCharacters('town')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="town">Town Figures</button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-purple-900/60 p-5 rounded space-y-3 font-mono text-xs">
-          <div class="flex justify-between items-center border-b border-purple-900 pb-2">
-            <span class="text-purple-300 font-bold uppercase">The South Park Goth Cell</span>
-            <span class="text-[10px] text-slate-500">Diner Booth #4</span>
-          </div>
-          <div class="space-y-2 text-slate-300 text-[11px]">
-            <div><strong class="text-purple-400">Henrietta:</strong> Writes morbid poetry, burns Hot Topic franchises.</div>
-            <div><strong class="text-purple-400">Pete:</strong> Flips hair constantly, drinks espresso, despises posers.</div>
-            <div><strong class="text-purple-400">Michael:</strong> Tall lead poet, chain smokes herbal clove sticks.</div>
-            <div><strong class="text-purple-400">Firkle:</strong> Kindergartner who calls everyone "conformist pigs".</div>
-          </div>
-          <button onclick="writeGothPoem()" class="w-full mt-3 py-2 bg-purple-950 hover:bg-purple-900 text-purple-200 font-bold uppercase border border-purple-700 shadow-sm">
-            Generate Depressing Goth Poem
-          </button>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="charactersGrid">
+      </div>
+    </section>
+
+    <section id="episodes" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase text-cTeal font-bold tracking-wider">Archival Directory</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Episodes, Specials &amp; Films Catalog</h2>
         </div>
-
-        <div class="lg:col-span-7 bg-black/80 border-2 border-purple-800/60 p-6 rounded space-y-4 font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-[10px] text-purple-400 font-bold uppercase">CONFORMITY DIAGNOSTIC TEST</span>
-            <span class="text-rose-400 text-[10px] font-bold" id="conformistRating">CONFORMIST LEVEL: 94%</span>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 font-mono text-xs">
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-400"></i>
+            <input type="text" id="episodeSearchInput" oninput="handleEpisodeSearch()" placeholder="Search title, plot, season, year..." class="bg-spPanel border border-spBorder pl-9 pr-3 py-2 rounded text-white focus:outline-none focus:border-cyan-500 w-full sm:w-64">
           </div>
-
-          <label class="block text-slate-300 uppercase font-bold">Select your weekend activity:</label>
-          <select id="gothActivitySelect" class="w-full bg-slate-900 border-2 border-slate-700 text-white p-2.5 focus:outline-none focus:border-purple-600">
-            <option value="disney">Going to an amusement park and smiling with family</option>
-            <option value="cheer">Attending high school basketball rally and cheering</option>
-            <option value="diner">Sitting behind the diner drinking black coffee in rain</option>
-            <option value="mall">Shopping at the mall for pre-ripped branded jeans</option>
-            <option value="graveyard">Reading Baudelaire in cemetery while glaring at sun</option>
+          <select id="episodeCategorySelect" onchange="handleEpisodeCategory()" class="bg-spPanel border border-spBorder px-3 py-2 rounded text-white focus:outline-none focus:border-cyan-500">
+            <option value="all">All Releases</option>
+            <option value="classic">Landmark Classics</option>
+            <option value="movie">Theatrical Film</option>
+            <option value="paramount">Paramount+ Event Specials</option>
+            <option value="multi">Multi-Part Sagas</option>
+            <option value="emmy">Emmy Award Winners</option>
+            <option value="banned">Controversial / Banned</option>
           </select>
-
-          <button onclick="evaluateConformism()" class="w-full py-3 bg-purple-900 hover:bg-purple-800 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout transition">
-            Evaluate My Conformist Status
-          </button>
-
-          <div id="gothVerdictBox" class="p-4 bg-purple-950/40 border border-purple-700/60 text-purple-200 leading-relaxed italic">
-            "Ugh, look at you. You probably enjoy sunlight and pop songs. What a complete conformist sellout."
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="cityWokTakeout" class="bg-[#18110b] border-4 border-orange-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-24 h-4 absolute -top-2 right-10 rotate-1"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-orange-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-orange-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 10 // CULINARY TELEPHONE ORDERING
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-orange-400 uppercase tracking-tight">
-            City Wok Takeout Terminal & Great Wall Defense
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Herro, City Wok! Take your order prease! Dammit, stupid Mongorians stop breaking down my City Wall!" — Mr. Tuong Lu Kim
-          </p>
-        </div>
-        <div class="font-mono text-xs text-orange-300">
-          MONGOL TOWER DEFENSE: <span class="font-bold text-emerald-400 uppercase">Wall Intact (99%)</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="cityWokMenuGrid">
-          </div>
-          <div class="p-3 bg-black/60 border border-slate-800 flex justify-between items-center text-slate-300">
-            <span>CURRENT BAG TOTAL: <strong id="cityWokTotal" class="text-orange-400">$0.00</strong></span>
-            <button onclick="clearCityWokOrder()" class="text-rose-400 text-[10px] hover:underline uppercase">Clear Bag</button>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 bg-black/80 border-2 border-orange-700/60 p-5 rounded space-y-3 font-mono text-xs">
-          <h4 class="font-headline text-sm text-orange-400 uppercase border-b border-orange-900 pb-2">Order Dispatch Wire</h4>
-          <div id="cityWokReceipt" class="space-y-1 text-slate-400 min-h-[90px]">
-            <p class="italic text-slate-500">Your takeout cart is empty. Add authentic City specialties to transmit order.</p>
-          </div>
-          <button onclick="placeCityWokOrder()" class="w-full py-3 bg-orange-600 hover:bg-orange-500 text-slate-950 font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout transition">
-            Transmit Order To Mr. Lu Kim
-          </button>
-          <button onclick="triggerMongolAttack()" class="w-full py-2 bg-stone-900 hover:bg-stone-800 text-rose-300 font-mono text-xs font-bold uppercase border border-rose-900">
-            Simulate Mongol Attack on City Wall
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section id="buttersPunish" class="bg-[#0b1617] border-4 border-teal-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-teal-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-cTeal text-slate-950 font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 11 // STOTCH DISCIPLINE LEDGER
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-teal-300 uppercase tracking-tight">
-            Butters' Grounding Log & Random Punishment
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "You are grounded, mister! For making funny faces at breakfast, you will spend the next three weeks staring at your wallpaper!" — Stephen Stotch
-          </p>
-        </div>
-        <button onclick="groundButtersNow()" class="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout active:scale-95 transition flex items-center gap-2">
-          <i data-lucide="shield-alert" class="w-4 h-4"></i>
-          <span>Ground Butters Now</span>
-        </button>
+      <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+        <span id="episodeCounterText">Displaying entries...</span>
+        <span class="hidden sm:inline">Click any entry to view complete production trivia, air dates &amp; historical notes</span>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-black/60 border-2 border-teal-800/60 p-5 rounded space-y-3 font-mono text-xs">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-cTeal border-2 border-black flex items-center justify-center font-headline text-2xl text-slate-950 shadow-cutout">
-              B
-            </div>
-            <div>
-              <h4 class="font-headline text-white uppercase text-sm">Leopold "Butters" Stotch</h4>
-              <span class="text-[10px] text-teal-400 block font-bold">PUNISHMENT TALLY: <span id="buttersGroundCount">412</span> Weeks</span>
-            </div>
-          </div>
-          <div class="p-3 bg-teal-950/40 border border-teal-600/50 text-teal-200 text-xs italic">
-            "Oh hamburgers, I didn't mean to drop my toast butter-side down! Dad's gonna take away my computer for a month!"
-          </div>
-        </div>
-
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <div class="text-[10px] text-teal-400 font-bold uppercase">HISTORICAL PUNISHMENT RECORDS:</div>
-          <div class="space-y-2 max-h-[240px] overflow-y-auto pr-1" id="buttersGroundingHistory">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="lemmiwinks" class="bg-[#18150c] border-4 border-yellow-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-yellow-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-yellow-500 text-slate-950 font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 12 // ANCIENT RODENT CHRONICLES
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-amber-300 uppercase tracking-tight">
-            Lemmiwinks Great Adventure & Quest Log
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "A great adventure lies ahead, hurry onward Lemmiwinks or you will soon be dead!" — The Catatafish & The Frog King
-          </p>
-        </div>
-        <div class="font-mono text-xs text-amber-400">
-          QUEST STATE: <span id="lemmiQuestState" class="font-bold text-white uppercase">The Caverns of Flesh</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-yellow-900/60 p-5 rounded space-y-3 font-mono text-xs text-center">
-          <div class="w-24 h-24 mx-auto bg-amber-400/20 border-2 border-amber-500 rounded-full flex items-center justify-center text-4xl shadow-cutout">
-            🐹
-          </div>
-          <h4 class="font-headline text-white uppercase text-sm">Sir Lemmiwinks of the Realm</h4>
-          <p class="text-slate-400 text-[11px]">Gerbil hero tasked with traversing the digestive underworld to defeat Wikileaks.</p>
-          <button onclick="advanceLemmiwinksQuest()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-headline text-xs uppercase tracking-wider border border-black shadow-cutout">
-            Advance Rodent Quest &rarr;
-          </button>
-        </div>
-
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <div class="space-y-2" id="lemmiwinksSpiritsContainer">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="gameVault" class="bg-[#10131d] border-4 border-indigo-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-indigo-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-indigo-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 13 // INTERACTIVE SOFTWARE REPOSITORY
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-indigo-300 uppercase tracking-tight">
-            South Park Video Game Trophy Room & Archive
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            From the 1998 N64 snowball engine to the Obsidian turn-based masterpiece 'The Stick of Truth' and Ubisoft's superhero RPG.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="gameVaultGrid">
-      </div>
-    </section>
-
-    <section id="casaBonitaTour" class="bg-[#1a0f12] border-4 border-rose-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="tape w-24 h-4 absolute -top-2 left-10 -rotate-1"></div>
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-rose-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-rose-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 14 // MEXICAN ENTERTAINMENT PALACE
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-rose-300 uppercase tracking-tight">
-            Casa Bonita & Black Bart's Cave Simulator
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "More sopapillas please! Cartman locked Butters in a nuclear bomb shelter for eight whole days just to eat here."
-          </p>
-        </div>
-        <div class="bg-black/90 border-2 border-rose-600 px-4 py-2 text-center font-mono">
-          <div class="text-[10px] text-rose-400 uppercase font-bold">SOPAPILLAS CONSUMED</div>
-          <div id="sopapillaLiveCount" class="font-headline text-2xl text-white">47</div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-rose-900/60 p-5 rounded space-y-4 font-mono text-xs">
-          <h4 class="font-headline text-sm text-rose-300 uppercase border-b border-rose-900 pb-2">Palace Amenities</h4>
-          <div class="space-y-2 text-slate-300 text-[11px]">
-            <div>&bull; <strong>Black Bart's Cave:</strong> Terrifying 12-foot winding cavern lined with fake treasure.</div>
-            <div>&bull; <strong>30-Foot Waterfall:</strong> Acapulco cliff-divers risking fractures for tips.</div>
-            <div>&bull; <strong>Little Red Flag:</strong> Lift it up on table for unlimited warm sopapillas.</div>
-            <div>&bull; <strong>Arcade Treasure Dome:</strong> 25,000 tickets for one plastic spider ring.</div>
-          </div>
-          <button onclick="raiseSopapillaFlag()" class="w-full py-3 bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout transition">
-            🚩 Raise Flag For More Sopapillas
-          </button>
-        </div>
-
-        <div class="lg:col-span-7 bg-black/80 border-2 border-rose-800/60 p-6 rounded space-y-4 font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-[10px] text-rose-400 font-bold uppercase">30-FOOT CLIFF DIVE TIMING GAME</span>
-            <span class="text-amber-400 text-[10px] font-bold">DIVER STATUS: PREPARING</span>
-          </div>
-
-          <p class="text-slate-300 text-xs leading-relaxed">
-            Time your leap precisely when the waterfall tide meter hits the peak GREEN zone to achieve a perfect 10.0 Acapulco dive!
-          </p>
-
-          <div class="w-full bg-slate-800 h-6 border-2 border-black relative overflow-hidden rounded">
-            <div class="absolute inset-y-0 left-[60%] w-[20%] bg-emerald-500/60"></div>
-            <div id="diveMarker" class="absolute top-0 bottom-0 w-2 bg-yellow-400 transition-all duration-75 left-[10%]"></div>
-          </div>
-
-          <div class="flex gap-2">
-            <button onclick="executeCliffDive()" class="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout">
-              Leap Off Waterfall
-            </button>
-            <button onclick="exploreBlackBartsCave()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-rose-200 border border-slate-700">
-              Enter Black Bart's Cave
-            </button>
-          </div>
-
-          <div id="diveOutcomeText" class="p-3 bg-black/60 border border-slate-800 text-slate-300 italic">
-            Waiting for the diver to step out onto the cliff edge...
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="critterChamber" class="bg-[#160b0b] border-4 border-red-800 p-6 sm:p-8 relative shadow-cutout-lg transition-all duration-300" id="critterChamberWrapper">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-red-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-red-700 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 15 // APOCRYPHAL WOODLAND SANCTUARY
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-rose-400 uppercase tracking-tight">
-            Woodland Critter Christmas Ritual Chamber
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Yay! Hail Satan!" — Cute fuzzy talking forest animals preparing for the unholy birth of the Antichrist in the snowy forest.
-          </p>
-        </div>
-        <button id="critterBloodPactBtn" onclick="toggleCritterBloodPact()" class="px-4 py-2.5 bg-red-900 hover:bg-red-800 text-white font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout active:scale-95 transition flex items-center gap-2">
-          <i data-lucide="skull" class="w-4 h-4 text-red-400"></i>
-          <span id="critterPactLabel">Initiate Blood Pact Ritual</span>
-        </button>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="crittersGrid">
-      </div>
-
-      <div id="critterRitualAlert" class="mt-6 p-4 bg-red-950/70 border-2 border-red-600 font-mono text-xs text-red-200 hidden">
-        <span class="font-headline text-white block uppercase mb-1">BLOOD ORGY COMMENCED IN THE PINE FOREST:</span>
-        <p class="italic">"We gotta build a manger for our Dark Lord! And then we sacrifice Rabbity the Rabbit so the beast can feed! Yay!"</p>
-      </div>
-    </section>
-
-    <section id="scottMalkinson" class="bg-[#17140e] border-4 border-amber-600 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-amber-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-600 text-black font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 16 // ENDOCRINOLOGY DISPATCH
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-amber-300 uppercase tracking-tight">
-            Scott Malkinson Diabetes Sensor & Hotline
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "I'm Scott Malkinson, I have diabetes." — South Park's most self-aware 4th grader and Captain Diabetes of the superhero faction.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-amber-900/60 p-5 rounded space-y-3 font-mono text-xs">
-          <div class="text-[10px] text-amber-400 font-bold uppercase">BLOOD SUGAR MONITOR (mg/dL)</div>
-          <div class="text-3xl font-headline text-white" id="bloodSugarDisplay">120 mg/dL (Normal)</div>
-          <input type="range" min="40" max="380" value="120" id="bloodSugarSlider" oninput="updateBloodSugar(this.value)" class="w-full accent-amber-500">
-          <p id="sugarDiagnosis" class="text-slate-400 text-[11px] leading-relaxed">
-            Scott is currently stable, but will still remind everyone he meets that he has terminal juvenile diabetes.
-          </p>
-        </div>
-
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <button onclick="scottSelfPityQuote()" class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-black font-headline text-xs uppercase tracking-wider border-2 border-black shadow-cutout">
-            Generate Scott Malkinson Self-Pity Quote
-          </button>
-          <div id="scottQuoteBox" class="p-4 bg-amber-950/40 border border-amber-600/60 text-amber-200 leading-relaxed italic">
-            "I'm Scott Malkinson. My tongue is a little dry, my insulin is in my backpack, and Cartman made fun of me again."
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="memberBerriesSec" class="bg-[#150e18] border-4 border-purple-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-purple-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-purple-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 17 // NOSTALGIA SEDATION REGISTRY
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-purple-300 uppercase tracking-tight">
-            Member Berries Memory Lane
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            Click the purple berries to hear sweet, intoxicating vintage 1980s pop culture memories. "'Member the Millennium Falcon? 'Member feeling safe?"
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3" id="memberBerriesGrid">
-      </div>
-
-      <div id="memberWhisperPanel" class="mt-4 p-4 bg-purple-950/40 border border-purple-600 text-purple-200 font-mono text-xs text-center italic">
-        "Oooo, yeah, I 'member! 'Member Chewbacca again?"
-      </div>
-    </section>
-
-    <section id="hankeySewer" class="bg-[#0f1711] border-4 border-emerald-700 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-emerald-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-600 text-white font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 18 // SUBTERRANEAN PLUMBING
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-emerald-300 uppercase tracking-tight">
-            Mr. Hankey's Holiday Sewer Navigator
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Howdy-ho! It's Mr. Hankey, the Christmas Poo! Eating lots of fiber so I can visit all the boys and girls!"
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-5 bg-black/70 border-2 border-emerald-900/60 p-5 rounded text-center space-y-3 font-mono text-xs">
-          <div class="text-5xl animate-bounce">💩🎅</div>
-          <h4 class="font-headline text-emerald-300 uppercase text-sm">Mr. Hankey, The Christmas Poo</h4>
-          <p class="text-slate-400 text-[11px]">Subterranean municipal ambassador bringing holiday cheer through municipal pipes.</p>
-          <button onclick="singHankeyCarol()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-headline text-xs uppercase tracking-wider border border-black shadow-cutout">
-            Sing Howdy-Ho Carol
-          </button>
-        </div>
-
-        <div class="lg:col-span-7 space-y-3 font-mono text-xs">
-          <div class="p-4 bg-emerald-950/40 border border-emerald-600/60 text-emerald-200 leading-relaxed italic" id="hankeyCarolOutput">
-            "Howdy-ho! Mr. Hankey the Christmas Poo, loves me and I love you! He comes around when Christmas is here, spreading peace and sewer cheer!"
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <button onclick="checkToiletBowl('Kyle')" class="p-2.5 bg-slate-900 border border-emerald-700/60 text-emerald-200 font-bold uppercase text-[10px]">
-              Kyle's Toilet
-            </button>
-            <button onclick="checkToiletBowl('Cartman')" class="p-2.5 bg-slate-900 border border-emerald-700/60 text-emerald-200 font-bold uppercase text-[10px]">
-              Cartman's Toilet
-            </button>
-            <button onclick="checkToiletBowl('Stan')" class="p-2.5 bg-slate-900 border border-emerald-700/60 text-emerald-200 font-bold uppercase text-[10px]">
-              Stan's Toilet
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="garrisonChalkboard" class="bg-[#141512] border-4 border-amber-500 p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-amber-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-500 text-slate-950 font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 19 // INSTRUCTIONAL BOARD OF EDUCATION
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-amber-300 uppercase tracking-tight">
-            Herbert Garrison Whiteboard & Mr. Hat Chamber
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-2xl">
-            "Now children, let's behave or Mr. Hat will get very angry and report your microaggressions to the federal board."
-          </p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <div class="lg:col-span-7 bg-[#1c241c] border-4 border-amber-800 p-6 rounded shadow-inner space-y-3 font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-amber-900/60 pb-2 text-amber-300">
-            <span>4TH GRADE LESSON PLAN: TODAY</span>
-            <span class="text-rose-400 font-bold">MR. HAT: OBSERVING</span>
-          </div>
-          <div id="chalkboardLessonText" class="text-amber-100 text-sm leading-relaxed p-3 bg-black/30 border border-amber-900/40 min-h-[100px]">
-            "Okay children! Today we are learning how to defeat the Canadian government using nothing but angry letters and oversized catapults!"
-          </div>
-          <div class="flex gap-2">
-            <button onclick="writeNewLessonPlan()" class="flex-1 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold uppercase shadow-sm">
-              Erase & Write New Lesson
-            </button>
-            <button onclick="askMrHat()" class="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-amber-300 border border-amber-700 font-bold uppercase">
-              Ask Mr. Hat
-            </button>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 bg-black/70 border-2 border-amber-700/60 p-5 rounded space-y-3 font-mono text-xs">
-          <h4 class="font-headline text-amber-300 uppercase text-sm">Garrison Executive Decrees</h4>
-          <div class="space-y-2 text-slate-300 text-[11px]">
-            <div>1. All math tests replaced with Game of Thrones debates.</div>
-            <div>2. The IT gyroscopic monowheel is the only legal transport.</div>
-            <div>3. Canadian border wall funding increased by 400%.</div>
-          </div>
-          <button onclick="speakGarrisonQuote()" class="w-full mt-2 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-headline text-xs uppercase tracking-wider border border-black shadow-cutout">
-            Hear Garrison Lecture Class
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section id="kennySection" class="bg-[#141211] border-4 border-kOrange p-6 sm:p-8 relative shadow-cutout-lg">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-orange-950 pb-5 mb-6">
-        <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-kOrange text-black font-mono font-bold text-[10px] uppercase mb-1">
-            TERMINAL 20 // MORTUARY DIVISION
-          </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-orange-400 uppercase tracking-tight">
-            Kenny McCormick: The Graveyard Registry
-          </h2>
-          <p class="font-mono text-xs text-slate-400 mt-1 max-w-xl">
-            Cursed by an arcane Lovecraftian pact sworn by his parents at a Cthulhu cult meeting. Reborn in his bed each morning.
-          </p>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <div class="bg-black/90 border-2 border-orange-600 px-4 py-2 text-center shadow-cutout">
-            <div class="text-[10px] font-mono text-orange-400 uppercase font-bold">Recorded Deaths</div>
-            <div id="kennyLiveCounter" class="font-headline text-3xl text-white">128</div>
-          </div>
-          <button onclick="smiteKennyTerminal()" class="px-4 py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white font-headline text-sm uppercase tracking-wider border-2 border-black shadow-cutout transition active:scale-95 flex items-center gap-2">
-            <i data-lucide="zap" class="w-4 h-4"></i>
-            <span>Kill Kenny Now</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3" id="kennyLogsGrid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="episodesGrid">
       </div>
     </section>
 
   </main>
 
-  <footer class="mt-20 border-t-4 border-slate-900 bg-black/95 py-10 font-mono text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 bg-cRed text-white font-headline text-lg flex items-center justify-center border border-black">SP</div>
+  <div id="detailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#0e1522] border-2 border-spBorder max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg paper-stamp-lg custom-scrollbar">
+      <div class="p-6 border-b border-spBorder flex items-start justify-between">
         <div>
-          <span class="text-white font-bold uppercase block">South Park Municipal Super-Terminal</span>
-          <span class="text-[10px]">Trey Parker & Matt Stone Satirical Tribute &bull; Est. 1997</span>
+          <span id="modalCategoryBadge" class="px-2 py-0.5 text-[10px] font-mono uppercase font-bold rounded bg-spBorder text-cyan-300"></span>
+          <h3 id="modalTitle" class="font-headline text-xl sm:text-2xl text-white mt-1.5 uppercase"></h3>
+          <p id="modalSubtitle" class="font-mono text-xs text-slate-400 mt-0.5"></p>
+        </div>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1 rounded bg-spCard border border-spBorder">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4 text-sm text-slate-300 leading-relaxed font-body" id="modalBody">
+      </div>
+      <div class="p-4 bg-spCard/80 border-t border-spBorder flex justify-end">
+        <button onclick="closeModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs uppercase rounded border border-spBorder">
+          Close Window
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-spBorder bg-[#05070c] py-12 mt-20 text-xs font-mono text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 bg-cRed text-white font-headline text-xs flex items-center justify-center border border-black">SP</div>
+          <span class="font-headline text-white tracking-wide uppercase text-sm">South Park Archives</span>
+        </div>
+        <div class="flex flex-wrap gap-4 text-slate-500">
+          <span>Trey Parker &amp; Matt Stone</span>
+          <span>Comedy Central &bull; Paramount Global</span>
+          <span>South Park Studios</span>
         </div>
       </div>
-      <div class="text-center md:text-right text-[10px] space-y-1">
-        <p>Satirical Fan Terminal. South Park is a registered trademark of Comedy Partners.</p>
-        <p>Built with pure HTML5, Tailwind CSS & Web Audio synthesis.</p>
-      </div>
+      <p class="text-slate-500 text-[11px] leading-relaxed">
+        Non-commercial educational archive documenting the historical production, broadcast chronology, and cultural impact of the animated television series South Park (1997–present). South Park and all related titles, logos, and characters are trademarks of Comedy Partners, a Warner Bros. Discovery / Paramount Global company.
+      </p>
     </div>
   </footer>
 
   <script>
-    let audioCtx = null;
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-      return audioCtx;
-    }
-
-    function triggerFartSound(customFreq) {
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
-
-        const freq = customFreq || parseInt(document.getElementById('fartFreqSlider')?.value || 115);
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(Math.max(30, freq * 0.4), ctx.currentTime + 0.35);
-
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(450, ctx.currentTime);
-        filter.frequency.linearRampToValueAtTime(150, ctx.currentTime + 0.35);
-
-        gain.gain.setValueAtTime(0.4, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime + 0.36);
-
-        const jaw = document.getElementById('terrenceJaw');
-        if (jaw) {
-          jaw.style.transform = 'translateY(14px)';
-          setTimeout(() => { jaw.style.transform = 'translateY(0px)'; }, 150);
-        }
-      } catch (err) {}
-    }
-
-    function updateFartFreq(val) {
-      const label = document.getElementById('fartFreqDisplay');
-      if (label) label.textContent = `${val} Hz`;
-    }
-
-    function triggerFartType(type) {
-      if (type === 'squeak') triggerFartSound(280);
-      else if (type === 'classic') triggerFartSound(110);
-      else if (type === 'rumble') triggerFartSound(70);
-      else if (type === 'rip') triggerFartSound(190);
-    }
-
-    let canadianHonorifics = ["Guy", "Buddy", "Friend"];
-    let honorificIdx = 0;
-    function cycleCanadianHonorific() {
-      honorificIdx = (honorificIdx + 1) % canadianHonorifics.length;
-      const btn = document.getElementById('canadianHonorificBtn');
-      if (btn) btn.textContent = canadianHonorifics[honorificIdx];
-      speakCanadian(`I'm not your ${canadianHonorifics[(honorificIdx + 2) % 3]}, ${canadianHonorifics[honorificIdx]}!`);
-    }
-
-    function playCanadianLine(line) {
-      triggerFartSound(130);
-      speakCanadian(line);
-      const box = document.getElementById('canadianDialogueBox');
-      if (box) box.textContent = `Terrence & Phillip: "${line}" *Pffft!*`;
-    }
-
-    function speakCanadian(text) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(text);
-        utt.pitch = 1.6;
-        utt.rate = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const heroesDB = [
+    const voiceCastData = [
       {
-        id: "coon",
-        name: "The Coon",
-        alter: "Eric Cartman",
-        power: "Claws of Retribution, Dark Alliances, Cinematic Roadmaps",
-        kryptonite: "Being told he is not the leader; low Cheesy Poof reserves",
-        level: 88,
-        bg: "bg-red-950",
-        lore: "Cartman's raccoon vigilante. Summons ancient Lovecraftian horrors when denied royalties."
+        name: "Trey Parker",
+        roles: "Stan Marsh, Eric Cartman, Randy Marsh, Herbert Garrison, Mr. Mackey, Officer Barbrady, Satan, Clyde Donovan, Craig Tucker, Timmy Burch, Jimmy Valmer, Tuong Lu Kim, Phillip, Santa Claus",
+        bio: "Co-creator, primary director, lead writer, and primary voice artist. Parker performs characters by speaking with specific pitch manipulation or vocal alterations; Cartman is pitched up slightly from Parker's speaking register, while Stan matches his natural voice. His musical background informs the series' numerous Emmy and Oscar-nominated songs."
       },
       {
-        id: "mysterion",
-        name: "Mysterion",
-        alter: "Kenny McCormick",
-        power: "Cosmic Immortality, Lovecraft Curse, Parka Stealth",
-        kryptonite: "Nobody ever remembers he died the previous afternoon",
-        level: 99,
-        bg: "bg-purple-950",
-        lore: "The only real supernatural hero in South Park. Protects little sister Karen as the Guardian Angel."
+        name: "Matt Stone",
+        roles: "Kyle Broflovski, Kenny McCormick, Butters Stotch, Gerald Broflovski, Craig Tucker (early), Pip Pirrup, Jimbo Kern, Jesus Christ, Big Gay Al, Saddam Hussein, Terrance, Tweek Tweak",
+        bio: "Co-creator, executive producer, and writer. Stone voices Kyle (his natural voice with slight inflection) and Butters (derived from South Park producer Eric Stough). To voice Kenny, Stone covers his mouth with his sleeve or hand, speaking real phonetic dialogue that is muffled and partially discernible upon close listening."
       },
       {
-        id: "toolshed",
-        name: "Toolshed",
-        alter: "Stan Marsh",
-        power: "Power Tools Mastery, Flashlight Beam, Moral Logic",
-        kryptonite: "Depression and father's manic commercial schemes",
-        level: 75,
-        bg: "bg-blue-950",
-        lore: "Armed with his father's cordless power tools and belt, defending South Park from corporate fraud."
+        name: "Mary Kay Bergman (1961–1999)",
+        roles: "Wendy Testaburger, Sharon Marsh, Sheila Broflovski, Liane Cartman, Mayor McDaniels, Shelley Marsh, Nurse Gollum, Principal Victoria (Seasons 1–3)",
+        bio: "An accomplished voice actress who voiced virtually all female characters in South Park from the 1997 pilot through the 1999 feature film Bigger, Longer & Uncut. Her versatility enabled Parker and Stone to maintain their tight turnaround times. Following her tragic passing in November 1999, S3E15 ('Mr. Hankey's Christmas Classics') was dedicated in her memory."
       },
       {
-        id: "kite",
-        name: "Human Kite",
-        alter: "Kyle Broflovski",
-        power: "Laser Eyes, Aerodynamic Flight, Moral Speeches",
-        kryptonite: "Cartman's incessant slurs; Cousin Kyle",
-        level: 78,
-        bg: "bg-green-950",
-        lore: "Takes to the Colorado winds with a crude kite strapped to his back, blasting laser beams."
+        name: "April Stewart",
+        roles: "Wendy Testaburger, Sharon Marsh, Liane Cartman, Mayor McDaniels, Shelley Marsh, Principal Victoria (current)",
+        bio: "Joined the voice cast during Season 8 in 2004. Stewart stepped into the central female roles, maintaining vocal consistency for Stan's mother Sharon, Wendy Testaburger, and Cartman's mother Liane across more than 200 episodes, video games, and streaming specials."
       },
       {
-        id: "chaos",
-        name: "Professor Chaos",
-        alter: "Butters Stotch",
-        power: "Foil Armor, Minor Inconvenience, Flooding via Garden Hose",
-        kryptonite: "Getting grounded by Stephen Stotch for any reason",
-        level: 65,
-        bg: "bg-teal-950",
-        lore: "World-feared supervillain dedicated to swapping diner soup bowls and stealing dry-erase markers."
+        name: "Mona Marshall",
+        roles: "Sheila Broflovski, Linda Stotch, Henrietta Biggle (Goth Kid), Red, additional townswomen",
+        bio: "A veteran voice artist who joined in 2000. Marshall performs Kyle's overprotective mother Sheila Broflovski with her recognizable Brooklyn-inflected cadence, as well as Butters' well-meaning but strict mother Linda Stotch."
       },
       {
-        id: "crunch",
-        name: "Mint-Berry Crunch",
-        alter: "Bradley Biggle",
-        power: "True Kokujon Alien Energy, Mint and Berry Crunch",
-        kryptonite: "Lack of cold milk; family ignorance",
-        level: 100,
-        bg: "bg-emerald-950",
-        lore: "Actual alien prince sent to Earth with powers to banish Cthulhu into the dark abyss."
+        name: "Isaac Hayes (1942–2008)",
+        roles: "Jerome 'Chef' McElroy (1997–2006)",
+        bio: "Legendary soul and funk singer-songwriter who provided musical and romantic advice to the boys through original songs like 'Chocolate Salty Balls' (which became a UK #1 single in 1998). Hayes departed the show in 2006 amid controversy surrounding Season 9's Scientology critique ('Trapped in the Closet')."
       },
       {
-        id: "diabetes",
-        name: "Captain Diabetes",
-        alter: "Scott Malkinson",
-        power: "Insulin Surge Strength, Sugar Rush Rage",
-        kryptonite: "Hypoglycemia, missing his backpack insulin",
-        level: 82,
-        bg: "bg-amber-950",
-        lore: "Surges with brute berserker strength whenever his blood sugar spikes from sugary treats."
+        name: "Adrien Beard",
+        roles: "Tolkien Black (formerly Token Black)",
+        bio: "A veteran South Park Studios animator, storyboard artist, and lead producer. When the character of Tolkien was introduced in early seasons, Parker and Stone recruited Beard from the art department because he was in the building; he has continued voicing the character for over two decades."
+      },
+      {
+        name: "Jennifer Howell",
+        roles: "Bebe Stevens",
+        bio: "Longtime supervising producer at South Park Studios who also provides the voice of Wendy's best friend, 4th-grade student Bebe Stevens, including central storylines such as Season 6's 'Bebe's Boobs Destroy Society'."
+      },
+      {
+        name: "Eliza Schneider",
+        roles: "Wendy, Sharon, Liane, Sheila, Shelley (Seasons 4–7)",
+        bio: "Dialect coach and voice artist who shared and voiced the central female characters alongside Shannon Cassidy between 2000 and 2003 following Mary Kay Bergman's passing."
       }
     ];
 
-    function renderHeroes() {
-      const container = document.getElementById('heroSelectorContainer');
-      if (!container) return;
-      container.innerHTML = heroesDB.map(h => `
-        <button onclick="selectHero('${h.id}')" class="w-full p-2.5 bg-slate-900 border border-slate-700 hover:border-rose-500 text-left font-mono text-xs flex items-center justify-between transition shadow-sm">
-          <div>
-            <span class="text-white font-bold block uppercase">${h.name}</span>
-            <span class="text-[10px] text-slate-400">Alter: ${h.alter}</span>
-          </div>
-          <span class="text-rose-400 font-bold text-xs">${h.level} PWR</span>
-        </button>
-      `).join('');
-      selectHero('coon');
-    }
-
-    function selectHero(heroId) {
-      const h = heroesDB.find(x => x.id === heroId) || heroesDB[0];
-      const panel = document.getElementById('heroDetailPanel');
-      if (!panel) return;
-      panel.innerHTML = `
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div>
-            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">HERO CODENAME:</span>
-            <h3 class="font-headline text-2xl text-rose-300 uppercase">${h.name}</h3>
-          </div>
-          <div class="px-3 py-1 bg-rose-950 border border-rose-600 text-rose-300 text-xs font-bold uppercase">
-            ${h.level} / 100 PWR
-          </div>
-        </div>
-        <div class="space-y-2 text-slate-300">
-          <div><strong class="text-amber-400">Secret Identity:</strong> ${h.alter}</div>
-          <div><strong class="text-amber-400">Active Superpowers:</strong> ${h.power}</div>
-          <div><strong class="text-rose-400">Critical Kryptonite:</strong> ${h.kryptonite}</div>
-          <p class="text-slate-400 italic pt-2 border-t border-slate-800 leading-relaxed">${h.lore}</p>
-        </div>
-        <div class="pt-2">
-          <div class="w-full bg-slate-800 h-2 rounded overflow-hidden">
-            <div class="bg-gradient-to-r from-red-600 to-amber-500 h-full" style="width: ${h.level}%"></div>
-          </div>
-        </div>
-      `;
-    }
-
-    const tegridyStrains = [
+    const charactersData = [
       {
-        name: "Tegridy Special",
-        thc: "82.4%",
-        terps: "Myrcene & Fresh Colorado Pine",
-        note: "Pure farm tegridy. Cured by Randy using old wood barrels.",
-        warning: "Causes spontaneous acoustic guitar strumming and farm speeches."
+        id: "stan",
+        category: "core",
+        name: "Stan Marsh",
+        fullName: "Stanley Marsh",
+        voicedBy: "Trey Parker",
+        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Often serving as the grounded everyman, Stan frequently offers moral conclusions ('You know, I learned something today...'). He struggles with adolescent cynicism, his father Randy's erratic schemes, and peer pressure.",
+        notableArcs: "S15E7 'You're Getting Old' (clinical depression and musical cynicism), S8E14 'Woodland Critter Christmas', S9E12 'Trapped in the Closet'."
       },
       {
-        name: "Halloween Special",
-        thc: "89.1%",
-        terps: "Pumpkin Spice & Witch Resin",
-        note: "Blended with Towelie during full autumn harvest moon.",
-        warning: "May summon aggressive mummy hallucinations in suburbia."
+        id: "kyle",
+        category: "core",
+        name: "Kyle Broflovski",
+        fullName: "Kyle Broflovski",
+        voicedBy: "Matt Stone",
+        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Intelligent, principled, and easily provoked by Cartman's prejudice. Kyle is often the philosophical core of the group, defending moral justice, civil liberties, and his adopted Canadian brother Ike.",
+        notableArcs: "S5E4 'Scott Tenorman Must Die', S10E3-E4 'Cartoon Wars', S11E10-E12 'Imaginationland', S12E4 'The Canada Problem'."
       },
       {
-        name: "Christmas Snow",
-        thc: "99.2%",
-        terps: "Frost Cured & Pure Mountain Snow",
-        note: "So white and pure, the mayor called a state of emergency.",
-        warning: "Will make users want to drive around in a festive sleigh singing."
+        id: "cartman",
+        category: "core",
+        name: "Eric Cartman",
+        fullName: "Eric Theodore Cartman",
+        voicedBy: "Trey Parker",
+        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Manipulative, narcissistic, sociopathic, and fiercely vindictive. Cartman serves as the primary antagonist among the boys, concocting schemes ranging from theme park takeovers to culinary vengeance.",
+        notableArcs: "S5E4 'Scott Tenorman Must Die', S7E11 'Casa Bonita', S8E1 'Good Times with Weapons', S8E3 'Up the Down Steroid', S14E5-E6 '200' and '201'."
       },
       {
-        name: "Pandemic Special",
-        thc: "94.5%",
-        terps: "Pangolin Extract & Secret Sauce",
-        note: "Manufactured during global quarantine isolation.",
-        warning: "Strictly confidential ingredients; keep away from Mickey Mouse."
+        id: "kenny",
+        category: "core",
+        name: "Kenny McCormick",
+        fullName: "Kenneth McCormick",
+        voicedBy: "Matt Stone",
+        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Muffled by his orange parka, Kenny comes from South Park's poorest family. He is street-smart, sexually curious, and fiercely protective of his little sister Karen. He also possesses supernatural immortality under his vigilante persona, Mysterion.",
+        notableArcs: "S5E13 'Kenny Dies' (temporary permanent death), S13E2 'The Coon', S14E11-E13 'Coon and Friends Trilogy' (origin of his cosmic immortality curse)."
+      },
+      {
+        id: "butters",
+        category: "school",
+        name: "Butters Stotch",
+        fullName: "Leopold 'Butters' Stotch",
+        voicedBy: "Matt Stone",
+        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Innocent, anxious, and perpetually terrified of being grounded by his authoritarian parents. Despite constant mistreatment from Cartman, Butters remains gentle, occasionally adopting the supervillain alter-ego 'Professor Chaos'.",
+        notableArcs: "S6E1 'Freak Strike', S6E6 'Professor Chaos', S8E5 'AWESOM-O 4000', S16E5 'Butterballs', S18E7 'Grounded Vindaloop'."
+      },
+      {
+        id: "wendy",
+        category: "school",
+        name: "Wendy Testaburger",
+        fullName: "Wendy Testaburger",
+        voicedBy: "Mary Kay Bergman / April Stewart",
+        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "The most outspoken and politically conscious student in the 4th grade. Wendy serves as class president and school paper editor, frequently debating Cartman on gender equity, breast cancer awareness, and social hypocrisy.",
+        notableArcs: "S12E9 'Breast Cancer Show Ever' (brutally fighting Cartman after school), S17E10 'The Hobbit' (challenging body dysmorphia and social media airbrushing)."
+      },
+      {
+        id: "randy",
+        category: "adults",
+        name: "Randy Marsh",
+        fullName: "Randall Marsh",
+        voicedBy: "Trey Parker",
+        firstAppearance: "S1E3 'Volcano' (1997)",
+        ageGrade: "Adult &bull; Geologist / Cannabis Farmer",
+        personality: "Stan's father. Originally a mild-mannered USGS geologist, Randy progressively transformed into the show's chief adult catalyst—hyper-obsessive, insecure, and swept up in cultural manias from cooking shows to marijuana farming.",
+        notableArcs: "S9E5 'The Losing Edge' (Batdad brawl), S18 Serialization (secret pop star Lorde), S22–S26 'Tegridy Farms' saga, S24 'The Pandemic Special'."
+      },
+      {
+        id: "garrison",
+        category: "adults",
+        name: "Herbert Garrison",
+        fullName: "Herbert J. Garrison",
+        voicedBy: "Trey Parker",
+        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
+        ageGrade: "Adult &bull; Teacher / 45th U.S. President",
+        personality: "The boys' volatile 4th-grade educator. Garrison's decades-long arc features dramatic personal transformations: relying on hand puppet Mr. Hat, transitioning to Janet Garrison, and later parodying Donald Trump as U.S. President.",
+        notableArcs: "S4E11 '4th Grade', S9E1 'Mr. Garrison's Fancy New Vagina', Seasons 19–24 (Presidential campaign and administration storylines)."
+      },
+      {
+        id: "chef",
+        category: "adults",
+        name: "Chef",
+        fullName: "Jerome McElroy",
+        voicedBy: "Isaac Hayes",
+        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
+        ageGrade: "Adult &bull; Cafeteria Chef",
+        personality: "The only adult in South Park whom the children consistently trusted for guidance. Chef clarified complex adult realities and romantic relationships through smooth R&B songs before departing in Season 10.",
+        notableArcs: "S2E9 'Chef's Chocolate Salty Balls', S2E14 'Chef Aid', S10E1 'The Return of Chef'."
+      },
+      {
+        id: "tolkien",
+        category: "school",
+        name: "Tolkien Black",
+        fullName: "Tolkien Black (formerly Token Black)",
+        voicedBy: "Adrien Beard",
+        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Son of South Park's wealthiest family. Level-headed, athletic, and articulate, Tolkien is a frequent foil to Cartman's stereotypes.",
+        notableArcs: "S4E4 'Cartman's Silly Hate Crime 2000', S25E2 'The Big Fix' (revealing his true namesake as author J.R.R. Tolkien)."
+      },
+      {
+        id: "craig",
+        category: "school",
+        name: "Craig Tucker",
+        fullName: "Craig Tucker",
+        voicedBy: "Matt Stone (early) / Trey Parker",
+        firstAppearance: "S1E2 'Weight Gain 4000'",
+        ageGrade: "10 Years Old &bull; 4th Grade",
+        personality: "Deadpan, monotone, and famously prone to flipping off classmates and adults. Craig leads his own rival group of boys (with Tweek, Clyde, and Token) and eventually begins a relationship with Tweek.",
+        notableArcs: "S12E10-E11 'Pandemic' (lamenting how the main four always drag everyone into disaster), S19E6 'Tweek x Craig'."
+      },
+      {
+        id: "mackey",
+        category: "adults",
+        name: "Mr. Mackey",
+        fullName: "Mr. Mackey",
+        voicedBy: "Trey Parker",
+        firstAppearance: "S1E8 'Damien'",
+        ageGrade: "Adult &bull; Guidance Counselor",
+        personality: "The Elementary School guidance counselor known for appending 'm'kay' to every sentence. Mackey struggles with bureaucratic school protocols and childhood hoardings.",
+        notableArcs: "S2E3 'Ike's Wee Wee' (losing his job over drug demonstrations), S14E10 'Insheeption' (addressing his compulsive hoarding trauma)."
       }
     ];
 
-    function renderTegridy() {
-      const container = document.getElementById('tegridyStrainsGrid');
+    const episodesData = [
+      {
+        id: "s01e01",
+        category: "classic",
+        code: "S01E01",
+        title: "Cartman Gets an Anal Probe",
+        airDate: "August 13, 1997",
+        writerDirector: "Trey Parker & Matt Stone",
+        synopsis: "Eight-year-old Cartman insists he had a nightmare about being abducted by aliens, while Kyle discovers that his baby brother Ike has actually been kidnapped by extraterrestrials.",
+        trivia: "The only episode animated entirely with physical construction paper cutouts, glue, and a stop-motion camera. Production required over three months to complete."
+      },
+      {
+        id: "s01e09",
+        category: "classic",
+        code: "S01E09",
+        title: "Mr. Hankey, the Christmas Poo",
+        airDate: "December 17, 1997",
+        writerDirector: "Trey Parker & Matt Stone",
+        synopsis: "Excluded from the school nativity pageant due to his Jewish faith, Kyle conjures Mr. Hankey, a living Christmas feces that spreads holiday goodwill to those with high dietary fiber.",
+        trivia: "The first holiday special of the series and the first episode where Kenny survives the entire runtime. It cemented the show's musical tradition."
+      },
+      {
+        id: "movie1999",
+        category: "movie",
+        code: "FILM",
+        title: "South Park: Bigger, Longer & Uncut",
+        airDate: "June 30, 1999 (Theatrical)",
+        writerDirector: "Trey Parker (Dir.) / Parker, Stone, Pam Brady (Writers)",
+        synopsis: "The boys sneak into an R-rated Canadian film starring Terrence and Phillip, sparking a nationwide moral panic led by Kyle's mother that escalates into an all-out war between the United States and Canada.",
+        trivia: "Earned an Academy Award nomination for Best Original Song ('Blame Canada'). Once held the Guinness World Record for the most profanity in an animated film (399 expletives and 128 offensive gestures)."
+      },
+      {
+        id: "s05e04",
+        category: "classic",
+        code: "S05E04",
+        title: "Scott Tenorman Must Die",
+        airDate: "July 11, 2001",
+        writerDirector: "Eric Stough (Dir.) / Trey Parker (Writer)",
+        synopsis: "After ninth-grader Scott Tenorman swindles Cartman out of $16.12 for pubic hair, Cartman attempts various revenge plots before staging a chili cook-off.",
+        trivia: "Widely regarded by critics and Parker himself as a watershed moment in South Park history, cementing Cartman's evolution from a spoiled brat into a cold sociopath. Features Radiohead as guest stars."
+      },
+      {
+        id: "s08e01",
+        category: "classic",
+        code: "S08E01",
+        title: "Good Times with Weapons",
+        airDate: "March 17, 2004",
+        writerDirector: "Trey Parker",
+        synopsis: "The boys purchase authentic martial arts weaponry at a county fair, imagining themselves as Japanese anime warriors until Butters is struck in the eye by a throwing star.",
+        trivia: "Noted for its hybrid animation style, switching between classic cutout animation and hyper-stylized anime parody with an original J-pop theme song ('Let's Fighting Love')."
+      },
+      {
+        id: "s08e08",
+        category: "classic",
+        code: "S08E08",
+        title: "Douche and Turd",
+        airDate: "October 27, 2004",
+        writerDirector: "Trey Parker",
+        synopsis: "PETA protests the school mascot, forcing an elementary school election between a Giant Douche and a Turd Sandwich. When Stan refuses to vote, he is exiled from the town.",
+        trivia: "A biting critique of binary American presidential politics aired just six days before the 2004 George W. Bush vs. John Kerry election."
+      },
+      {
+        id: "s08e14",
+        category: "classic",
+        code: "S08E14",
+        title: "Woodland Critter Christmas",
+        airDate: "December 15, 2004",
+        writerDirector: "Trey Parker",
+        synopsis: "Stan aids a group of cute forest creatures in preparing for the birth of their savior, only to discover they are a Satanic cult bent on bringing about the Antichrist.",
+        trivia: "Conceived during an exhausting season finale crunch; Parker and Stone had no plot two days before broadcast and resorted to a dark subversion of Rankin/Bass holiday animation."
+      },
+      {
+        id: "s09e12",
+        category: "banned",
+        code: "S09E12",
+        title: "Trapped in the Closet",
+        airDate: "November 16, 2005",
+        writerDirector: "Trey Parker",
+        synopsis: "Stan takes a free personality test and is identified by Church of Scientology leadership as the reincarnation of founder L. Ron Hubbard, while Tom Cruise locks himself in Stan's bedroom closet.",
+        trivia: "Nominated for an Emmy Award. Sparked intense real-world fallout, leading to the departure of longtime cast member Isaac Hayes and legal threats regarding rebroadcasts."
+      },
+      {
+        id: "s10e03",
+        category: "multi",
+        code: "S10E03-04",
+        title: "Cartoon Wars (Parts 1 & 2)",
+        airDate: "April 5 & 12, 2006",
+        writerDirector: "Trey Parker",
+        synopsis: "When rival animated sitcom Family Guy announces plans to air an uncensored image of the Islamic prophet Muhammad, fear of retaliation grips the nation. Cartman journeys to Hollywood to pull the episode.",
+        trivia: "Comedy Central refused to broadcast the depiction of Muhammad, replacing the scene with a title card explaining the censorship, highlighting the show's ongoing battle over broadcast standards."
+      },
+      {
+        id: "s10e08",
+        category: "emmy",
+        code: "S10E08",
+        title: "Make Love, Not Warcraft",
+        airDate: "October 4, 2006",
+        writerDirector: "Trey Parker",
+        synopsis: "A high-level griefer terrorizes the World of Warcraft server. The boys dedicate their lives to slaughtering low-level boars for 21 hours a day to gain enough experience to defeat him.",
+        trivia: "Won the Primetime Emmy Award for Outstanding Animated Program. Produced in official collaboration with Blizzard Entertainment, utilizing in-game Machinima assets alongside 2D animation."
+      },
+      {
+        id: "s11e10",
+        category: "emmy",
+        code: "S11E10-12",
+        title: "Imaginationland Trilogy",
+        airDate: "October 17–31, 2007",
+        writerDirector: "Trey Parker",
+        synopsis: "Terrorists breach the barrier separating good and evil human imagination, unleashing every villain ever conceived. Butters must restore the world while Kyle fights Cartman over a leprechaun bet.",
+        trivia: "Won the Primetime Emmy Award for Outstanding Animated Program (One Hour or More) in 2008. Later compiled into a direct-to-video feature film."
+      },
+      {
+        id: "s13e05",
+        category: "classic",
+        code: "S13E05",
+        title: "Fishsticks",
+        airDate: "April 8, 2009",
+        writerDirector: "Trey Parker",
+        synopsis: "Jimmy writes the funniest joke in the world about fishsticks, but Cartman gradually convinces himself he co-wrote it. Kanye West is the only person on Earth unable to understand the pun.",
+        trivia: "Achieved widespread mainstream virality, prompting a real-world blog response from Kanye West addressing his public ego."
+      },
+      {
+        id: "s14e05",
+        category: "banned",
+        code: "S14E05-06",
+        title: "200 & 201",
+        airDate: "April 14 & 21, 2010",
+        writerDirector: "Trey Parker",
+        synopsis: "To celebrate the 200th episode, every celebrity ever ridiculed by the town files a class-action lawsuit led by Tom Cruise, demanding access to the prophet Muhammad to gain immunity from ridicule.",
+        trivia: "Following death threats from radical extremist blog Revolution Muslim, Comedy Central heavily bleeped the episode's moral speech and barred it from domestic syndication and digital streaming."
+      },
+      {
+        id: "s15e07",
+        category: "classic",
+        code: "S15E07",
+        title: "You're Getting Old",
+        airDate: "June 8, 2011",
+        writerDirector: "Trey Parker",
+        synopsis: "Upon turning ten years old, Stan begins perceiving everything he once loved—music, video games, food—as literal feces, leading to a diagnosis of clinical cynicism and his parents' separation.",
+        trivia: "Critically acclaimed for its melancholy reflection on middle age and the exhaustion of sustained production, sparking rumors that Parker and Stone were preparing to conclude the series."
+      },
+      {
+        id: "s17e07",
+        category: "multi",
+        code: "S17E07-09",
+        title: "Black Friday Trilogy",
+        airDate: "November 13 – Dec 4, 2013",
+        writerDirector: "Trey Parker",
+        synopsis: "A Game of Thrones parody dividing the children of South Park into warring factions over whether to buy PlayStation 4 or Xbox One consoles at the South Park Mall's Black Friday sale.",
+        trivia: "Directly paved the narrative and gameplay path for the critically acclaimed console RPG South Park: The Stick of Truth, released in 2014."
+      },
+      {
+        id: "s24e01",
+        category: "paramount",
+        code: "S24E01",
+        title: "The Pandemic Special",
+        airDate: "September 30, 2020",
+        writerDirector: "Trey Parker",
+        synopsis: "As COVID-19 hits South Park, Randy reckons with his personal role in the outbreak during a visit to China, while the children face a militarized school reopening.",
+        trivia: "The first hour-long television special in the show's run, produced remotely by animators working from home during the global pandemic. Delivered the series' highest ratings in seven years."
+      },
+      {
+        id: "paramount01",
+        category: "paramount",
+        code: "SPEC 01",
+        title: "South Park: Post COVID",
+        airDate: "November 25, 2021",
+        writerDirector: "Trey Parker",
+        synopsis: "Set forty years in the future, the surviving boys are now adults living separate lives until Kenny McCormick—now a world-renowned scientist—dies under mysterious circumstances.",
+        trivia: "The first of 14 exclusive streaming films commissioned under Parker and Stone's historic $900M+ ViacomCBS / Paramount+ contract."
+      },
+      {
+        id: "paramount02",
+        category: "paramount",
+        code: "SPEC 02",
+        title: "Post COVID: The Return of COVID",
+        airDate: "December 16, 2021",
+        writerDirector: "Trey Parker",
+        synopsis: "Adult Stan and Kyle travel back in time to alter the timeline, preventing Kenny's death, the collapse of their childhood friendship, and the rise of an apocalyptic future.",
+        trivia: "Concludes the two-part Post COVID saga, exploring the psychological trauma of the early 2020s through an alternate future lens."
+      },
+      {
+        id: "paramount05",
+        category: "paramount",
+        code: "SPEC 05",
+        title: "Joining the Panderverse",
+        airDate: "October 27, 2023",
+        writerDirector: "Trey Parker",
+        synopsis: "Cartman has deeply disturbing nightmares about diverse female actors replacing his friends. Meanwhile, artificial intelligence tools threaten blue-collar professions across town.",
+        trivia: "Satirized corporate Disney studio practices, DEI initiatives, and generative AI Hollywood anxiety, sparking significant social commentary upon release."
+      },
+      {
+        id: "paramount07",
+        category: "paramount",
+        code: "SPEC 07",
+        title: "The End of Obesity",
+        airDate: "May 24, 2024",
+        writerDirector: "Trey Parker",
+        synopsis: "When new GLP-1 weight-loss drugs sweep the town, Cartman and Kyle explore the realities of the American healthcare and insurance systems to obtain treatment.",
+        trivia: "An examination of Ozempic culture and economic barriers to healthcare access, featuring musical parodies and nutritional satire."
+      }
+    ];
+
+    function renderVoiceCast() {
+      const container = document.getElementById('voiceCastGrid');
       if (!container) return;
-      container.innerHTML = tegridyStrains.map(s => `
-        <div class="bg-black/60 border-2 border-emerald-900/60 p-4 font-mono text-xs flex flex-col justify-between shadow-cutout">
+      container.innerHTML = voiceCastData.map(c => `
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3">
           <div>
-            <div class="flex items-center justify-between border-b border-emerald-950 pb-2 mb-2">
-              <span class="text-emerald-400 font-bold uppercase">${s.name}</span>
-              <span class="text-[10px] px-1.5 py-0.5 bg-emerald-950 border border-emerald-600 text-emerald-300 font-bold">${s.thc}</span>
+            <div class="border-b border-spBorder pb-2 mb-3">
+              <h3 class="font-headline text-lg text-white uppercase">${c.name}</h3>
             </div>
-            <p class="text-[11px] text-slate-300 mb-2 italic">"${s.note}"</p>
-            <div class="text-[10px] text-slate-400"><strong>Terpenes:</strong> ${s.terps}</div>
+            <p class="text-xs text-slate-300 leading-relaxed font-body mb-3">${c.bio}</p>
           </div>
-          <div class="mt-3 pt-2 border-t border-emerald-950 text-[10px] text-rose-300">
-            <strong>Advisory:</strong> ${s.warning}
+          <div class="pt-3 border-t border-spBorder/80">
+            <span class="text-[10px] font-mono uppercase text-slate-400 font-bold block mb-1">Key Character Credits:</span>
+            <p class="text-[11px] font-mono text-cyan-300 leading-snug">${c.roles}</p>
           </div>
         </div>
       `).join('');
     }
 
-    function rollTegridyJoint() {
-      const s = tegridyStrains[Math.floor(Math.random() * tegridyStrains.length)];
-      const res = document.getElementById('jointRollingResult');
-      if (!res) return;
-      res.classList.remove('hidden');
-      res.innerHTML = `
-        <div class="flex items-center gap-2 font-headline text-white uppercase text-sm mb-1">
-          <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-          <span>Fresh Joint Rolled: ${s.name} (${s.thc} THC)</span>
-        </div>
-        <p class="text-slate-300 text-xs">Randy Marsh: "Now that's some good ol' fashioned mountain tegridy right there! Take a puff and remember your roots!"</p>
-      `;
-      lucide.createIcons();
-    }
-
-    function scanForMicroaggressions() {
-      const txt = (document.getElementById('pcInputText')?.value || '').toLowerCase();
-      const violations = [];
-
-      if (txt.includes('dumb') || txt.includes('stupid') || txt.includes('crazy')) {
-        violations.push("Ableist Neuro-Normative Language detected ('crazy/dumb')");
-      }
-      if (txt.includes('you guys') || txt.includes('guys')) {
-        violations.push("Gender-Exclusive Collective Noun ('you guys')");
-      }
-      if (txt.includes('fat') || txt.includes('diet')) {
-        violations.push("Body-Shaming Non-Inclusive Slur");
-      }
-      if (txt.includes('illegal') || txt.includes('alien')) {
-        violations.push("De-humanizing Sovereign Nomenclature");
-      }
-      if (violations.length === 0) {
-        violations.push("Insufficiently Enthusiastic Allyship Detected in Syntax");
-      }
-
-      const badge = document.getElementById('pcSeverityBadge');
-      const verdict = document.getElementById('pcVerdict');
-      const list = document.getElementById('pcViolationsList');
-
-      if (badge) badge.textContent = `${violations.length} VIOLATIONS FOUND // 2 WEEKS DETENTION`;
-      if (verdict) verdict.textContent = `"WOAH WOAH WOAH! BRO, DID YOU REALLY JUST WRITE THAT IN MY SCHOOL?! YOU ARE SO SUSPENDED, BRO!"`;
-      if (list) {
-        list.innerHTML = violations.map(v => `<div>&bull; ${v}</div>`).join('');
-      }
-
-      speakPCPrincipal();
-    }
-
-    function loadSampleOffense() {
-      const input = document.getElementById('pcInputText');
-      if (input) input.value = "You guys are totally crazy if you think this stupid rule makes any sense!";
-      scanForMicroaggressions();
-    }
-
-    function speakPCPrincipal() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Did someone just use a microaggression?! You check your privilege right now, bro!");
-        utt.pitch = 0.85;
-        utt.rate = 1.15;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const chefMenu = [
-      { name: "Salisbury Steak", desc: "Served with mysterious brown gravy and lukewarm green peas." },
-      { name: "Chocolate Salty Balls", desc: "Chef's patented high-protein holiday confectionery." },
-      { name: "Tuna Casserole Surprise", desc: "The surprise is nobody knows how long it's been in the pantry." }
-    ];
-
-    function renderChefMenu() {
-      const container = document.getElementById('chefMenuContainer');
+    function renderCharacters(filter = 'all') {
+      const container = document.getElementById('charactersGrid');
       if (!container) return;
-      container.innerHTML = chefMenu.map(m => `
-        <div class="border-b border-yellow-950 pb-2">
-          <div class="font-bold text-yellow-300 uppercase">${m.name}</div>
-          <div class="text-[11px] text-slate-400">${m.desc}</div>
-        </div>
-      `).join('');
-    }
-
-    function consultChefAdvice() {
-      const sel = document.getElementById('chefDilemmaSelect')?.value;
-      const box = document.getElementById('chefAdviceOutput');
-      let quote = "";
-
-      if (sel === 'girls') {
-        quote = "Hello there, children! You see, making love to a woman is a lot like making a fine sauce. You gotta stir it real gentle, simmer low, and put on some slow soul music!";
-      } else if (sel === 'parents') {
-        quote = "Children, when parents go out in the woods chanting in robes, it usually means they need some hot fondue and Barry White to work out their marital issues!";
-      } else if (sel === 'aliens') {
-        quote = "An 80-foot dish?! Dammit, children! I told you not to mess with those extraterrestrials when there is chicken pot pie on the stove!";
-      } else if (sel === 'fats') {
-        quote = "Oh man, that is messed up right there! No way Chef is putting that on the school cafeteria line!";
-      } else {
-        quote = "Life is crazy, children! But as long as you got sweet soul music and some Salisbury steak, you can make it through the morning!";
-      }
-
-      if (box) box.textContent = `Chef: "${quote}"`;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(quote);
-        utt.pitch = 0.75;
-        utt.rate = 0.95;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const imaginationCodex = [
-      { name: "Aslan the Lion", side: "good", bio: "Rightful majestic ruler of the sunny pastures of Imagination." },
-      { name: "Strawberry Shortcake", side: "good", bio: "Heads the Council of Nine defending against dark horrors." },
-      { name: "Gandalf the Grey", side: "good", bio: "Casts barrier wards to keep evil entities beyond the wall." },
-      { name: "Freddy Krueger", side: "evil", bio: "Breached the wall and seeks to terrorize human imagination." },
-      { name: "Evil Jason Voorhees", side: "evil", bio: "Lurks beyond the boundary hunting innocent fictional critters." },
-      { name: "ManBearPig (Imagination)", side: "evil", bio: "The ultimate nightmare creature summoned across dimensions." }
-    ];
-
-    let stargateCombo = [];
-    const glyphSymbols = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏"];
-
-    function renderStargate() {
-      const container = document.getElementById('stargateGlyphsGrid');
-      if (!container) return;
-      container.innerHTML = glyphSymbols.map(g => `
-        <button onclick="pressGlyph('${g}')" class="p-3 bg-slate-900 border border-pink-700/60 hover:border-pink-400 text-pink-300 font-headline text-lg rounded shadow-sm">
-          ${g}
-        </button>
-      `).join('');
-      filterCodex('all');
-    }
-
-    function pressGlyph(g) {
-      if (stargateCombo.length < 4) {
-        stargateCombo.push(g);
-        const disp = document.getElementById('stargateDialed');
-        if (disp) disp.textContent = stargateCombo.join(' - ');
-      }
-    }
-
-    function resetStargate() {
-      stargateCombo = [];
-      const disp = document.getElementById('stargateDialed');
-      if (disp) disp.textContent = 'None';
-    }
-
-    function activateStargate() {
-      if (stargateCombo.length < 4) {
-        alert("Enter a 4-glyph sequence to dial the Stargate!");
-        return;
-      }
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(300, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.5);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.51);
-      } catch (err) {}
-
-      if ('speechSynthesis' in window) {
-        const utt = new SpeechSynthesisUtterance("Imagination! Imagination! Imagination!");
-        utt.pitch = 1.4;
-        utt.rate = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function filterCodex(side) {
-      const container = document.getElementById('imaginationCodexGrid');
-      if (!container) return;
-      const filtered = side === 'all' ? imaginationCodex : imaginationCodex.filter(x => x.side === side);
-      container.innerHTML = filtered.map(c => `
-        <div class="p-3 bg-black/60 border ${c.side === 'good' ? 'border-pink-600/60' : 'border-red-600/60'} rounded font-mono text-xs">
-          <div class="flex justify-between items-center mb-1">
-            <span class="font-bold text-white uppercase">${c.name}</span>
-            <span class="text-[9px] uppercase px-1.5 py-0.5 ${c.side === 'good' ? 'bg-pink-950 text-pink-300' : 'bg-red-950 text-red-300'} font-bold">${c.side}</span>
-          </div>
-          <p class="text-slate-400 text-[11px] leading-snug">${c.bio}</p>
-        </div>
-      `).join('');
-    }
-
-    function setMBPThreat(level) {
-      const badge = document.getElementById('mbpThreatBadge');
-      const speech = document.getElementById('alGoreSpeech');
-      const blip = document.getElementById('mbpBlip');
-
-      if (level === 1) {
-        if (badge) badge.textContent = "DEFCON 5 (Low)";
-        if (speech) speech.textContent = `"I'm telling you, I found hair in the bushes! It's half man, half bear, and half pig! Excelsior!"`;
-        if (blip) blip.className = "absolute w-2 h-2 bg-yellow-400 rounded-full top-20 right-28";
-      } else if (level === 3) {
-        if (badge) badge.textContent = "DEFCON 3 (Alert)";
-        if (speech) speech.textContent = `"He is eating all the cereal! Super cereal! We need to seal the coal mines immediately!"`;
-        if (blip) blip.className = "absolute w-3 h-3 bg-orange-500 rounded-full animate-pulse top-14 right-20";
-      } else {
-        if (badge) badge.textContent = "DEFCON 1 (Catastrophic)";
-        if (speech) speech.textContent = `"Nobody took me super cereal! And now he is ripping through the bowling alley! May god have mercy on us all!"`;
-        if (blip) blip.className = "absolute w-4 h-4 bg-red-600 rounded-full animate-ping top-10 right-16";
-      }
-    }
-
-    function broadcastSuperCerealAlarm() {
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(400, ctx.currentTime);
-        osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.3);
-        osc.frequency.linearRampToValueAtTime(400, ctx.currentTime + 0.6);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.61);
-      } catch (err) {}
-
-      if ('speechSynthesis' in window) {
-        const utt = new SpeechSynthesisUtterance("Super serial alarm! ManBearPig is here!");
-        utt.pitch = 1.3;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function updateTowelState(val) {
-      const lbl = document.getElementById('towelMoistureValue');
-      const st = document.getElementById('towelStateText');
-      if (lbl) lbl.textContent = `${val}%`;
-      if (st) {
-        if (val < 25) st.textContent = "STATUS: Parched & Needs Immediate Waterpark Dip";
-        else if (val < 75) st.textContent = "STATUS: Mildly Stoned & Thinking of Tunes";
-        else st.textContent = "STATUS: Completely Soaked & Advising Washcloths";
-      }
-    }
-
-    function askTowelieAdvice() {
-      const advices = [
-        "Don't forget to bring a towel when you go to the pool!",
-        "You wanna get high and listen to some smooth tracks?",
-        "If you're ever being chased by military agents, always carry extra terrycloth!",
-        "Wait, what were we just talking about? I kinda forgot."
-      ];
-      const pick = advices[Math.floor(Math.random() * advices.length)];
-      const box = document.getElementById('towelieAdviceBox');
-      if (box) box.textContent = `Towelie: "${pick}"`;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(pick);
-        utt.pitch = 1.45;
-        utt.rate = 0.95;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function playFunkyTownBeep() {
-      try {
-        const ctx = getAudioContext();
-        const notes = [523, 523, 466, 523, 0, 392, 0, 392, 523, 698, 659, 523];
-        notes.forEach((freq, idx) => {
-          if (freq > 0) {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.frequency.value = freq;
-            gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.12);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (idx + 1) * 0.12);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(ctx.currentTime + idx * 0.12);
-            osc.stop(ctx.currentTime + (idx + 1) * 0.12);
-          }
-        });
-      } catch (err) {}
-    }
-
-    function writeGothPoem() {
-      const lines = [
-        "Darkness swallows the suburban lawn,",
-        "Black coffee drips till the bitter dawn,",
-        "Conformists smile in their pre-washed jeans,",
-        "While death feasts on their cheerleader dreams."
-      ];
-      const box = document.getElementById('gothVerdictBox');
-      if (box) box.textContent = lines.join(' ');
-    }
-
-    function evaluateConformism() {
-      const act = document.getElementById('gothActivitySelect')?.value;
-      const rat = document.getElementById('conformistRating');
-      const box = document.getElementById('gothVerdictBox');
-
-      if (act === 'graveyard' || act === 'diner') {
-        if (rat) rat.textContent = "CONFORMIST LEVEL: 12% (Acceptable Outcast)";
-        if (box) box.textContent = `Pete: "*Flips hair* Fine, you can sit with us behind the diner. But don't speak unless it's about eternal decay."`;
-      } else {
-        if (rat) rat.textContent = "CONFORMIST LEVEL: 99% (Britney Spears Fan)";
-        if (box) box.textContent = `Firkle: "Look at this conformist pig! Go back to cheerleading camp, poser!"`;
-      }
-    }
-
-    const cityWokItems = [
-      { name: "City Chicken", price: 11.50 },
-      { name: "City Beef", price: 12.95 },
-      { name: "City Pork", price: 10.75 },
-      { name: "City Shitty Shrimp", price: 14.20 }
-    ];
-
-    let cityOrder = [];
-    function renderCityWok() {
-      const container = document.getElementById('cityWokMenuGrid');
-      if (!container) return;
-      container.innerHTML = cityWokItems.map((item, idx) => `
-        <div class="p-3 bg-black/60 border border-orange-700/60 rounded flex items-center justify-between font-mono text-xs">
+      const list = filter === 'all' ? charactersData : charactersData.filter(c => c.category === filter);
+      container.innerHTML = list.map(c => `
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3 cursor-pointer hover:border-slate-400 transition" onclick="openCharacterModal('${c.id}')">
           <div>
-            <span class="font-bold text-white block uppercase">${item.name}</span>
-            <span class="text-orange-400">$${item.price.toFixed(2)}</span>
+            <div class="flex items-center justify-between border-b border-spBorder pb-2 mb-3">
+              <h4 class="font-headline text-base text-white uppercase">${c.name}</h4>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-spCard border border-spBorder text-amber-400 uppercase font-bold">${c.category}</span>
+            </div>
+            <div class="space-y-1 font-mono text-[11px] mb-3">
+              <div class="text-slate-400">Voiced by: <strong class="text-slate-200">${c.voicedBy}</strong></div>
+              <div class="text-slate-400">Age: <span class="text-slate-300">${c.ageGrade}</span></div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed font-body line-clamp-3">${c.personality}</p>
           </div>
-          <button onclick="addCityWokItem(${idx})" class="px-3 py-1 bg-orange-600 hover:bg-orange-500 text-slate-950 font-bold uppercase text-[10px]">
-            + Add
-          </button>
+          <div class="pt-3 border-t border-spBorder flex items-center justify-between font-mono text-[11px]">
+            <span class="text-cyan-400 hover:underline">View File &rarr;</span>
+            <span class="text-slate-500 text-[10px]">${c.firstAppearance.split('/')[0]}</span>
+          </div>
         </div>
       `).join('');
     }
 
-    function addCityWokItem(idx) {
-      cityOrder.push(cityWokItems[idx]);
-      updateCityWokTotal();
-    }
-
-    function clearCityWokOrder() {
-      cityOrder = [];
-      updateCityWokTotal();
-    }
-
-    function updateCityWokTotal() {
-      const total = cityOrder.reduce((acc, x) => acc + x.price, 0);
-      const disp = document.getElementById('cityWokTotal');
-      const receipt = document.getElementById('cityWokReceipt');
-
-      if (disp) disp.textContent = `$${total.toFixed(2)}`;
-      if (receipt) {
-        if (cityOrder.length === 0) {
-          receipt.innerHTML = `<p class="italic text-slate-500">Your takeout cart is empty. Add authentic City specialties to transmit order.</p>`;
+    function filterCharacters(cat) {
+      document.querySelectorAll('.char-tab').forEach(btn => {
+        if (btn.dataset.filter === cat) {
+          btn.className = 'char-tab px-3 py-1.5 rounded bg-sBlue text-white font-bold paper-stamp';
         } else {
-          receipt.innerHTML = cityOrder.map(i => `<div>&bull; ${i.name} — $${i.price.toFixed(2)}</div>`).join('');
+          btn.className = 'char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white';
         }
-      }
+      });
+      renderCharacters(cat);
     }
 
-    function placeCityWokOrder() {
-      if (cityOrder.length === 0) {
-        alert("Your City Wok cart is empty!");
+    function renderEpisodes(list) {
+      const container = document.getElementById('episodesGrid');
+      const counter = document.getElementById('episodeCounterText');
+      if (!container) return;
+      if (counter) counter.textContent = `Displaying ${list.length} cataloged releases`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full p-8 text-center bg-spPanel border border-spBorder rounded-lg font-mono text-sm text-slate-400">
+            No episodes or specials match your search filter criteria.
+          </div>
+        `;
         return;
       }
-      const line = "Herro! Thank you for call City Wok! We make your order fresh right away!";
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(line);
-        utt.pitch = 1.35;
-        utt.rate = 1.0;
-        window.speechSynthesis.speak(utt);
-      }
-      alert("Order transmitted to City Wok! Estimated delivery: 25 minutes.");
-    }
 
-    function triggerMongolAttack() {
-      alert("SWEET MOTHER OF PEARL! MONGORIANS ATTACKING THE CITY WALL! MAN THE HOT OIL CATAPULTS!");
-      if ('speechSynthesis' in window) {
-        const utt = new SpeechSynthesisUtterance("Goddamn Mongorians, stop tearing down my City Wall!");
-        utt.pitch = 1.4;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    let buttersWeeks = 412;
-    const groundingReasons = [
-      "Making an improper posture at the breakfast table",
-      "Looking at the neighbor's hedge without adult supervision",
-      "Letting Eric Cartman harvest his organs for amusement park tickets",
-      "Purchasing excessive tin foil while cosplaying Professor Chaos",
-      "Smiling on school picture day without parental permission",
-      "Staring out the window when he should have been dusting baseboards"
-    ];
-
-    function groundButtersNow() {
-      buttersWeeks += Math.floor(Math.random() * 8) + 2;
-      const count = document.getElementById('buttersGroundCount');
-      if (count) count.textContent = buttersWeeks;
-
-      const reason = groundingReasons[Math.floor(Math.random() * groundingReasons.length)];
-      const history = document.getElementById('buttersGroundingHistory');
-      if (history) {
-        const entry = document.createElement('div');
-        entry.className = "p-2 bg-black/60 border border-teal-800 text-teal-200 text-xs";
-        entry.textContent = `🚨 Grounded for: ${reason} (+3 weeks)`;
-        history.prepend(entry);
-      }
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(`You are grounded mister! ${reason}!`);
-        utt.pitch = 0.9;
-        utt.rate = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function renderButtersDefaults() {
-      const history = document.getElementById('buttersGroundingHistory');
-      if (!history) return;
-      history.innerHTML = groundingReasons.map(r => `
-        <div class="p-2 bg-black/60 border border-teal-900/60 text-slate-300 text-[11px]">
-          &bull; Grounded: ${r}
+      container.innerHTML = list.map(ep => `
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3 cursor-pointer hover:border-slate-400 transition" onclick="openEpisodeModal('${ep.id}')">
+          <div>
+            <div class="flex items-center justify-between border-b border-spBorder pb-2 mb-2">
+              <span class="font-mono text-xs font-bold text-amber-400 uppercase">${ep.code}</span>
+              <span class="font-mono text-[10px] text-slate-400">${ep.airDate}</span>
+            </div>
+            <h4 class="font-headline text-base text-white uppercase leading-snug mb-2">${ep.title}</h4>
+            <p class="text-xs text-slate-300 leading-relaxed font-body line-clamp-3 mb-2">${ep.synopsis}</p>
+          </div>
+          <div class="pt-3 border-t border-spBorder flex items-center justify-between font-mono text-[11px]">
+            <span class="text-slate-400">${ep.writerDirector}</span>
+            <span class="text-cyan-400 hover:underline">Read dossier &rarr;</span>
+          </div>
         </div>
       `).join('');
     }
 
-    const lemmiQuestSteps = [
-      "The Caverns of Flesh",
-      "The Sparrow Prince Perch",
-      "The Catatafish Coral Reef",
-      "The Frog King's Scepter Room",
-      "Liberation into the Living Room"
-    ];
-    let lemmiIdx = 0;
+    function handleEpisodeSearch() {
+      const q = (document.getElementById('episodeSearchInput')?.value || '').toLowerCase().trim();
+      const cat = document.getElementById('episodeCategorySelect')?.value || 'all';
+      let filtered = episodesData;
 
-    function renderLemmiwinks() {
-      const container = document.getElementById('lemmiwinksSpiritsContainer');
-      if (!container) return;
-      container.innerHTML = `
-        <div class="p-3 bg-black/60 border border-yellow-700/60 rounded">
-          <div class="font-bold text-amber-300 uppercase">The Frog King:</div>
-          <p class="text-slate-300 text-[11px]">"You are the chosen gerbil king, Lemmiwinks! You must seek the Catatafish to earn your holy crown!"</p>
-        </div>
-        <div class="p-3 bg-black/60 border border-yellow-700/60 rounded">
-          <div class="font-bold text-amber-300 uppercase">The Sparrow Prince:</div>
-          <p class="text-slate-300 text-[11px]">"Beware your brother Wikileaks, who seeks to release private browser histories to the press!"</p>
+      if (cat !== 'all') {
+        filtered = filtered.filter(ep => ep.category === cat);
+      }
+      if (q) {
+        filtered = filtered.filter(ep => 
+          ep.title.toLowerCase().includes(q) ||
+          ep.code.toLowerCase().includes(q) ||
+          ep.synopsis.toLowerCase().includes(q) ||
+          ep.trivia.toLowerCase().includes(q) ||
+          ep.airDate.toLowerCase().includes(q)
+        );
+      }
+      renderEpisodes(filtered);
+    }
+
+    function handleEpisodeCategory() {
+      handleEpisodeSearch();
+    }
+
+    function openCharacterModal(charId) {
+      const c = charactersData.find(x => x.id === charId);
+      if (!c) return;
+      document.getElementById('modalCategoryBadge').textContent = `DOSSIER // ${c.category.toUpperCase()}`;
+      document.getElementById('modalTitle').textContent = c.name;
+      document.getElementById('modalSubtitle').textContent = `${c.fullName} &bull; ${c.ageGrade}`;
+      
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-spCard border border-spBorder rounded font-mono text-xs">
+            <div><span class="text-slate-400 block">Voice Actor:</span> <strong class="text-white">${c.voicedBy}</strong></div>
+            <div><span class="text-slate-400 block">First Appearance:</span> <strong class="text-white">${c.firstAppearance}</strong></div>
+          </div>
+          <div>
+            <h5 class="font-headline text-xs text-amber-400 uppercase tracking-wider mb-1">Character Profile &amp; Personality</h5>
+            <p class="text-slate-300 text-sm leading-relaxed">${c.personality}</p>
+          </div>
+          <div>
+            <h5 class="font-headline text-xs text-cyan-400 uppercase tracking-wider mb-1">Defining Narrative Arcs &amp; Episodes</h5>
+            <p class="text-slate-300 text-sm leading-relaxed font-mono text-xs bg-spCard p-3 rounded border border-spBorder">${c.notableArcs}</p>
+          </div>
         </div>
       `;
+      document.getElementById('detailModal').classList.remove('hidden');
     }
 
-    function advanceLemmiwinksQuest() {
-      lemmiIdx = (lemmiIdx + 1) % lemmiQuestSteps.length;
-      const state = document.getElementById('lemmiQuestState');
-      if (state) state.textContent = lemmiQuestSteps[lemmiIdx];
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Lemmiwinks journeyed onward through the dark abyss...");
-        utt.pitch = 1.35;
-        utt.rate = 1.0;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const videoGames = [
-      {
-        title: "The Stick of Truth",
-        year: "2014",
-        genre: "Turn-based RPG",
-        meta: "85%",
-        note: "Obsidian masterwork written directly by Trey & Matt. 100% authentic paper cutout engine."
-      },
-      {
-        title: "The Fractured But Whole",
-        year: "2017",
-        genre: "Tactical Superhero RPG",
-        meta: "81%",
-        note: "Features Coon and Friends fighting rival Freedom Pals across South Park backyards."
-      },
-      {
-        title: "South Park: Snow Day!",
-        year: "2024",
-        genre: "3D Co-op Brawler",
-        meta: "61%",
-        note: "Blizzard-covered town mayhem celebrating no school days with 3D combat."
-      },
-      {
-        title: "South Park (N64 / PS1)",
-        year: "1998",
-        genre: "First-Person Shooter",
-        meta: "67%",
-        note: "Pelt turkeys with yellow snowballs and cow launchers across endless fog."
-      }
-    ];
-
-    function renderGameVault() {
-      const container = document.getElementById('gameVaultGrid');
-      if (!container) return;
-      container.innerHTML = videoGames.map(g => `
-        <div class="bg-black/60 border-2 border-indigo-900/60 p-4 font-mono text-xs flex flex-col justify-between shadow-cutout">
+    function openEpisodeModal(epId) {
+      const ep = episodesData.find(x => x.id === epId);
+      if (!ep) return;
+      document.getElementById('modalCategoryBadge').textContent = `CATALOG // ${ep.code} // ${ep.category.toUpperCase()}`;
+      document.getElementById('modalTitle').textContent = ep.title;
+      document.getElementById('modalSubtitle').textContent = `Aired: ${ep.airDate} &bull; Direction & Script: ${ep.writerDirector}`;
+      
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <div class="space-y-4">
           <div>
-            <div class="flex items-center justify-between border-b border-indigo-950 pb-2 mb-2">
-              <span class="text-indigo-300 font-bold uppercase">${g.title}</span>
-              <span class="text-[10px] text-amber-400 font-bold">${g.year}</span>
-            </div>
-            <p class="text-slate-300 text-[11px] mb-2">${g.note}</p>
+            <h5 class="font-headline text-xs text-amber-400 uppercase tracking-wider mb-1">Narrative Synopsis</h5>
+            <p class="text-slate-300 text-sm leading-relaxed">${ep.synopsis}</p>
           </div>
-          <div class="pt-2 border-t border-indigo-950 flex justify-between items-center text-[10px] text-slate-400">
-            <span>${g.genre}</span>
-            <span class="text-emerald-400 font-bold">Meta: ${g.meta}</span>
+          <div class="p-4 bg-spCard border border-spBorder rounded space-y-1">
+            <h5 class="font-headline text-xs text-cyan-400 uppercase tracking-wider">Production Notes &amp; Cultural Impact</h5>
+            <p class="text-slate-300 text-xs font-mono leading-relaxed">${ep.trivia}</p>
           </div>
         </div>
-      `).join('');
+      `;
+      document.getElementById('detailModal').classList.remove('hidden');
     }
 
-    let sopapillaCount = 47;
-    function raiseSopapillaFlag() {
-      sopapillaCount += 6;
-      const count = document.getElementById('sopapillaLiveCount');
-      if (count) count.textContent = sopapillaCount;
-
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.frequency.setValueAtTime(587, ctx.currentTime);
-        osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.31);
-      } catch (err) {}
+    function closeModal() {
+      document.getElementById('detailModal').classList.add('hidden');
     }
 
-    let divePos = 10;
-    let diveDir = 1;
-    let diveInterval = null;
-
-    function initCliffDive() {
-      if (diveInterval) clearInterval(diveInterval);
-      diveInterval = setInterval(() => {
-        divePos += 3 * diveDir;
-        if (divePos >= 90) diveDir = -1;
-        if (divePos <= 10) diveDir = 1;
-        const marker = document.getElementById('diveMarker');
-        if (marker) marker.style.left = `${divePos}%`;
-      }, 35);
-    }
-
-    function executeCliffDive() {
-      const outcome = document.getElementById('diveOutcomeText');
-      if (divePos >= 60 && divePos <= 80) {
-        if (outcome) outcome.innerHTML = `<span class="text-emerald-400 font-bold">PERFECT DIVE! 10.0!</span> You cleared the rocks and landed smoothly into the pool! The crowd erupts!`;
-      } else {
-        if (outcome) outcome.innerHTML = `<span class="text-rose-400 font-bold">BELLY FLOP! 3.2!</span> You splashed half the diners at table 4 and ruined their enchiladas!`;
-      }
-    }
-
-    function exploreBlackBartsCave() {
-      const outcome = document.getElementById('diveOutcomeText');
-      if (outcome) outcome.textContent = "You ventured into Black Bart's cave! A fake skeleton popped out and you found 12 arcade tickets!";
-    }
-
-    const critters = [
-      { name: "Beary the Bear", role: "High Priest", evil: "Carves pentagrams in the sacred pine." },
-      { name: "Beavery the Beaver", role: "Manger Builder", evil: "Gathers human bones for the dark nursery." },
-      { name: "Porcupiney", role: "Blood Collector", evil: "Uses sharp quills for sacrificial pacts." },
-      { name: "Skunky the Skunk", role: "Unholy Incense", evil: "Emits toxic brimstone smoke." },
-      { name: "Rabbity the Rabbit", role: "The Martyr", evil: "Willingly feeds the dark newborn." },
-      { name: "Foxy the Fox", role: "Scout of Evil", evil: "Keeps Santa Claus from finding their lair." }
-    ];
-
-    let critterRitualActive = false;
-    function renderCritters() {
-      const container = document.getElementById('crittersGrid');
-      if (!container) return;
-      container.innerHTML = critters.map(c => `
-        <div class="p-3 bg-black/60 border ${critterRitualActive ? 'border-red-600 critter-glow' : 'border-stone-800'} text-center font-mono text-xs space-y-1">
-          <div class="text-3xl">${critterRitualActive ? '🩸😈' : '🐰🌲'}</div>
-          <div class="font-bold text-white uppercase text-[10px]">${c.name}</div>
-          <div class="text-[9px] text-slate-400">${critterRitualActive ? c.evil : c.role}</div>
-        </div>
-      `).join('');
-    }
-
-    function toggleCritterBloodPact() {
-      critterRitualActive = !critterRitualActive;
-      const label = document.getElementById('critterPactLabel');
-      const alertBox = document.getElementById('critterRitualAlert');
-      if (label) label.textContent = critterRitualActive ? "Banish Blood Pact (Too Spooky)" : "Initiate Blood Pact Ritual";
-      if (alertBox) {
-        if (critterRitualActive) alertBox.classList.remove('hidden');
-        else alertBox.classList.add('hidden');
-      }
-      renderCritters();
-
-      if (critterRitualActive && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Yay! Blood orgy! Blood orgy in the pine woods!");
-        utt.pitch = 1.7;
-        utt.rate = 1.15;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function updateBloodSugar(val) {
-      const disp = document.getElementById('bloodSugarDisplay');
-      const diag = document.getElementById('sugarDiagnosis');
-      if (disp) disp.textContent = `${val} mg/dL`;
-      if (diag) {
-        if (val < 70) diag.textContent = "CRITICAL HYPOGLYCEMIA: Scott needs juice boxes and Cheesy Poofs immediately!";
-        else if (val > 250) diag.textContent = "SUPERCHARGED DIABETIC RAGE: Captain Diabetes powers activated!";
-        else diag.textContent = "Scott is currently stable, but will still remind everyone he has diabetes.";
-      }
-    }
-
-    function scottSelfPityQuote() {
-      const quotes = [
-        "I'm Scott Malkinson, I have diabetes.",
-        "Don't mock my condition, I need insulin every four hours!",
-        "Cartman told everyone my insulin was actually concentrated liquid candy!",
-        "I'm Captain Diabetes, and my dad still won't come to my baseball games!"
-      ];
-      const pick = quotes[Math.floor(Math.random() * quotes.length)];
-      const box = document.getElementById('scottQuoteBox');
-      if (box) box.textContent = `Scott: "${pick}"`;
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(pick);
-        utt.pitch = 1.1;
-        utt.rate = 0.95;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const memberQuotes = [
-      "'Member Star Wars?",
-      "'Member Chewbacca?",
-      "'Member 1983?",
-      "'Member Spock?",
-      "'Member feeling safe?",
-      "'Member Ghostbusters?",
-      "'Member the Millennium Falcon?",
-      "'Member Tron?"
-    ];
-
-    function renderMemberBerries() {
-      const container = document.getElementById('memberBerriesGrid');
-      if (!container) return;
-      container.innerHTML = memberQuotes.map((q, i) => `
-        <button onclick="playSpecificMember('${q}')" class="p-3 bg-purple-950/40 border border-purple-700/60 hover:border-purple-400 rounded-full text-center font-mono text-xs text-purple-200 transition active:scale-95 shadow-sm">
-          🍇 ${q}
-        </button>
-      `).join('');
-    }
-
-    function playSpecificMember(quote) {
-      const box = document.getElementById('memberWhisperPanel');
-      if (box) box.textContent = `Member Berries: "Oh yeah, I 'member! ${quote}"`;
-
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(650, ctx.currentTime);
-        osc.frequency.linearRampToValueAtTime(850, ctx.currentTime + 0.2);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.25);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.26);
-      } catch (err) {}
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance(quote);
-        utt.pitch = 1.8;
-        utt.rate = 1.0;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function playMemberWhisper() {
-      const q = memberQuotes[Math.floor(Math.random() * memberQuotes.length)];
-      playSpecificMember(q);
-    }
-
-    function singHankeyCarol() {
-      const lyrics = [
-        "Howdy-ho! Mr. Hankey the Christmas Poo, loves me and I love you!",
-        "If you eat fiber, fruits and nuts, he'll visit your house and spread good cheer!",
-        "Merry Christmas, everybody! Howdy-ho!"
-      ];
-      const box = document.getElementById('hankeyCarolOutput');
-      if (box) box.textContent = lyrics.join(' ');
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Howdy ho! It's Mr. Hankey, the Christmas Poo!");
-        utt.pitch = 1.75;
-        utt.rate = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function checkToiletBowl(owner) {
-      const box = document.getElementById('hankeyCarolOutput');
-      if (box) box.textContent = `You peeked into ${owner}'s toilet! Mr. Hankey popped out with a holiday bow: "Howdy-ho, ${owner}! Don't forget to flush with holiday cheer!"`;
-      singHankeyCarol();
-    }
-
-    const garrisonLessons = [
-      "Okay children! Today we are studying the economic catastrophe of Underpants Gnomes!",
-      "Now class! If anyone mentions President Garrison's orange tan, Mr. Hat will unleash detention fury!",
-      "Listen up! All standardized tests are canceled until we decide if Xbox or PlayStation is superior!"
-    ];
-
-    function writeNewLessonPlan() {
-      const pick = garrisonLessons[Math.floor(Math.random() * garrisonLessons.length)];
-      const board = document.getElementById('chalkboardLessonText');
-      if (board) board.textContent = `"${pick}"`;
-    }
-
-    function askMrHat() {
-      const board = document.getElementById('chalkboardLessonText');
-      if (board) board.textContent = `Mr. Hat: "I think you boys should be sent straight to the boiler room for recess!"`;
-      if ('speechSynthesis' in window) {
-        const utt = new SpeechSynthesisUtterance("You boys need to behave, or Mr. Hat will be very angry!");
-        utt.pitch = 1.3;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    function speakGarrisonQuote() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Now children, let's behave or Mr. Hat will get very angry.");
-        utt.pitch = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    const kennyDeaths = [
-      { ep: "S1E1", cause: "Shot by Barbrady and trampled by cattle stampede" },
-      { ep: "S1E2", cause: "Crushed by molten volcanic lava" },
-      { ep: "S2E3", cause: "Succumbed to chickenpox on bowling alley lane" },
-      { ep: "S3E2", cause: "Spontaneously combusted from holding in flatulence" },
-      { ep: "S4E2", cause: "Drowned with concrete footwear by tooth mafia" },
-      { ep: "S5E13", cause: "Terminal muscular disease in county hospital" },
-      { ep: "S8E6", cause: "Shot by employment time-traveler from 3045" },
-      { ep: "S9E3", cause: "Crossfire casualty in Chinese Triad shootout" },
-      { ep: "S10E8", cause: "Ganked in Elwynn Forest by no-life WoW rogue" }
-    ];
-
-    let kennyDeathCount = 128;
-    function renderKennyGraveyard() {
-      const container = document.getElementById('kennyLogsGrid');
-      if (!container) return;
-      container.innerHTML = kennyDeaths.map(d => `
-        <div class="p-3 bg-black/60 border border-orange-900/60 font-mono text-xs">
-          <div class="text-orange-400 font-bold uppercase mb-1">${d.ep}</div>
-          <p class="text-slate-300 text-[11px] leading-snug">${d.cause}</p>
-        </div>
-      `).join('');
-    }
-
-    function smiteKennyTerminal() {
-      kennyDeathCount++;
-      const counter = document.getElementById('kennyLiveCounter');
-      if (counter) counter.textContent = kennyDeathCount;
-
-      try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(600, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.4);
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.41);
-      } catch (err) {}
-
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utt = new SpeechSynthesisUtterance("Oh my God! They killed Kenny! You bastards!");
-        utt.pitch = 1.35;
-        utt.rate = 1.1;
-        window.speechSynthesis.speak(utt);
-      }
-    }
-
-    let cynicismEnabled = false;
-    document.getElementById('toggleCynicismBtn')?.addEventListener('click', () => {
-      cynicismEnabled = !cynicismEnabled;
-      const body = document.getElementById('pageBody');
-      const lbl = document.getElementById('cynicismLabel');
-      if (body) {
-        if (cynicismEnabled) body.classList.add('cynicism-active');
-        else body.classList.remove('cynicism-active');
-      }
-      if (lbl) lbl.textContent = cynicismEnabled ? "Cynicism: ON (CRAP FILTER)" : "Cynicism: OFF";
-      triggerFartSound(100);
-    });
-
-    document.getElementById('quickCartmanCalcBtn')?.addEventListener('click', () => {
-      const coon = document.getElementById('coonHQ');
-      if (coon) coon.scrollIntoView({ behavior: 'smooth' });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      renderHeroes();
-      renderTegridy();
-      renderChefMenu();
-      renderStargate();
-      renderCityWok();
-      renderButtersDefaults();
-      renderLemmiwinks();
-      renderGameVault();
-      initCliffDive();
-      renderCritters();
-      renderMemberBerries();
-      renderKennyGraveyard();
+      renderVoiceCast();
+      renderCharacters('all');
+      renderEpisodes(episodesData);
       lucide.createIcons();
     });
   </script>
