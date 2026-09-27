@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Park Archives &amp; Show Guide</title>
+  <title>South Park Archives &amp; Show Guide &bull; Definitive Encyclopedia</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,16 +21,17 @@
             body: ['Inter', 'sans-serif']
           },
           colors: {
-            spNavy: '#070a10',
-            spPanel: '#0e1420',
-            spCard: '#131b2b',
-            spBorder: '#233047',
+            spNavy: '#060910',
+            spPanel: '#0c121d',
+            spCard: '#111927',
+            spBorder: '#1e2c42',
             cRed: '#c53030',
             kGreen: '#2f855a',
             sBlue: '#2b6cb0',
             kOrange: '#dd6b20',
             cTeal: '#00a3c4',
-            bYellow: '#d69e2e'
+            bYellow: '#d69e2e',
+            spDarkPaper: '#0a0f18'
           }
         }
       }
@@ -38,27 +39,34 @@
   </script>
   <style>
     body {
-      background-color: #070a10;
+      background-color: #060910;
       background-image: 
-        radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0),
-        linear-gradient(to bottom, #090e17 0%, #06080d 100%);
-      background-size: 28px 28px, 100% 100%;
+        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
+        linear-gradient(to bottom, #090f19 0%, #05080e 100%);
+      background-size: 24px 24px, 100% 100%;
     }
     .custom-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: #070a10; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #233047; border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3b5072; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #060910; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e2c42; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #33486a; }
     .paper-stamp {
-      box-shadow: 3px 3px 0px rgba(0,0,0,0.85);
+      box-shadow: 3px 3px 0px rgba(0,0,0,0.9);
     }
     .paper-stamp-lg {
-      box-shadow: 5px 6px 0px rgba(0,0,0,0.9);
+      box-shadow: 6px 7px 0px rgba(0,0,0,0.95);
+    }
+    .cutout-tab {
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .badge-tape {
+      transform: rotate(-1.5deg);
+      box-shadow: 2px 2px 0px rgba(0,0,0,0.4);
     }
   </style>
 </head>
 <body class="text-slate-200 font-body selection:bg-kOrange selection:text-white custom-scrollbar">
 
-  <div class="w-full bg-[#111927] border-b border-spBorder/80 sticky top-0 z-40 backdrop-blur-md bg-opacity-95">
+  <header class="w-full bg-[#0b111c] border-b border-spBorder sticky top-0 z-40 backdrop-blur-md bg-opacity-95">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
@@ -67,217 +75,422 @@
           </div>
           <div>
             <a href="#" class="font-headline text-lg text-white tracking-wide block leading-none">South Park Archives</a>
-            <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Historical &amp; Production Database</span>
+            <span class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">Documentary, Production &amp; Legal Records</span>
           </div>
         </div>
-        <nav class="hidden md:flex items-center space-x-1 font-mono text-xs uppercase tracking-wider">
-          <a href="#history" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Production History</a>
-          <a href="#pipeline" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">6-Day Pipeline</a>
-          <a href="#voicecast" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Voice Cast</a>
-          <a href="#characters" class="px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Characters</a>
-          <a href="#episodes" class="px-3 py-2 bg-sBlue text-white rounded font-bold paper-stamp hover:bg-blue-600 transition flex items-center gap-1.5">
-            <i data-lucide="film" class="w-3.5 h-3.5"></i> Episode Catalog
+
+        <nav class="hidden xl:flex items-center space-x-1 font-mono text-[11px] uppercase tracking-wider">
+          <a href="#pipeline" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Tech Pipeline</a>
+          <a href="#seasons" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Seasons Guide</a>
+          <a href="#controversies" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Censorship &amp; Law</a>
+          <a href="#music" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Musical Score</a>
+          <a href="#lexicon" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Linguistics</a>
+          <a href="#guests" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Guest Voice Cast</a>
+          <a href="#business" class="px-2.5 py-1.5 text-slate-300 hover:text-white hover:bg-slate-800/60 rounded transition">Rights &amp; Streaming</a>
+          <a href="#episodes" class="px-3 py-1.5 bg-sBlue text-white rounded font-bold paper-stamp hover:bg-blue-600 transition flex items-center gap-1.5">
+            <i data-lucide="film" class="w-3.5 h-3.5"></i> Episodes
           </a>
         </nav>
+
+        <div class="flex items-center gap-2">
+          <button onclick="focusGlobalSearch()" class="flex items-center gap-2 px-3 py-1.5 bg-spCard border border-spBorder rounded text-xs font-mono text-slate-300 hover:text-white hover:border-slate-500 transition">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span class="hidden sm:inline">Search Database</span>
+            <kbd class="px-1.5 py-0.5 text-[10px] bg-spNavy border border-spBorder rounded text-slate-400">/</kbd>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <section class="border-b border-spBorder bg-gradient-to-b from-[#0c1320] to-[#070a10] py-14">
+  <section class="border-b border-spBorder bg-gradient-to-b from-[#0e1624] via-[#090f19] to-[#060910] py-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
+      <div class="max-w-4xl">
         <div class="inline-flex items-center gap-2 px-3 py-1 bg-spCard border border-spBorder rounded text-xs font-mono text-cyan-400 mb-4 uppercase tracking-wider">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Independent Reference Document &bull; 1997 – Present
+          Comprehensive Production Encyclopedia &bull; 1992 – Present
         </div>
         <h1 class="font-headline text-3xl sm:text-5xl text-white tracking-tight leading-tight uppercase">
-          South Park Chronicles &amp; Media Archive
+          South Park Technical &amp; Archival Record
         </h1>
         <p class="mt-4 text-base sm:text-lg text-slate-300 font-sans leading-relaxed">
-          An encyclopedia detailing the history, production methodology, cast records, and an archive of episodes, theatrical releases, and streaming specials created by Trey Parker and Matt Stone.
+          A definitive documentary reference charting thirty years of animation engineering, season-by-season editorial shifts, First Amendment litigation, musical compositions, linguistic cultural adoption, and syndication deals behind the creation of Trey Parker and Matt Stone.
         </p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-10 font-mono">
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">Original Run</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Network Launch</span>
           <span class="text-xl font-bold text-white font-sans">Aug 13, 1997</span>
-          <span class="text-[10px] text-emerald-400 block mt-0.5">26+ Seasons</span>
+          <span class="text-[10px] text-emerald-400 block mt-0.5">Season 1 &bull; Episode 1</span>
         </div>
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">Television Episodes</span>
-          <span class="text-xl font-bold text-white font-sans">325+</span>
-          <span class="text-[10px] text-cyan-400 block mt-0.5">Broadcasting on Comedy Central</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Broadcast Output</span>
+          <span class="text-xl font-bold text-white font-sans">328+ Episodes</span>
+          <span class="text-[10px] text-cyan-400 block mt-0.5">26 Seasons Produced</span>
         </div>
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">Paramount+ Specials</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Streaming Specials</span>
           <span class="text-xl font-bold text-white font-sans">7 Event Films</span>
-          <span class="text-[10px] text-amber-400 block mt-0.5">Extended Multi-Acts</span>
+          <span class="text-[10px] text-amber-400 block mt-0.5">Paramount+ Exclusive</span>
         </div>
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">Theatrical Feature</span>
-          <span class="text-xl font-bold text-white font-sans">1 Film</span>
-          <span class="text-[10px] text-rose-400 block mt-0.5">Bigger, Longer &amp; Uncut (1999)</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Render Workstations</span>
+          <span class="text-xl font-bold text-white font-sans">Maya / Linux</span>
+          <span class="text-[10px] text-rose-400 block mt-0.5">Originally SGI Unix</span>
         </div>
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">Major Honors</span>
-          <span class="text-xl font-bold text-white font-sans">5 Emmys</span>
-          <span class="text-[10px] text-yellow-400 block mt-0.5">1 Peabody Award (2005)</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Primary Honors</span>
+          <span class="text-xl font-bold text-white font-sans">5 Primetime Emmys</span>
+          <span class="text-[10px] text-yellow-400 block mt-0.5">Peabody Award (2005)</span>
         </div>
         <div class="bg-spPanel/90 border border-spBorder p-3.5 rounded paper-stamp">
-          <span class="text-slate-400 text-[11px] block uppercase">ViacomCBS Deal</span>
-          <span class="text-xl font-bold text-white font-sans">$900M+</span>
-          <span class="text-[10px] text-purple-400 block mt-0.5">Extended Through Season 30</span>
+          <span class="text-slate-400 text-[11px] block uppercase">Franchise Valuations</span>
+          <span class="text-xl font-bold text-white font-sans">$900M+ Viacom</span>
+          <span class="text-[10px] text-purple-400 block mt-0.5">Seasons 27–30 Contract</span>
         </div>
       </div>
     </div>
   </section>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
-
-    <section id="history" class="space-y-6">
-      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-        <div>
-          <span class="text-xs font-mono uppercase text-cRed font-bold tracking-wider">Historical Context</span>
-          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Origin &amp; The Colorado Inception</h2>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <div class="bg-spPanel border-2 border-spBorder p-4 sm:p-5 rounded-lg paper-stamp">
+      <div class="flex flex-col md:flex-row items-center gap-4">
+        <div class="flex items-center gap-2 text-cyan-400 font-mono text-xs uppercase font-bold shrink-0">
+          <i data-lucide="database" class="w-4 h-4"></i>
+          Universal Archive Inspector:
         </div>
-        <span class="font-mono text-xs text-slate-400">University of Colorado Boulder (1992 – 1997)</span>
+        <div class="relative w-full">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-slate-400"></i>
+          <input type="text" id="globalArchiveSearch" oninput="runUniversalSearch()" placeholder="Search all historical essays, court cases, hardware rigs, episodes, musical tracks, or words..." class="w-full bg-spCard border border-spBorder pl-9 pr-4 py-2 rounded text-sm text-white focus:outline-none focus:border-cyan-400 font-mono">
+        </div>
+        <button onclick="clearGlobalSearch()" class="px-3 py-2 bg-spCard border border-spBorder text-xs font-mono text-slate-400 hover:text-white rounded shrink-0">
+          Reset Filter
+        </button>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
-          <div class="w-10 h-10 rounded bg-red-950/80 border border-red-700/80 flex items-center justify-center text-red-400 font-mono font-bold text-sm">
-            01
-          </div>
-          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Spirit of Christmas (1992 &amp; 1995)</h3>
-          <p class="text-sm text-slate-300 leading-relaxed font-body">
-            Trey Parker and Matt Stone met in a film class at the University of Colorado Boulder in 1992. Using construction paper cutouts, an old 8mm camera, and stop-motion capture, they assembled a student short titled <em class="text-white">Jesus vs. Frosty</em>. The short established crude prototypes of Stan, Kyle, Kenny, and a character visually identical to Cartman (initially named "Kenny").
-          </p>
-          <p class="text-xs text-slate-400 leading-relaxed font-body">
-            In 1995, Fox television executive Brian Graden saw the short and paid the duo $2,000 to produce an animated holiday video card to send to friends. This short, <em class="text-white">Jesus vs. Santa</em>, featured a martial arts brawl between Jesus and Santa Claus over the meaning of Christmas, arbitrated by the four boys and figure skater Brian Boitano.
-          </p>
-        </div>
-
-        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
-          <div class="w-10 h-10 rounded bg-cyan-950/80 border border-cyan-700/80 flex items-center justify-center text-cyan-400 font-mono font-bold text-sm">
-            02
-          </div>
-          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Hollywood VHS Bootleg Network</h3>
-          <p class="text-sm text-slate-300 leading-relaxed font-body">
-            Graden's tape became an early viral hit before internet video streaming existed. Copies were duplicated from VHS to VHS across entertainment agencies, studios, and celebrity circles in Los Angeles, including George Clooney, who reportedly made dozens of copies for his peers.
-          </p>
-          <p class="text-xs text-slate-400 leading-relaxed font-body">
-            The bootlegged cassette generated meetings with major networks. While broadcast networks balked at the coarse language and subject matter, Doug Herzog, then-president of the fledgling basic cable channel Comedy Central, committed to funding a full 22-minute pilot episode to bolster the network's original programming roster.
-          </p>
-        </div>
-
-        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
-          <div class="w-10 h-10 rounded bg-emerald-950/80 border border-emerald-700/80 flex items-center justify-center text-emerald-400 font-mono font-bold text-sm">
-            03
-          </div>
-          <h3 class="font-headline text-base text-white tracking-wide uppercase">The Pilot: 'Cartman Gets an Anal Probe'</h3>
-          <p class="text-sm text-slate-300 leading-relaxed font-body">
-            Produced across approximately three and a half months in early 1997, the official pilot was animated by hand using real construction paper, scissors, Elmer's glue, and an overhead lighting rig. Stop-motion frame capture made changes labor-intensive and costly.
-          </p>
-          <p class="text-xs text-slate-400 leading-relaxed font-body">
-            When test audiences gave polarized responses, Parker and Stone trimmed several minutes (including an excised plotline involving Cartman's father and sister) and re-edited the episode. It premiered on August 13, 1997, drawing nearly 1 million viewers—a monumental rating for Comedy Central at the time—and instantly launched the series into the cultural mainstream.
-          </p>
-        </div>
+      <div id="searchResultsCount" class="text-[11px] font-mono text-slate-400 mt-2 hidden">
+        Showing filtered results across encyclopedic modules...
       </div>
-    </section>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-24">
 
     <section id="pipeline" class="space-y-6">
       <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <span class="text-xs font-mono uppercase text-kGreen font-bold tracking-wider">Animation Architecture</span>
-          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">The 6-Day Production Pipeline</h2>
+          <span class="text-xs font-mono uppercase text-kGreen font-bold tracking-wider">Animation Engineering</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Hardware Evolution &amp; Animation Architecture</h2>
         </div>
-        <span class="font-mono text-xs text-slate-400">Documented in '6 Days to Air: The Making of South Park' (2011)</span>
+        <span class="font-mono text-xs text-slate-400">1992 Stop-Motion &rarr; 2026 High-Performance Maya Clusters</span>
       </div>
 
-      <div class="bg-spPanel border border-spBorder p-6 sm:p-8 rounded-lg paper-stamp-lg space-y-6">
-        <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-body">
-          Unlike conventional animated television series that require 6 to 9 months of overseas production per episode, South Park is produced almost entirely in-house at South Park Studios in Marina del Rey, California, inside a strict 6-day cycle (Thursday to Wednesday airdate). This setup enables Parker and Stone to satirize breaking political news, legal decisions, and cultural trends within hours of their occurrence.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
-            <span class="text-xs font-mono uppercase text-amber-400 font-bold block">Phase 1 &bull; Thursday – Friday</span>
-            <h4 class="font-headline text-sm text-white uppercase">Writers' Room &amp; Breakouts</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Trey Parker, Matt Stone, and executive producers convene in the conference room. Rather than working from formal scripts or outlines, Parker writes scenes in bursts while storyboard artists immediately start layout drafts.
-            </p>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="flex items-center justify-between border-b border-spBorder pb-3">
+            <span class="font-mono text-xs text-amber-400 uppercase font-bold">Generation I &bull; 1992–1997</span>
+            <span class="text-[10px] font-mono text-slate-400">Physical Stop-Motion</span>
           </div>
-
-          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
-            <span class="text-xs font-mono uppercase text-cyan-400 font-bold block">Phase 2 &bull; Saturday – Sunday</span>
-            <h4 class="font-headline text-sm text-white uppercase">Voice Capture &amp; Maya Rigging</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Parker and Stone record primary dialogue scratch in their private vocal booth. Character models and new asset rigs are generated in Autodesk Maya and Adobe Illustrator, intentionally replicating the imperfect, rough-hewn cut-paper look.
-            </p>
+          <h3 class="font-headline text-base text-white uppercase">Construction Paper &amp; Overhead Rigs</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            The student shorts <em class="text-white">Jesus vs. Frosty</em> and <em class="text-white">The Spirit of Christmas (Jesus vs. Santa)</em>, along with the original pilot episode <em class="text-white">"Cartman Gets an Anal Probe"</em>, were animated entirely by hand. Using heavy construction paper cut with X-Acto knives, scissors, and Elmer's glue, Parker and Stone shot frame-by-frame on an 8mm and 16mm overhead camera rostrum.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300 space-y-1">
+            <div>&bull; Frame Rate: 12–15 fps on twos</div>
+            <div>&bull; Pilot Duration: 3.5 months of physical labor</div>
+            <div>&bull; Physical Assets: Hundreds of hand-cut paper mouths and pupils</div>
           </div>
-
-          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
-            <span class="text-xs font-mono uppercase text-purple-400 font-bold block">Phase 3 &bull; Monday – Tuesday</span>
-            <h4 class="font-headline text-sm text-white uppercase">Full Animation &amp; Sound</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Dozens of animators construct camera motions, lip sync, and backgrounds. Composer Jamie Dunlap creates original scores and parodies, while sound designers map Foley effects and audio beds in Pro Tools.
-            </p>
-          </div>
-
-          <div class="bg-spCard border border-spBorder p-4 rounded space-y-2">
-            <span class="text-xs font-mono uppercase text-rose-400 font-bold block">Phase 4 &bull; Wednesday (Air Day)</span>
-            <h4 class="font-headline text-sm text-white uppercase">Final Mix &amp; Satellite Uplink</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Final audio mix, color timing, and Standards &amp; Practices legal clearances conclude just hours before broadcast. The finished tape is digitally uploaded directly to Comedy Central's master control facility in New York.
-            </p>
-          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Every movement required careful manual tweezers positioning under hot studio lamps. If a paper asset tore or curled under heat, entire sequences had to be reshot from scratch.
+          </p>
         </div>
 
-        <div class="border-t border-spBorder pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-slate-400 font-mono gap-2">
-          <span>Technology Evolution: Stop-Motion (1997) &rarr; SGI PowerAnimator &rarr; Autodesk Maya &amp; CorelDRAW/Illustrator</span>
-          <span class="text-slate-300">Missed Air Date: Only once (S17E4 "Goth Kids 3" due to a studio power outage)</span>
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="flex items-center justify-between border-b border-spBorder pb-3">
+            <span class="font-mono text-xs text-cyan-400 uppercase font-bold">Generation II &bull; 1997–2004</span>
+            <span class="text-[10px] font-mono text-slate-400">Silicon Graphics Workstations</span>
+          </div>
+          <h3 class="font-headline text-base text-white uppercase">SGI PowerAnimator &amp; Unix Clusters</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Immediately following the greenlight of Season 1, continuing stop-motion for a 13-episode series proved structurally impossible. The studio invested in high-end Silicon Graphics (SGI) workstations running Unix and PowerAnimator—the high-end software package previously employed to render dinosaurs in <em class="text-white">Jurassic Park</em>.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300 space-y-1">
+            <div>&bull; Hardware: SGI Octane and O2 Unix workstations</div>
+            <div>&bull; Software: Alias PowerAnimator &rarr; Maya transition</div>
+            <div>&bull; Pipeline Shift: Production dropped from 3 months to 3 weeks</div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            High-end 3D software was deployed counter-intuitively to simulate crude, flat 2D cardboard geometry. High-resolution flatbed scanners digitized physical construction paper textures to preserve raw grain, fibers, and uneven edge cuts.
+          </p>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="flex items-center justify-between border-b border-spBorder pb-3">
+            <span class="font-mono text-xs text-purple-400 uppercase font-bold">Generation III &bull; 2004–Present</span>
+            <span class="text-[10px] font-mono text-slate-400">Autodesk Maya &amp; Scaled Linux Farms</span>
+          </div>
+          <h3 class="font-headline text-base text-white uppercase">Maya, Illustrator &amp; 6-Day Delivery</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Today, South Park Studios operates in Marina del Rey using Autodesk Maya, Adobe Illustrator, and CorelDRAW. Custom procedural rigs replicate the characteristic stop-motion jitter and paper-drop shadows. Real-time audio lip-sync engines map mouth shapes directly to Parker and Stone's dialogue scratch tracks within minutes of vocal recording.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300 space-y-1">
+            <div>&bull; Software Stack: Autodesk Maya, Adobe Illustrator, Pro Tools</div>
+            <div>&bull; Rendering: Dedicated in-house Linux render farm</div>
+            <div>&bull; Turnaround: Complete 22-minute episode in under 140 hours</div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The studio employs custom shaders that emulate the slight imperfections of paper cutouts, allowing artists to generate cinematic camera moves, lighting passes, and 3D vehicle collisions while maintaining the handcrafted visual style established in 1992.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp">
+        <h4 class="font-headline text-sm text-white uppercase mb-3 text-cyan-300">Technical Rigging &amp; Lip-Sync System Architecture</h4>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono text-slate-300">
+          <div class="bg-spCard border border-spBorder p-3 rounded">
+            <span class="text-amber-400 font-bold block mb-1">Mouth Phoneme Banks</span>
+            Over 60 standardized hand-drawn mouth positions per character, organized by phonemes (Ah, Oh, Ee, F/V, L, M/P/B), triggered along Maya's timeline via specialized scripts.
+          </div>
+          <div class="bg-spCard border border-spBorder p-3 rounded">
+            <span class="text-cyan-400 font-bold block mb-1">Texture Fiber Preservation</span>
+            High-resolution scan maps of real construction paper applied as bump and displacement layers, ensuring corners display slight scissor burrs and fibrous paper edges.
+          </div>
+          <div class="bg-spCard border border-spBorder p-3 rounded">
+            <span class="text-purple-400 font-bold block mb-1">Rigid Cutout Skeletal Rigs</span>
+            Characters have no soft joint deformations; limbs hinge cleanly like flat card pieces fastened by brads, preventing organic bending and preserving the aesthetic.
+          </div>
+          <div class="bg-spCard border border-spBorder p-3 rounded">
+            <span class="text-rose-400 font-bold block mb-1">Simultaneous Network Playback</span>
+            Centralized SAN servers allow multiple animators to work simultaneously on different shots within the same scene file, syncing directly to the audio cutting room.
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="voicecast" class="space-y-6">
+    <section id="seasons" class="space-y-6">
       <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <span class="text-xs font-mono uppercase text-sBlue font-bold tracking-wider">Cast Archive</span>
-          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Voice Actors &amp; Creative Cast</h2>
+          <span class="text-xs font-mono uppercase text-sBlue font-bold tracking-wider">Chronology &bull; 1997–2026</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Complete Seasons &amp; Narrative Eras</h2>
         </div>
-        <span class="font-mono text-xs text-slate-400">Vocal Roster &bull; 1997 – Present</span>
+        <span class="font-mono text-xs text-slate-400">Analyzing Structural &amp; Narrative Paradigm Shifts</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="voiceCastGrid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp space-y-2">
+          <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cRed/20 text-rose-300 border border-cRed/40 font-bold">Era 1 &bull; S01 – S04</span>
+          <h4 class="font-headline text-sm text-white uppercase">Shock Humor &amp; Monster-of-the-Week</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Characterized by raw toilet humor, extraterrestrial probes, talking holiday feces, zombie outbreaks, and Kenny's recurring deaths in every single episode. The show functioned as a traditional surreal sitcom focusing on children reacting to bizarre phenomena.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 pt-2 border-t border-spBorder">
+            Run: 1997 – 2000 &bull; Episodes: 65 &bull; Theatrical Movie: 1999
+          </div>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp space-y-2">
+          <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-kGreen/20 text-emerald-300 border border-kGreen/40 font-bold">Era 2 &bull; S05 – S17</span>
+          <h4 class="font-headline text-sm text-white uppercase">The Golden Age &amp; Deep Satire</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Transitioned into a fast-turnaround socio-political satire machine. Cartman evolved into a manipulative sociopath in "Scott Tenorman Must Die". Kenny's death gag was temporarily retired in Season 6 to elevate Butters and Tweek, and the rapid 6-day production cycle was established.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 pt-2 border-t border-spBorder">
+            Run: 2001 – 2013 &bull; Episodes: 182 &bull; 4 Primetime Emmy Wins
+          </div>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp space-y-2">
+          <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cTeal/20 text-cyan-300 border border-cTeal/40 font-bold">Era 3 &bull; S18 – S23</span>
+          <h4 class="font-headline text-sm text-white uppercase">Continuous Serialization &amp; Tegridy</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            The series broke from self-contained episodes, experimenting with full-season narrative continuity. Major storylines included Randy's double life as pop singer Lorde, the arrival of PC Principal, Herbert Garrison's presidential campaign, and the move to Tegridy Farms.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 pt-2 border-t border-spBorder">
+            Run: 2014 – 2019 &bull; Episodes: 60 &bull; Full Continuity Arcs
+          </div>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp space-y-2">
+          <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-bYellow/20 text-amber-300 border border-bYellow/40 font-bold">Era 4 &bull; S24 – Present</span>
+          <h4 class="font-headline text-sm text-white uppercase">Dual Format &amp; Paramount+ Specials</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Following the COVID-19 pandemic, the franchise adopted a split model: shortened 6-episode television seasons for Comedy Central, paired with high-budget, hour-long streaming event films for Paramount+ tackling systemic societal issues.
+          </p>
+          <div class="text-[11px] font-mono text-slate-400 pt-2 border-t border-spBorder">
+            Run: 2020 – 2026+ &bull; 7 Feature Specials &bull; $900M Viacom Deal
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto bg-spPanel border border-spBorder rounded-lg paper-stamp custom-scrollbar">
+        <table class="w-full text-left font-mono text-xs">
+          <thead class="bg-spCard border-b border-spBorder text-slate-400 uppercase text-[10px]">
+            <tr>
+              <th class="p-3">Season</th>
+              <th class="p-3">Broadcast Window</th>
+              <th class="p-3">Episode Count</th>
+              <th class="p-3">Dominant Narrative Shift</th>
+              <th class="p-3">Key Landmark Episode</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-spBorder text-slate-300" id="seasonsTableBody">
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section id="characters" class="space-y-6">
-      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <section id="controversies" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
-          <span class="text-xs font-mono uppercase text-kOrange font-bold tracking-wider">Personnel Records</span>
-          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Character Dossiers</h2>
+          <span class="text-xs font-mono uppercase text-cRed font-bold tracking-wider">Legal History &amp; Censorship</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">The First Amendment Battleground</h2>
         </div>
-        <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs" id="characterTabs">
-          <button onclick="filterCharacters('all')" class="char-tab px-3 py-1.5 rounded bg-sBlue text-white font-bold paper-stamp" data-filter="all">All Profiles</button>
-          <button onclick="filterCharacters('core')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="core">The Core Four</button>
-          <button onclick="filterCharacters('school')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="school">Schoolmates</button>
-          <button onclick="filterCharacters('adults')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="adults">Parents &amp; Adults</button>
-          <button onclick="filterCharacters('town')" class="char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white" data-filter="town">Town Figures</button>
-        </div>
+        <span class="font-mono text-xs text-slate-400">FCC Challenges, Religious Clashes &amp; International Bans</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="charactersGrid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="controversiesGrid">
+      </div>
+    </section>
+
+    <section id="music" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-amber-400 font-bold tracking-wider">Score &amp; Theatrical Composition</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Musical Legacy &amp; Broadway Pedigree</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">From Primus Bass Riffs to Oscar Nominations and Broadway</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="w-8 h-8 rounded bg-amber-950/80 border border-amber-600 flex items-center justify-center text-amber-400 font-mono font-bold text-sm">
+            <i data-lucide="music" class="w-4 h-4"></i>
+          </div>
+          <h3 class="font-headline text-base text-white uppercase">The Primus Theme Evolution</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            In 1997, Parker and Stone approached funk-metal band Primus and frontman Les Claypool to record the opening theme. Claypool tracked the signature thumping bassline and off-kilter vocal cadence. As the series evolved, the theme underwent four recorded iterations: the raw original tempo (Seasons 1–5), an acoustic country bluegrass variant (Season 6), an uptempo electro-rock remix (Seasons 10–16), and the cinematic orchestral revamp in the high-definition era.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300">
+            <strong>Vocal Line Trick:</strong> Kenny's muffled lyrics in the theme song were rewritten each era to include explicit double-entendres that escaped network censors due to vocal muffling.
+          </div>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="w-8 h-8 rounded bg-rose-950/80 border border-rose-600 flex items-center justify-center text-rose-400 font-mono font-bold text-sm">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <h3 class="font-headline text-base text-white uppercase">Academy Award Nomination &amp; Marc Shaiman</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            For the 1999 feature film <em class="text-white">South Park: Bigger, Longer &amp; Uncut</em>, Trey Parker partnered with Broadway composer Marc Shaiman to craft a traditional 14-track musical score in the tradition of Disney's Golden Age and Stephen Sondheim. The satirical protest anthem <strong class="text-white">"Blame Canada"</strong> was nominated for the Academy Award for Best Original Song at the 72nd Academy Awards, where Robin Williams performed it live accompanied by a chorus line.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300">
+            <strong>Oscars Ceremony Lore:</strong> Parker and Stone attended the Academy Awards broadcast wearing dresses replicating Gwyneth Paltrow's pink Ralph Lauren gown and Jennifer Lopez's green Versace silk dress.
+          </div>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-4">
+          <div class="w-8 h-8 rounded bg-cyan-950/80 border border-cyan-600 flex items-center justify-center text-cyan-400 font-mono font-bold text-sm">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+          </div>
+          <h3 class="font-headline text-base text-white uppercase">Path to 'The Book of Mormon'</h3>
+          <p class="text-sm text-slate-300 leading-relaxed font-body">
+            Parker's musical compositions inside South Park episodes—including "Chocolate Salty Balls" (a UK #1 hit), "Montage" (Team America / S6), "Let's Fighting Love" (S8), and the Kanye West parody "Gay Fish" (S13)—laid the foundation for their 2011 theatrical masterwork, <em class="text-white">The Book of Mormon</em>. Co-written with Robert Lopez (co-creator of Avenue Q), the musical went on to win 9 Tony Awards and a Grammy, affirming Parker and Stone as major modern theatrical composers.
+          </p>
+          <div class="p-3 bg-spCard border border-spBorder rounded font-mono text-xs text-slate-300">
+            <strong>Resident Composer:</strong> Jamie Dunlap has composed underscore, cinematic parodies, and comedic arrangements for South Park Studios since 2000.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lexicon" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-emerald-400 font-bold tracking-wider">Sociolinguistics</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Cultural Lexicon &amp; Linguistic Impact</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">Slang, Legal Precedents &amp; Societal Vernacular</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="lexiconGrid">
+      </div>
+    </section>
+
+    <section id="guests" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-purple-400 font-bold tracking-wider">Casting Anomalies</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Guest Voice Stars &amp; Celebrity Inversions</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">Authentic Cameos vs. Anti-Celebrity Philosophy</span>
+      </div>
+
+      <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp mb-6">
+        <p class="text-sm text-slate-300 leading-relaxed font-body">
+          Unlike contemporary animated shows that promote high-profile celebrity cameos, Parker and Stone established a deliberate counter-policy early in the show's run: major celebrities who requested guest roles were typically assigned non-speaking animal noises or intentionally minor bit parts, while prominent celebrity characters in storylines (Tom Cruise, Kanye West, Barbra Streisand, Mel Gibson) were voiced without consent by Parker and Stone.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="guestStarsGrid">
+      </div>
+    </section>
+
+    <section id="business" class="space-y-6">
+      <div class="border-b border-spBorder pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+        <div>
+          <span class="text-xs font-mono uppercase text-bYellow font-bold tracking-wider">Industry Economics</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Commercial Rights &amp; Streaming Deals</h2>
+        </div>
+        <span class="font-mono text-xs text-slate-400">The 50/50 Digital Split, HBO Max War &amp; The $900M Paramount Agreement</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="flex items-center justify-between border-b border-spBorder pb-2">
+            <span class="font-mono text-xs text-amber-400 uppercase font-bold">2007 Landmark Deal</span>
+            <span class="font-mono text-xs text-slate-400">The 50/50 Digital Split</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-body">
+            In 2007, Parker and Stone negotiated a contract with Comedy Central parent company Viacom that media analysts consider one of the shrewdest digital rights agreements in television history. Long before streaming was recognized as television's successor, they secured an unprecedented 50% profit-sharing stake on all digital and non-linear ad revenues.
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            In March 2008, they launched <strong>SouthParkStudios.com</strong>, offering the entire catalog uncensored for free with digital advertising, generating tens of millions of dollars annually while retaining half of all net profits directly.
+          </p>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="flex items-center justify-between border-b border-spBorder pb-2">
+            <span class="font-mono text-xs text-cyan-400 uppercase font-bold">2019 Bidding War</span>
+            <span class="font-mono text-xs text-slate-400">$500M+ HBO Max Deal</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-body">
+            As streaming platforms battled for legacy content in 2019, WarnerMedia's nascent HBO Max acquired the domestic streaming rights to South Park's catalog in a competitive auction valued at over $500 million for a five-year window (outbidding Netflix and Peacock).
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            Under their 2007 profit-sharing structure, Parker and Stone personally shared in half the proceeds of the license, cementing their financial independence and establishing South Park as one of television's top three most valuable syndicated libraries alongside <em class="text-slate-300">Seinfeld</em> and <em class="text-slate-300">Friends</em>.
+          </p>
+        </div>
+
+        <div class="bg-spPanel border border-spBorder p-6 rounded-lg paper-stamp space-y-3">
+          <div class="flex items-center justify-between border-b border-spBorder pb-2">
+            <span class="font-mono text-xs text-emerald-400 uppercase font-bold">2021 Megadeal</span>
+            <span class="font-mono text-xs text-slate-400">$900M ViacomCBS Extension</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-body">
+            In August 2021, MTV Entertainment Studios and ViacomCBS signed Parker and Stone to an expansive six-year agreement valued at more than $900 million. The contract renewed the series through Season 30 on Comedy Central and financed 14 exclusive made-for-streaming feature event specials on Paramount+.
+          </p>
+          <p class="text-xs text-slate-400 leading-relaxed font-body">
+            The funding provided Parker and Stone the personal capital to acquire and restore the landmark Lakewood, Colorado theme restaurant <strong>Casa Bonita</strong> for upwards of $40 million, reopening it in 2023 as an experiential destination.
+          </p>
+        </div>
       </div>
     </section>
 
     <section id="episodes" class="space-y-6">
       <div class="border-b border-spBorder pb-4 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
         <div>
-          <span class="text-xs font-mono uppercase text-cTeal font-bold tracking-wider">Archival Directory</span>
-          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Episodes, Specials &amp; Films Catalog</h2>
+          <span class="text-xs font-mono uppercase text-cTeal font-bold tracking-wider">Broadcast Catalog</span>
+          <h2 class="font-headline text-2xl sm:text-3xl text-white tracking-wide uppercase">Episodes, Specials &amp; Films Directory</h2>
         </div>
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 font-mono text-xs">
           <div class="relative">
@@ -298,7 +511,7 @@
 
       <div class="flex items-center justify-between text-xs font-mono text-slate-400">
         <span id="episodeCounterText">Displaying entries...</span>
-        <span class="hidden sm:inline">Click any entry to view complete production trivia, air dates &amp; historical notes</span>
+        <span class="hidden sm:inline">Click any card to read production trivia &amp; historical context</span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="episodesGrid">
@@ -308,7 +521,7 @@
   </main>
 
   <div id="detailModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-[#0e1522] border-2 border-spBorder max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg paper-stamp-lg custom-scrollbar">
+    <div class="bg-[#0c121d] border-2 border-spBorder max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-lg paper-stamp-lg custom-scrollbar">
       <div class="p-6 border-b border-spBorder flex items-start justify-between">
         <div>
           <span id="modalCategoryBadge" class="px-2 py-0.5 text-[10px] font-mono uppercase font-bold rounded bg-spBorder text-cyan-300"></span>
@@ -329,206 +542,173 @@
     </div>
   </div>
 
-  <footer class="border-t border-spBorder bg-[#05070c] py-12 mt-20 text-xs font-mono text-slate-400">
+  <footer class="border-t border-spBorder bg-[#04060a] py-12 mt-20 text-xs font-mono text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2">
           <div class="w-6 h-6 bg-cRed text-white font-headline text-xs flex items-center justify-center border border-black">SP</div>
-          <span class="font-headline text-white tracking-wide uppercase text-sm">South Park Archives</span>
+          <span class="font-headline text-white tracking-wide uppercase text-sm">South Park Archives &amp; Documentation Project</span>
         </div>
         <div class="flex flex-wrap gap-4 text-slate-500">
-          <span>Trey Parker &amp; Matt Stone</span>
-          <span>Comedy Central &bull; Paramount Global</span>
-          <span>South Park Studios</span>
+          <span>Trey Parker &bull; Matt Stone</span>
+          <span>South Park Studios, Marina del Rey</span>
+          <span>Comedy Partners / Paramount Global</span>
         </div>
       </div>
       <p class="text-slate-500 text-[11px] leading-relaxed">
-        Non-commercial educational archive documenting the historical production, broadcast chronology, and cultural impact of the animated television series South Park (1997–present). South Park and all related titles, logos, and characters are trademarks of Comedy Partners, a Warner Bros. Discovery / Paramount Global company.
+        Non-commercial educational archive documenting the historical production, legal history, broadcast chronology, and cultural impact of the animated television series South Park (1997–present). South Park and all associated character likenesses, scripts, and logos are property of Comedy Partners, a Warner Bros. Discovery / Paramount Global enterprise.
       </p>
     </div>
   </footer>
 
   <script>
-    const voiceCastData = [
+    const seasonData = [
+      { s: "Season 1", dates: "1997 – 1998", eps: 13, focus: "Introduction of town lore, Kenny's deaths, crude stop-motion transition to SGI Unix.", key: "Cartman Gets an Anal Probe (S01E01)" },
+      { s: "Season 2", dates: "1998 – 1999", eps: 18, focus: "Broad pop culture awareness, terrance & phillip April Fools special, Chef's songs.", key: "Chef's Chocolate Salty Balls (S02E09)" },
+      { s: "Season 3", dates: "1999 – 2000", eps: 17, focus: "Production of the feature film, increasing political commentary, passing of Mary Kay Bergman.", key: "Chinpokomon (S03E11)" },
+      { s: "Season 4", dates: "2000", eps: 17, focus: "Boys transition from third grade to fourth grade, Timmy introduced.", key: "Cartman's Silly Hate Crime 2000 (S04E02)" },
+      { s: "Season 5", dates: "2001", eps: 14, focus: "Major tonal turning point; Cartman becomes sociopathic; permanent death of Kenny.", key: "Scott Tenorman Must Die (S05E04)" },
+      { s: "Season 6", dates: "2002", eps: 17, focus: "Kenny remains dead; Butters and Tweek alternate as the fourth boy; Professor Chaos debut.", key: "Professor Chaos (S06E06)" },
+      { s: "Season 7", dates: "2003", eps: 15, focus: "Kenny returns; Iraq War satire; Casa Bonita episode establishes real-world monument.", key: "Casa Bonita (S07E11)" },
+      { s: "Season 8", dates: "2004", eps: 14, focus: "Anime parodies, Good Times with Weapons, political election satire ('Douche and Turd').", key: "Good Times with Weapons (S08E01)" },
+      { s: "Season 9", dates: "2005", eps: 14, focus: "Critical acclaim; Peabody Award; Scientology confrontation triggers Isaac Hayes exit.", key: "Trapped in the Closet (S09E12)" },
+      { s: "Season 10", dates: "2006", eps: 14, focus: "Emmy win for Warcraft; First Amendment censorship controversy in 'Cartoon Wars'.", key: "Make Love, Not Warcraft (S10E08)" },
+      { s: "Season 11", dates: "2007", eps: 14, focus: "Three-part Imaginationland epic; Tourette's syndrome depiction lauded by advocacy groups.", key: "Imaginationland (S11E10-12)" },
+      { s: "Season 12", dates: "2008", eps: 14, focus: "High-definition broadcast transition (1080i); Barack Obama election night turnaround in 72 hours.", key: "About Last Night... (S12E12)" },
+      { s: "Season 13", dates: "2009", eps: 14, focus: "Somali pirates, Kanye West fishsticks viral explosion, The Coon alter-ego introduced.", key: "Fishsticks (S13E05)" },
+      { s: "Season 14", dates: "2010", eps: 14, focus: "200th episode milestone; death threats from radical groups over Muhammad depictions.", key: "200 & 201 (S14E05-06)" },
+      { s: "Season 15", dates: "2011", eps: 14, focus: "Mid-life crisis exploration; 'You're Getting Old' signals existential tone shift; iPad satire.", key: "You're Getting Old (S15E07)" },
+      { s: "Season 16", dates: "2012", eps: 14, focus: "Ziplining mockumentary, Amazon and UPS culture, bullying awareness parody.", key: "I Should Have Never Gone Ziplining (S16E06)" },
+      { s: "Season 17", dates: "2013", eps: 10, focus: "Switch from two 7-episode batches to single 10-episode fall runs; Stick of Truth tie-in.", key: "Black Friday Trilogy (S17E07-09)" },
+      { s: "Season 18", dates: "2014", eps: 10, focus: "First season with continuous serial continuity; Randy revealed as pop singer Lorde.", key: "The Cissy (S18E03)" },
+      { s: "Season 19", dates: "2015", eps: 10, focus: "Gentrification of South Park (SoDoSoPa); arrival of PC Principal; sponsored content critique.", key: "Naughty Ninjas (S19E07)" },
+      { s: "Season 20", dates: "2016", eps: 10, focus: "Full-season serialized election satire; internet troll hunting; Member Berries obsession.", key: "The Damned (S20E03)" },
+      { s: "Season 21", dates: "2017", eps: 10, focus: "Cartman/Heidi abusive relationship arc; White nationalist parody; smart speaker disruption.", key: "White People Renovating Houses (S21E01)" },
+      { s: "Season 22", dates: "2018", eps: 10, focus: "Tegridy Farms introduced; school shooting apathy; return of ManBearPig as climate change.", key: "Time to Get Cereal (S22E06)" },
+      { s: "Season 23", dates: "2019", eps: 10, focus: "Tegridy Farms dominant arc; 'Band in China' triggers total Chinese government censorship.", key: "Band in China (S23E02)" },
+      { s: "Season 24", dates: "2020 – 2021", eps: 4, focus: "Pandemic disruption; hour-long televised specials; remote home studio workflow.", key: "The Pandemic Special (S24E01)" },
+      { s: "Season 25", dates: "2022", eps: 6, focus: "Post-COVID era return to 6-episode seasonal television runs on Comedy Central.", key: "The Big Fix (S25E02)" },
+      { s: "Season 26", dates: "2023", eps: 6, focus: "Artificial intelligence satire (ChatGPT credited in S26E04); Prince Harry parody.", key: "Deep Learning (S26E04)" }
+    ];
+
+    const controversiesData = [
       {
-        name: "Trey Parker",
-        roles: "Stan Marsh, Eric Cartman, Randy Marsh, Herbert Garrison, Mr. Mackey, Officer Barbrady, Satan, Clyde Donovan, Craig Tucker, Timmy Burch, Jimmy Valmer, Tuong Lu Kim, Phillip, Santa Claus",
-        bio: "Co-creator, primary director, lead writer, and primary voice artist. Parker performs characters by speaking with specific pitch manipulation or vocal alterations; Cartman is pitched up slightly from Parker's speaking register, while Stan matches his natural voice. His musical background informs the series' numerous Emmy and Oscar-nominated songs."
+        title: "It Hits the Fan (Season 5, 2001)",
+        tag: "FCC & Swear Counter",
+        summary: "Broadcast on June 20, 2001, following the NYPD Blue drama over mild broadcast profanity. The episode featured an onscreen digital ticker counting 162 uncensored utterances of the word 'shit', averaging one every eight seconds.",
+        impact: "Comedy Central received only a handful of complaints, marking an industry shift in standard basic-cable language standards and proving cable networks were exempt from FCC broadcast decency fines."
       },
       {
-        name: "Matt Stone",
-        roles: "Kyle Broflovski, Kenny McCormick, Butters Stotch, Gerald Broflovski, Craig Tucker (early), Pip Pirrup, Jimbo Kern, Jesus Christ, Big Gay Al, Saddam Hussein, Terrance, Tweek Tweak",
-        bio: "Co-creator, executive producer, and writer. Stone voices Kyle (his natural voice with slight inflection) and Butters (derived from South Park producer Eric Stough). To voice Kenny, Stone covers his mouth with his sleeve or hand, speaking real phonetic dialogue that is muffled and partially discernible upon close listening."
+        title: "Trapped in the Closet (Season 9, 2005)",
+        tag: "Scientology & Celebrity",
+        summary: "Satirized Scientology's operating thetan doctrines (with an onscreen graphic reading 'This is what Scientologists actually believe') while Tom Cruise and John Travolta literally refuse to come out of Stan's closet.",
+        impact: "Prompted the abrupt resignation of Isaac Hayes (Chef) after nine years. Re-broadcasts were temporarily pulled amid rumors that Tom Cruise threatened to boycott promotional duties for Mission: Impossible III."
       },
       {
-        name: "Mary Kay Bergman (1961–1999)",
-        roles: "Wendy Testaburger, Sharon Marsh, Sheila Broflovski, Liane Cartman, Mayor McDaniels, Shelley Marsh, Nurse Gollum, Principal Victoria (Seasons 1–3)",
-        bio: "An accomplished voice actress who voiced virtually all female characters in South Park from the 1997 pilot through the 1999 feature film Bigger, Longer & Uncut. Her versatility enabled Parker and Stone to maintain their tight turnaround times. Following her tragic passing in November 1999, S3E15 ('Mr. Hankey's Christmas Classics') was dedicated in her memory."
+        title: "Cartoon Wars Parts I & II (Season 10, 2006)",
+        tag: "First Amendment & Cartoon Censorship",
+        summary: "Following the Danish Jyllands-Posten Muhammad cartoons crisis, the episode depicted Family Guy announcing it would show Muhammad. Cartman travels to Hollywood to get the episode pulled.",
+        impact: "Comedy Central refused to broadcast the five-second visual of Muhammad handing Peter Griffin a salmon. Parker and Stone inserted an ironic black title card reading 'Comedy Central has refused to broadcast an image of Muhammad on their network'."
       },
       {
-        name: "April Stewart",
-        roles: "Wendy Testaburger, Sharon Marsh, Liane Cartman, Mayor McDaniels, Shelley Marsh, Principal Victoria (current)",
-        bio: "Joined the voice cast during Season 8 in 2004. Stewart stepped into the central female roles, maintaining vocal consistency for Stan's mother Sharon, Wendy Testaburger, and Cartman's mother Liane across more than 200 episodes, video games, and streaming specials."
+        title: "200 & 201 (Season 14, 2010)",
+        tag: "Extremist Death Threats",
+        summary: "Milestone celebration featuring every celebrity previously mocked. Radical New York website Revolution Muslim posted an open threat stating Parker and Stone 'will probably wind up like Theo van Gogh'.",
+        impact: "Comedy Central bleeped all mentions of Muhammad's name, speech segments, and replaced portions with black bars. The two episodes remain permanently barred from streaming services and domestic syndication."
       },
       {
-        name: "Mona Marshall",
-        roles: "Sheila Broflovski, Linda Stotch, Henrietta Biggle (Goth Kid), Red, additional townswomen",
-        bio: "A veteran voice artist who joined in 2000. Marshall performs Kyle's overprotective mother Sheila Broflovski with her recognizable Brooklyn-inflected cadence, as well as Butters' well-meaning but strict mother Linda Stotch."
+        title: "Band in China (Season 24, 2019)",
+        tag: "International Geo-Political Ban",
+        summary: "Directly attacked Hollywood studios, Disney, and the NBA for censoring creative works and political speech to satisfy Chinese Communist Party state censors for box office access.",
+        impact: "Within 48 hours of broadcast, the Chinese government completely expunged all mentions of South Park from Chinese internet portals, Baidu Tieba forums, and streaming servers. Parker and Stone issued an ironic formal apology."
       },
       {
-        name: "Isaac Hayes (1942–2008)",
-        roles: "Jerome 'Chef' McElroy (1997–2006)",
-        bio: "Legendary soul and funk singer-songwriter who provided musical and romantic advice to the boys through original songs like 'Chocolate Salty Balls' (which became a UK #1 single in 1998). Hayes departed the show in 2006 amid controversy surrounding Season 9's Scientology critique ('Trapped in the Closet')."
-      },
-      {
-        name: "Adrien Beard",
-        roles: "Tolkien Black (formerly Token Black)",
-        bio: "A veteran South Park Studios animator, storyboard artist, and lead producer. When the character of Tolkien was introduced in early seasons, Parker and Stone recruited Beard from the art department because he was in the building; he has continued voicing the character for over two decades."
-      },
-      {
-        name: "Jennifer Howell",
-        roles: "Bebe Stevens",
-        bio: "Longtime supervising producer at South Park Studios who also provides the voice of Wendy's best friend, 4th-grade student Bebe Stevens, including central storylines such as Season 6's 'Bebe's Boobs Destroy Society'."
-      },
-      {
-        name: "Eliza Schneider",
-        roles: "Wendy, Sharon, Liane, Sheila, Shelley (Seasons 4–7)",
-        bio: "Dialect coach and voice artist who shared and voiced the central female characters alongside Shannon Cassidy between 2000 and 2003 following Mary Kay Bergman's passing."
+        title: "Super Best Friends (Season 5, 2001)",
+        tag: "Retrospective Withdrawal",
+        summary: "Originally broadcast in July 2001, depicting a superhero coalition of religious leaders including Jesus, Buddha, Moses, Joseph Smith, and Muhammad (depicted as a heroic figure shooting fire from his hands).",
+        impact: "Aired without any network objection in 2001. Following the 2010 controversies surrounding '200' and '201', the episode was retroactively pulled from SouthParkStudios, Netflix, and subsequent streaming packages."
       }
     ];
 
-    const charactersData = [
+    const lexiconData = [
       {
-        id: "stan",
-        category: "core",
-        name: "Stan Marsh",
-        fullName: "Stanley Marsh",
-        voicedBy: "Trey Parker",
-        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Often serving as the grounded everyman, Stan frequently offers moral conclusions ('You know, I learned something today...'). He struggles with adolescent cynicism, his father Randy's erratic schemes, and peer pressure.",
-        notableArcs: "S15E7 'You're Getting Old' (clinical depression and musical cynicism), S8E14 'Woodland Critter Christmas', S9E12 'Trapped in the Closet'."
+        term: "The Chewbacca Defense",
+        origin: "Season 2, Episode 14 &bull; 'Chef Aid' (1998)",
+        definition: "A deliberate legal strategy in which an advocate presents an argument so entirely nonsensical and confusing that the jury's reasoning shuts down ('If Chewbacca lives on Endor, you must acquit!').",
+        significance: "Adopted directly by American legal scholars, law professors, criminologists, and mock trial competitions as a formal term for deliberate obfuscation in jury trials."
       },
       {
-        id: "kyle",
-        category: "core",
-        name: "Kyle Broflovski",
-        fullName: "Kyle Broflovski",
-        voicedBy: "Matt Stone",
-        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Intelligent, principled, and easily provoked by Cartman's prejudice. Kyle is often the philosophical core of the group, defending moral justice, civil liberties, and his adopted Canadian brother Ike.",
-        notableArcs: "S5E4 'Scott Tenorman Must Die', S10E3-E4 'Cartoon Wars', S11E10-E12 'Imaginationland', S12E4 'The Canada Problem'."
+        term: "Derp / Herp Derp",
+        origin: "BASEketball (1998) &amp; Season 3, Episode 3 'The Succubus' (1999)",
+        definition: "An interjection uttered to acknowledge an act of total stupidity or foolishness, personified by the character Mr. Derp who struck himself in the head with kitchen utensils.",
+        significance: "Entered Oxford English Dictionary and global internet vernacular as the universal label for clumsy internet behavior, comic incompetence, and internet meme culture."
       },
       {
-        id: "cartman",
-        category: "core",
-        name: "Eric Cartman",
-        fullName: "Eric Theodore Cartman",
-        voicedBy: "Trey Parker",
-        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Manipulative, narcissistic, sociopathic, and fiercely vindictive. Cartman serves as the primary antagonist among the boys, concocting schemes ranging from theme park takeovers to culinary vengeance.",
-        notableArcs: "S5E4 'Scott Tenorman Must Die', S7E11 'Casa Bonita', S8E1 'Good Times with Weapons', S8E3 'Up the Down Steroid', S14E5-E6 '200' and '201'."
+        term: "Ginger Kids",
+        origin: "Season 9, Episode 11 &bull; 'Ginger Kids' (2005)",
+        definition: "Cartman's mock-hate crusade asserting that individuals with red hair, fair skin, and freckles suffer from 'Gingervitis' and have no souls, reversing when his friends dye his hair red while he sleeps.",
+        significance: "Spawned an international cultural phenomenon, including real-world school pranks ('Kick a Ginger Day') that resulted in police investigations and widespread debates on adolescent bullying."
       },
       {
-        id: "kenny",
-        category: "core",
-        name: "Kenny McCormick",
-        fullName: "Kenneth McCormick",
-        voicedBy: "Matt Stone",
-        firstAppearance: "Jesus vs. Frosty (1992) / S1E1 (1997)",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Muffled by his orange parka, Kenny comes from South Park's poorest family. He is street-smart, sexually curious, and fiercely protective of his little sister Karen. He also possesses supernatural immortality under his vigilante persona, Mysterion.",
-        notableArcs: "S5E13 'Kenny Dies' (temporary permanent death), S13E2 'The Coon', S14E11-E13 'Coon and Friends Trilogy' (origin of his cosmic immortality curse)."
+        term: "Respect My Authoritah!",
+        origin: "Season 1, Episode 1 &bull; 'Cartman Gets an Anal Probe' (1997)",
+        definition: "Cartman's aggressive catchphrase shouted while enforcing petty authority as a junior deputy on a Big Wheel tricycle.",
+        significance: "Became the defining pop culture catchphrase of late-1990s television, quoted across major sports events, political commentary, and academic examinations of authoritarian personalities."
       },
       {
-        id: "butters",
-        category: "school",
-        name: "Butters Stotch",
-        fullName: "Leopold 'Butters' Stotch",
-        voicedBy: "Matt Stone",
-        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Innocent, anxious, and perpetually terrified of being grounded by his authoritarian parents. Despite constant mistreatment from Cartman, Butters remains gentle, occasionally adopting the supervillain alter-ego 'Professor Chaos'.",
-        notableArcs: "S6E1 'Freak Strike', S6E6 'Professor Chaos', S8E5 'AWESOM-O 4000', S16E5 'Butterballs', S18E7 'Grounded Vindaloop'."
+        term: "They Took Our Jobs! ('Dey Took Er Jerbs!')",
+        origin: "Season 8, Episode 7 &bull; 'Goobacks' (2004)",
+        definition: "A chorus of working-class South Park men shouting their grievances against time-traveling migrants, gradually devolving into rooster-like unintelligible crowing sounds.",
+        significance: "Universally utilized by editorial cartoonists and political journalists across CNN, MSNBC, and The New York Times as a shorthand for xenophobic economic anxiety."
       },
       {
-        id: "wendy",
-        category: "school",
-        name: "Wendy Testaburger",
-        fullName: "Wendy Testaburger",
-        voicedBy: "Mary Kay Bergman / April Stewart",
-        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "The most outspoken and politically conscious student in the 4th grade. Wendy serves as class president and school paper editor, frequently debating Cartman on gender equity, breast cancer awareness, and social hypocrisy.",
-        notableArcs: "S12E9 'Breast Cancer Show Ever' (brutally fighting Cartman after school), S17E10 'The Hobbit' (challenging body dysmorphia and social media airbrushing)."
+        term: "Member Berries",
+        origin: "Season 20, Episode 1 &bull; 'Member Berries' (2016)",
+        definition: "Sentient, grape-like talking purple fruits that whisper soothing fragments of 1980s pop culture nostalgia ('Member Star Wars? Member Spock?') to lull citizens into political complacency.",
+        significance: "Widely cited by sociologists and political essayists to describe weaponized political nostalgia and cinematic reboot culture in late-stage capitalism."
+      }
+    ];
+
+    const guestStarsData = [
+      {
+        name: "George Clooney",
+        role: "Sparky the Dog (S01E04) / Dr. Gouache (1999 Movie)",
+        details: "Clooney was an early champion who helped bootleg 'Jesus vs. Santa' across Hollywood. In Season 1, Parker and Stone cast him strictly to provide realistic dog barks and whimpers for Stan's gay dog Sparky. He later voiced the trauma surgeon who replaced Cartman's heart with a baked potato in the 1999 movie."
       },
       {
-        id: "randy",
-        category: "adults",
-        name: "Randy Marsh",
-        fullName: "Randall Marsh",
-        voicedBy: "Trey Parker",
-        firstAppearance: "S1E3 'Volcano' (1997)",
-        ageGrade: "Adult &bull; Geologist / Cannabis Farmer",
-        personality: "Stan's father. Originally a mild-mannered USGS geologist, Randy progressively transformed into the show's chief adult catalyst—hyper-obsessive, insecure, and swept up in cultural manias from cooking shows to marijuana farming.",
-        notableArcs: "S9E5 'The Losing Edge' (Batdad brawl), S18 Serialization (secret pop star Lorde), S22–S26 'Tegridy Farms' saga, S24 'The Pandemic Special'."
+        name: "Robert Smith (The Cure)",
+        role: "Himself (S01E12 'Mecha-Streisand')",
+        details: "Smith agreed to voice himself in the Season 1 finale, transforming into a giant moth warrior to save South Park from a colossal mechanical Barbra Streisand. Kyle declares 'Disintegration is the best album ever!'"
       },
       {
-        id: "garrison",
-        category: "adults",
-        name: "Herbert Garrison",
-        fullName: "Herbert J. Garrison",
-        voicedBy: "Trey Parker",
-        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
-        ageGrade: "Adult &bull; Teacher / 45th U.S. President",
-        personality: "The boys' volatile 4th-grade educator. Garrison's decades-long arc features dramatic personal transformations: relying on hand puppet Mr. Hat, transitioning to Janet Garrison, and later parodying Donald Trump as U.S. President.",
-        notableArcs: "S4E11 '4th Grade', S9E1 'Mr. Garrison's Fancy New Vagina', Seasons 19–24 (Presidential campaign and administration storylines)."
+        name: "Radiohead",
+        role: "Themselves (S05E04 'Scott Tenorman Must Die')",
+        details: "Thom Yorke, Jonny Greenwood, and the band recorded their lines at a studio in London during their Kid A/Amnesiac tour. They appear in the climax to ridicule Scott Tenorman for crying, oblivious to Cartman's culinary vengeance."
       },
       {
-        id: "chef",
-        category: "adults",
-        name: "Chef",
-        fullName: "Jerome McElroy",
-        voicedBy: "Isaac Hayes",
-        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
-        ageGrade: "Adult &bull; Cafeteria Chef",
-        personality: "The only adult in South Park whom the children consistently trusted for guidance. Chef clarified complex adult realities and romantic relationships through smooth R&B songs before departing in Season 10.",
-        notableArcs: "S2E9 'Chef's Chocolate Salty Balls', S2E14 'Chef Aid', S10E1 'The Return of Chef'."
+        name: "Korn",
+        role: "Themselves (S03E10 'Korn's Groovy Pirate Ghost Mystery')",
+        details: "The nu-metal band appeared in a Scooby-Doo parody, solving the mystery of the pirate ghosts at the docks while debuting their single 'Falling Away from Me' during the credits."
       },
       {
-        id: "tolkien",
-        category: "school",
-        name: "Tolkien Black",
-        fullName: "Tolkien Black (formerly Token Black)",
-        voicedBy: "Adrien Beard",
-        firstAppearance: "S1E1 'Cartman Gets an Anal Probe'",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Son of South Park's wealthiest family. Level-headed, athletic, and articulate, Tolkien is a frequent foil to Cartman's stereotypes.",
-        notableArcs: "S4E4 'Cartman's Silly Hate Crime 2000', S25E2 'The Big Fix' (revealing his true namesake as author J.R.R. Tolkien)."
+        name: "Malcolm McDowell",
+        role: "A British Person (S04E14 'Pip')",
+        details: "The Clockwork Orange star appeared in live-action framing segments introducing Charles Dickens' Great Expectations dressed in smoking jackets by a fire, repeatedly introducing himself simply as 'A British Person'."
       },
       {
-        id: "craig",
-        category: "school",
-        name: "Craig Tucker",
-        fullName: "Craig Tucker",
-        voicedBy: "Matt Stone (early) / Trey Parker",
-        firstAppearance: "S1E2 'Weight Gain 4000'",
-        ageGrade: "10 Years Old &bull; 4th Grade",
-        personality: "Deadpan, monotone, and famously prone to flipping off classmates and adults. Craig leads his own rival group of boys (with Tweek, Clyde, and Token) and eventually begins a relationship with Tweek.",
-        notableArcs: "S12E10-E11 'Pandemic' (lamenting how the main four always drag everyone into disaster), S19E6 'Tweek x Craig'."
+        name: "Cheech & Chong",
+        role: "Carlos & Marcel (S04E09 'Cherokee Hair Tampons')",
+        details: "Cheech Marin and Tommy Chong agreed to voice two fake Native American faux-healers selling herbal placebos to Stan's mother Sharon, marking one of their rare collaborative appearances during their estrangement."
       },
       {
-        id: "mackey",
-        category: "adults",
-        name: "Mr. Mackey",
-        fullName: "Mr. Mackey",
-        voicedBy: "Trey Parker",
-        firstAppearance: "S1E8 'Damien'",
-        ageGrade: "Adult &bull; Guidance Counselor",
-        personality: "The Elementary School guidance counselor known for appending 'm'kay' to every sentence. Mackey struggles with bureaucratic school protocols and childhood hoardings.",
-        notableArcs: "S2E3 'Ike's Wee Wee' (losing his job over drug demonstrations), S14E10 'Insheeption' (addressing his compulsive hoarding trauma)."
+        name: "Elon Musk",
+        role: "Himself (S18E04 'Handicar' / S20E08 'Members Only')",
+        details: "Musk voiced himself in multiple episodes, participating in Wacky Races-style competitions with Handicar and demonstrating SpaceX's Mars colony launch trajectories at South Park Elementary."
+      },
+      {
+        name: "PewDiePie (Felix Kjellberg)",
+        role: "Himself (S18E09-10 '#REHASH' and '#HappyHolograms')",
+        details: "The YouTube star recorded commentary frames of himself in his web camera corner, analyzing Cartman's let's play channel ('CartmanBrah') during the rise of streaming-first youth culture."
       }
     ];
 
@@ -735,59 +915,72 @@
       }
     ];
 
-    function renderVoiceCast() {
-      const container = document.getElementById('voiceCastGrid');
+    function renderSeasonsTable() {
+      const tbody = document.getElementById('seasonsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = seasonData.map(row => `
+        <tr class="hover:bg-slate-800/40 transition">
+          <td class="p-3 font-bold text-white">${row.s}</td>
+          <td class="p-3 text-slate-400">${row.dates}</td>
+          <td class="p-3 text-amber-400 font-bold">${row.eps}</td>
+          <td class="p-3 text-slate-300 font-sans text-xs">${row.focus}</td>
+          <td class="p-3 text-cyan-400 font-sans text-xs">${row.key}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderControversies() {
+      const container = document.getElementById('controversiesGrid');
       if (!container) return;
-      container.innerHTML = voiceCastData.map(c => `
+      container.innerHTML = controversiesData.map(item => `
         <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3">
           <div>
-            <div class="border-b border-spBorder pb-2 mb-3">
-              <h3 class="font-headline text-lg text-white uppercase">${c.name}</h3>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed font-body mb-3">${c.bio}</p>
-          </div>
-          <div class="pt-3 border-t border-spBorder/80">
-            <span class="text-[10px] font-mono uppercase text-slate-400 font-bold block mb-1">Key Character Credits:</span>
-            <p class="text-[11px] font-mono text-cyan-300 leading-snug">${c.roles}</p>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function renderCharacters(filter = 'all') {
-      const container = document.getElementById('charactersGrid');
-      if (!container) return;
-      const list = filter === 'all' ? charactersData : charactersData.filter(c => c.category === filter);
-      container.innerHTML = list.map(c => `
-        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3 cursor-pointer hover:border-slate-400 transition" onclick="openCharacterModal('${c.id}')">
-          <div>
             <div class="flex items-center justify-between border-b border-spBorder pb-2 mb-3">
-              <h4 class="font-headline text-base text-white uppercase">${c.name}</h4>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-spCard border border-spBorder text-amber-400 uppercase font-bold">${c.category}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cRed/20 text-rose-300 border border-cRed/40 font-bold uppercase">${item.tag}</span>
             </div>
-            <div class="space-y-1 font-mono text-[11px] mb-3">
-              <div class="text-slate-400">Voiced by: <strong class="text-slate-200">${c.voicedBy}</strong></div>
-              <div class="text-slate-400">Age: <span class="text-slate-300">${c.ageGrade}</span></div>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed font-body line-clamp-3">${c.personality}</p>
+            <h4 class="font-headline text-base text-white uppercase mb-2">${item.title}</h4>
+            <p class="text-xs text-slate-300 leading-relaxed font-body mb-3">${item.summary}</p>
           </div>
-          <div class="pt-3 border-t border-spBorder flex items-center justify-between font-mono text-[11px]">
-            <span class="text-cyan-400 hover:underline">View File &rarr;</span>
-            <span class="text-slate-500 text-[10px]">${c.firstAppearance.split('/')[0]}</span>
+          <div class="pt-3 border-t border-spBorder bg-spCard/50 -mx-5 -mb-5 p-4 rounded-b-lg">
+            <span class="text-[10px] font-mono uppercase text-slate-400 font-bold block mb-1">Legal / Industry Impact:</span>
+            <p class="text-xs text-slate-300 font-body leading-relaxed">${item.impact}</p>
           </div>
         </div>
       `).join('');
     }
 
-    function filterCharacters(cat) {
-      document.querySelectorAll('.char-tab').forEach(btn => {
-        if (btn.dataset.filter === cat) {
-          btn.className = 'char-tab px-3 py-1.5 rounded bg-sBlue text-white font-bold paper-stamp';
-        } else {
-          btn.className = 'char-tab px-3 py-1.5 rounded bg-spPanel border border-spBorder text-slate-300 hover:text-white';
-        }
-      });
-      renderCharacters(cat);
+    function renderLexicon() {
+      const container = document.getElementById('lexiconGrid');
+      if (!container) return;
+      container.innerHTML = lexiconData.map(item => `
+        <div class="bg-spPanel border border-spBorder p-5 rounded-lg paper-stamp flex flex-col justify-between space-y-3">
+          <div>
+            <div class="border-b border-spBorder pb-2 mb-2">
+              <span class="text-[10px] font-mono text-emerald-400 block">${item.origin}</span>
+              <h4 class="font-headline text-base text-white uppercase mt-0.5">${item.term}</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed font-body mb-3">${item.definition}</p>
+          </div>
+          <div class="pt-2 border-t border-spBorder text-[11px] font-mono text-cyan-300 leading-relaxed">
+            <strong class="text-slate-400 block text-[10px] uppercase">Societal Adoption:</strong>
+            ${item.significance}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderGuestStars() {
+      const container = document.getElementById('guestStarsGrid');
+      if (!container) return;
+      container.innerHTML = guestStarsData.map(g => `
+        <div class="bg-spPanel border border-spBorder p-4 rounded-lg paper-stamp flex flex-col justify-between space-y-2">
+          <div>
+            <span class="text-[10px] font-mono text-amber-400 uppercase font-bold block">${g.role}</span>
+            <h4 class="font-headline text-sm text-white uppercase mt-1">${g.name}</h4>
+            <p class="text-xs text-slate-300 font-body leading-relaxed mt-2">${g.details}</p>
+          </div>
+        </div>
+      `).join('');
     }
 
     function renderEpisodes(list) {
@@ -799,7 +992,7 @@
       if (list.length === 0) {
         container.innerHTML = `
           <div class="col-span-full p-8 text-center bg-spPanel border border-spBorder rounded-lg font-mono text-sm text-slate-400">
-            No episodes or specials match your search filter criteria.
+            No entries match your search criteria.
           </div>
         `;
         return;
@@ -847,33 +1040,6 @@
       handleEpisodeSearch();
     }
 
-    function openCharacterModal(charId) {
-      const c = charactersData.find(x => x.id === charId);
-      if (!c) return;
-      document.getElementById('modalCategoryBadge').textContent = `DOSSIER // ${c.category.toUpperCase()}`;
-      document.getElementById('modalTitle').textContent = c.name;
-      document.getElementById('modalSubtitle').textContent = `${c.fullName} &bull; ${c.ageGrade}`;
-      
-      const body = document.getElementById('modalBody');
-      body.innerHTML = `
-        <div class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-spCard border border-spBorder rounded font-mono text-xs">
-            <div><span class="text-slate-400 block">Voice Actor:</span> <strong class="text-white">${c.voicedBy}</strong></div>
-            <div><span class="text-slate-400 block">First Appearance:</span> <strong class="text-white">${c.firstAppearance}</strong></div>
-          </div>
-          <div>
-            <h5 class="font-headline text-xs text-amber-400 uppercase tracking-wider mb-1">Character Profile &amp; Personality</h5>
-            <p class="text-slate-300 text-sm leading-relaxed">${c.personality}</p>
-          </div>
-          <div>
-            <h5 class="font-headline text-xs text-cyan-400 uppercase tracking-wider mb-1">Defining Narrative Arcs &amp; Episodes</h5>
-            <p class="text-slate-300 text-sm leading-relaxed font-mono text-xs bg-spCard p-3 rounded border border-spBorder">${c.notableArcs}</p>
-          </div>
-        </div>
-      `;
-      document.getElementById('detailModal').classList.remove('hidden');
-    }
-
     function openEpisodeModal(epId) {
       const ep = episodesData.find(x => x.id === epId);
       if (!ep) return;
@@ -901,13 +1067,58 @@
       document.getElementById('detailModal').classList.add('hidden');
     }
 
+    function focusGlobalSearch() {
+      const input = document.getElementById('globalArchiveSearch');
+      if (input) {
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function runUniversalSearch() {
+      const q = (document.getElementById('globalArchiveSearch')?.value || '').toLowerCase().trim();
+      const countEl = document.getElementById('searchResultsCount');
+      if (!q) {
+        if (countEl) countEl.classList.add('hidden');
+        renderEpisodes(episodesData);
+        return;
+      }
+      if (countEl) {
+        countEl.classList.remove('hidden');
+        countEl.textContent = `Filtering database view for query: "${q}"`;
+      }
+      const epInput = document.getElementById('episodeSearchInput');
+      if (epInput) {
+        epInput.value = q;
+        handleEpisodeSearch();
+      }
+    }
+
+    function clearGlobalSearch() {
+      const gInput = document.getElementById('globalArchiveSearch');
+      const epInput = document.getElementById('episodeSearchInput');
+      const catSelect = document.getElementById('episodeCategorySelect');
+      const countEl = document.getElementById('searchResultsCount');
+      if (gInput) gInput.value = '';
+      if (epInput) epInput.value = '';
+      if (catSelect) catSelect.value = 'all';
+      if (countEl) countEl.classList.add('hidden');
+      renderEpisodes(episodesData);
+    }
+
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeModal();
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        focusGlobalSearch();
+      }
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      renderVoiceCast();
-      renderCharacters('all');
+      renderSeasonsTable();
+      renderControversies();
+      renderLexicon();
+      renderGuestStars();
       renderEpisodes(episodesData);
       lucide.createIcons();
     });
